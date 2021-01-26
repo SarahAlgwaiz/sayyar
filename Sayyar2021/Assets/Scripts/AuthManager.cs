@@ -3,6 +3,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Auth;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class AuthManager : MonoBehaviour
 {
@@ -57,15 +58,23 @@ public class AuthManager : MonoBehaviour
 
     private IEnumerator Register(string _email, string _password)
     {
-    //    // if (_username == "")
-    //     {
-    //         //If the username field is blank show a warning
-    //        // warningRegisterText.text = "Missing Username";
-    //     }
-    
-        
-    //   else 
-        
+        if(_email == ""){
+            //Debug.Log("يرجى إدخال البريد الالكتروني");
+            Debug.Log("Kindly enter your email address");
+        }
+     string arabicCheck = "/([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])/"; //check whether string contains arabic characters
+    // Regex arabicRegex = new Regex(arabicCheck);
+     bool result = Regex.IsMatch(_password, arabicCheck);
+
+     if(result){
+         Debug.Log("Password should contain only English characters");
+     }
+        if(_password.Length != 6){
+            Debug.Log("Password should have length of six characters");
+        }
+         if(_password.Length != 6){
+            Debug.Log("Password should have length of six characters");
+        }
             //Call the Firebase auth signin function passing the email and password
             var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
             //Wait until the task completes
@@ -78,22 +87,28 @@ public class AuthManager : MonoBehaviour
                 FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
                 AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
-                string message = "Register Failed!";
+                //string message = "لم يتم إنشاء حساب جديد";
+                string message = "Unable to create new account";
                 switch (errorCode)
                 {
                     case AuthError.MissingEmail:
-                        message = "Missing Email";
+                       // message = "يرجى إدخال البريد الالكتروني";
+                       message = "Kindly enter a valid email";
                         break;
                     case AuthError.MissingPassword:
-                        message = "Missing Password";
+                        //message = "يرجى إدخال كلمة السر";
+                        message = "Kindly enter a password";
                         break;
                     case AuthError.WeakPassword:
-                        message = "Weak Password";
+                        //message = "كلمة السر ضعيفة، يرجى إدخال كلمة سر أقوى";
+                        message = "Password is weak, kindly enter a stronger password";
                         break;
                     case AuthError.EmailAlreadyInUse:
-                        message = "Email Already In Use";
+                        //message = "البريد الالكتروني مسجل لحساب آخر";
+                        message = "Email is already in use";
                         break;
                 }
+                Debug.Log(message);
               //  warningRegisterText.text = message;
             }
            // else
