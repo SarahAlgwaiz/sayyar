@@ -62,7 +62,7 @@ public class AuthManager : MonoBehaviour
             //Debug.Log("يرجى إدخال البريد الالكتروني");
             Debug.Log("Kindly enter your email address");
         }
-     string arabicCheck = "/([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])/"; //check whether string contains arabic characters
+     string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
     // Regex arabicRegex = new Regex(arabicCheck);
      bool result = Regex.IsMatch(_password, arabicCheck);
 
@@ -72,9 +72,7 @@ public class AuthManager : MonoBehaviour
         if(_password.Length != 6){
             Debug.Log("Password should have length of six characters");
         }
-         if(_password.Length != 6){
-            Debug.Log("Password should have length of six characters");
-        }
+  
             //Call the Firebase auth signin function passing the email and password
             var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
             //Wait until the task completes
