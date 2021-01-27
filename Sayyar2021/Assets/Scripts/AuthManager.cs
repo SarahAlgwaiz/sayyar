@@ -58,10 +58,6 @@ public class AuthManager : MonoBehaviour
 
     private IEnumerator Register(string _email, string _password)
     {
-        if(_email == ""){
-            //Debug.Log("يرجى إدخال البريد الالكتروني");
-            Debug.Log("Kindly enter your email address");
-        }
      string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
     // Regex arabicRegex = new Regex(arabicCheck);
      bool result = Regex.IsMatch(_password, arabicCheck);
