@@ -64,6 +64,9 @@ string gameVersion = "1";
     }
         public override void OnConnectedToMaster(){
             Debug.Log("connected to master");
+            createButton.gameObject.SetActive(true);
+            joinButton.gameObject.SetActive(true);
+            connectingText.SetActive(false);
         }
         public void createRoom(){
             while(!PhotonNetwork.IsConnected){
@@ -71,7 +74,7 @@ string gameVersion = "1";
             }
             Debug.Log("Connected create room");
              roomNumber=  UnityEngine.Random.Range(0, 100000);
-            PhotonNetwork.CreateRoom(""+roomNumber, new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom});
+            PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom});
             Debug.Log("Room Created");
         }
         public override void OnCreatedRoom(){
@@ -83,6 +86,9 @@ string gameVersion = "1";
                 Connect();
             }         
                string roomCode = roomNumField.text;
+               if(roomCode.Length!=5){
+                   Debug.Log("Room Code length should be 5");
+               }
           
             PhotonNetwork.JoinRoom(roomCode);
             
@@ -108,8 +114,11 @@ string gameVersion = "1";
             joinRoomView.SetActive(false);
         }
          void Start() {
+               createButton.gameObject.SetActive(false);
+               joinButton.gameObject.SetActive(false);
+               connectingText.SetActive(true);
             Connect();
-   
+
         }
        public override void OnCreateRoomFailed(short returnCode, string message){
            Debug.Log("failed to create room");
@@ -117,10 +126,7 @@ string gameVersion = "1";
             
         }
         public void Connect(){
-               createButton.gameObject.SetActive(false);
-               joinButton.gameObject.SetActive(false);
-                        connectingText.SetActive(true);
-
+           
             connectingText.SetActive(true);
             if(PhotonNetwork.IsConnected){
                 Debug.Log("Success");
@@ -131,9 +137,7 @@ string gameVersion = "1";
                 Debug.Log("Success");
 
             }
-                     createButton.gameObject.SetActive(true);
-            joinButton.gameObject.SetActive(true);
-            connectingText.SetActive(false);
+    
         }
     }
 }
