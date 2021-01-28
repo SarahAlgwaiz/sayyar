@@ -19,7 +19,6 @@ public class AuthManager : MonoBehaviour
     [Header("Register")]
     public InputField email;
     public InputField password;
-    
 
     void Awake()
     {
@@ -54,7 +53,9 @@ public class AuthManager : MonoBehaviour
         StartCoroutine(Register(email.text, password.text));
     }
 
-   
+   public void Toggle_Change(bool vlaue){
+       Debug.Log(vlaue);
+   }
 
     private IEnumerator Register(string _email, string _password)
     {
