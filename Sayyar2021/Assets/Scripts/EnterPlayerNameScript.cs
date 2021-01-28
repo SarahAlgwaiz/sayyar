@@ -6,7 +6,6 @@ using Photon.Pun;
 using UnityEngine.UI;
 
 namespace com.cactusteam.Sayyar{
-[RequireComponent(typeof(InputField))] //this script requires a component of type inputfield, which, in this case, is the player's name
 public class EnterPlayerNameScript : MonoBehaviour
 {
 
@@ -19,14 +18,13 @@ public class EnterPlayerNameScript : MonoBehaviour
         if(PlayerPrefs.HasKey(namePrefKey)){
             name = PlayerPrefs.GetString(namePrefKey);
         }
+       else{
+        PlayerPrefs.SetString(namePrefKey,name);     
+          } 
         PhotonNetwork.NickName = name;
 
     }
 
-    public void setName(string name){
-        PhotonNetwork.NickName = name;
-        PlayerPrefs.SetString(namePrefKey,name);
-    }
 }
 
 }
