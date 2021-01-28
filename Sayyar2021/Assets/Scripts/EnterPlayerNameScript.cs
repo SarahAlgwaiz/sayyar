@@ -25,7 +25,6 @@ private TMPro.TMP_Text playerNameText;
         PlayerPrefs.SetString(namePrefKey,name);     
           } 
           PhotonNetwork.NickName = name;
-          while(!PhotonNetwork.IsConnected);
           playerNameText.text = PhotonNetwork.NickName;
 
     }
