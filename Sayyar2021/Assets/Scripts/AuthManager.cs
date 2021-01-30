@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Firebase;
+using Firebase.Database;
 using Firebase.Auth;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
@@ -12,6 +13,7 @@ public class AuthManager : MonoBehaviour
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;    
     public FirebaseUser User;
+    public DatabaseReference DBreference;
 
     //Login variables
    
@@ -19,8 +21,9 @@ public class AuthManager : MonoBehaviour
     [Header("Register")]
     public InputField email;
     public InputField password;
+    public InputField name;
     
-
+   
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -44,20 +47,21 @@ public class AuthManager : MonoBehaviour
         Debug.Log("Setting up Firebase Auth");
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     //Function for the login button
    
     public void RegisterButton()
     {
-        //Call the register coroutine passing the email, password, and username
-        StartCoroutine(Register(email.text, password.text));
+        //Call the register coroutine passing the email, password, and name
+        StartCoroutine(Register(email.text, password.text,name.text));
     }
 
    
 
-    private IEnumerator Register(string _email, string _password)
-    {
+    private IEnumerator Register(string _email, string _password, string _name )
+    {     
      string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
     // Regex arabicRegex = new Regex(arabicCheck);
      bool result = Regex.IsMatch(_password, arabicCheck);
@@ -71,6 +75,9 @@ public class AuthManager : MonoBehaviour
   
             //Call the Firebase auth signin function passing the email and password
             var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
+            //Call the realtime database to save playerInfo
+             DBreference.Child("players").Child(User.UserID).Child("Email").SetValuAsync(_email);
+             DBreference.Child("players").Child(User.UserID).Child("Name").SetValuAsync(_name);
             //Wait until the task completes
             yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
 
