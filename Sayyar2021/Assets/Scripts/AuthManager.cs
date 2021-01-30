@@ -81,8 +81,8 @@ public class AuthManager : MonoBehaviour
         //Call the Firebase auth signin function passing the email and password
         var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
         //Call the realtime database to save playerInfo
-        DBreference.Child("players").Child(User.UserID).Child("Email").SetValuAsync(_email);
-        DBreference.Child("players").Child(User.UserID).Child("Name").SetValuAsync(_name);
+        //DBreference.Child("players").Child(User.UserID).Child("Email").SetValuAsync(_email);
+       // DBreference.Child("players").Child(User.UserID).Child("Name").SetValuAsync(_name);
         //Wait until the task completes
         yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
 

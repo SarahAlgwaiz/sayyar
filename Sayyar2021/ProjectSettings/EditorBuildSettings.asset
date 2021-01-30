@@ -6,17 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/game.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/JoinGameScene.unity
     guid: a6e78d8537d424538bb3d4393f356ee6
   - enabled: 1
     path: Assets/MainScene.unity
     guid: 3b265da286c134b8a87420cf9808de9d
-  - enabled: 1
-<<<<<<< Updated upstream
-    path: Assets/Scenes/SampleScene.unity
-=======
-    path: Assets/Scenes/game.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 172ac085f4ee54127b9bc800df6a1028, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0a534eff454c04a608af3d14a7663676, type: 2}
