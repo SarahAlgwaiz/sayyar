@@ -21,9 +21,13 @@ public class AuthManager : MonoBehaviour
     [Header("Register")]
     public InputField email;
     public InputField password;
+<<<<<<< HEAD
     public InputField name;
     
    
+=======
+
+>>>>>>> master
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -58,7 +62,9 @@ public class AuthManager : MonoBehaviour
         StartCoroutine(Register(email.text, password.text,name.text));
     }
 
-   
+   public void Toggle_Change(bool vlaue){
+       Debug.Log(vlaue);
+   }
 
     private IEnumerator Register(string _email, string _password, string _name )
     {     
