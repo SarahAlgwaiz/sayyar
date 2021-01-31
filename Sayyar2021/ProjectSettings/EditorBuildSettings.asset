@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/HomeScene.unity
+    guid: 74c7fbbac757a4a61a145848ffa0efbe
+  - enabled: 1
+    path: Assets/Scenes/JoinGameScene.unity
+    guid: a6e78d8537d424538bb3d4393f356ee6
+  - enabled: 1
+    path: Assets/Scenes/CreateGameScene.unity
+    guid: f291157bb5fb34927b03b96203ccc044
+  - enabled: 1
+    path: Assets/Scenes/SolarSystemGame.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 172ac085f4ee54127b9bc800df6a1028, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0a534eff454c04a608af3d14a7663676, type: 2}

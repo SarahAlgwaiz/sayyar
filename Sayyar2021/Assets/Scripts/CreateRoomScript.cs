@@ -28,7 +28,9 @@ private int roomNumber;
         public override void OnCreatedRoom(){
             roomCodeCreateField.text = "Room Number: "+roomNumber;
         }
-        
+         private void Start() {
+            createRoom();
+        }
         public override void OnDisconnected(DisconnectCause cause){
             Debug.Log("disconnected" + cause);
         }       

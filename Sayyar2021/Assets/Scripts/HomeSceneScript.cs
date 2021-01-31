@@ -3,9 +3,12 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 namespace com.cactusteam.Sayyar{
-    public class HomeSceneScript: MonoBehaviourPunCallbacks{
+
+public class HomeSceneScript: MonoBehaviourPunCallbacks{
     
     [SerializeField]
 private Button joinButton;
@@ -15,11 +18,12 @@ private Button createButton;
 private GameObject connectingText;
 
 string gameVersion = "1";
+
     public void OnClickJoinButton(){
-        SceneManager.LoadSceneAsync("JoinGameScene");
+       SceneManager.LoadScene("JoinGameScene", LoadSceneMode.Single);
           }
     public void OnClickCreateButton(){
-        SceneManager.LoadSceneAsync("CreateGameScene");
+        SceneManager.LoadScene("CreateGameScene", LoadSceneMode.Single);
     }
         public override void OnConnectedToMaster(){
             Debug.Log("connected to master");
@@ -29,9 +33,7 @@ string gameVersion = "1";
         }
  
         public override void OnDisconnected(DisconnectCause cause){
-            createButton.gameObject.SetActive(true);
-            joinButton.gameObject.SetActive(true);
-            connectingText.SetActive(false);
+
             Debug.Log("disconnected" + cause);
         }       
           void Awake() {
