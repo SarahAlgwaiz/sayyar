@@ -5,10 +5,7 @@ using Photon.Realtime;
 using System;
 
 namespace com.cactusteam.Sayyar{
-    public class PlayerConnectionScript: MonoBehaviourPunCallbacks{
-        [Tooltip("Maximum number of players in each room. When a room is full, new players can't join in. Therefore a new room will be created for the new player.")]
-    [SerializeField]
-    private byte maxPlayersPerRoom = 4;
+    public class HomeSceneScript: MonoBehaviourPunCallbacks{
     
     [SerializeField]
 private Button joinButton;
@@ -16,24 +13,8 @@ private Button joinButton;
 private Button createButton;
 [SerializeField]
 private GameObject connectingText;
-[SerializeField]
-private GameObject joinRoomView;
-[SerializeField]
-private GameObject createRoomView;
-[SerializeField]
-private TMPro.TMP_Text roomCodeCreateField;
-[SerializeField]
-private Button roomCodeConfirmButton;
-[SerializeField]
-private TMPro.TMP_InputField roomNumField;
- 
  [SerializeField]
 private GameObject GameView;
- 
- [SerializeField]
-private Button ExitGameButton;
- 
-private int roomNumber;
 
 string gameVersion = "1";
 
@@ -124,20 +105,6 @@ string gameVersion = "1";
            Debug.Log("failed to create room");
            createRoom();
             
-        }
-        public void Connect(){
-           
-            connectingText.SetActive(true);
-            if(PhotonNetwork.IsConnected){
-                Debug.Log("Success");
-            }
-            else{
-                PhotonNetwork.ConnectUsingSettings();
-                PhotonNetwork.GameVersion = gameVersion;
-                Debug.Log("Success");
-
-            }
-    
         }
     }
 }
