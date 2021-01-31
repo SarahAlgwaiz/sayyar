@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace com.cactusteam.Sayyar{
     public class CreateRoomScript: MonoBehaviourPunCallbacks{
@@ -15,23 +16,10 @@ private GameObject createRoomView;
 [SerializeField]
 private TMPro.TMP_Text roomCodeCreateField;
  
- [SerializeField]
-private GameObject GameView;
- 
- 
 private int roomNumber;
 
-string gameVersion = "1";
 
-
-        public override void OnConnectedToMaster(){
-            Debug.Log("connected to master");
-            connectingText.SetActive(false);
-        }
         public void createRoom(){
-            while(!PhotonNetwork.IsConnected){
-                Connect();
-            }
             Debug.Log("Connected create room");
              roomNumber=  UnityEngine.Random.Range(0, 100000);
             PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom});
@@ -42,7 +30,6 @@ string gameVersion = "1";
         }
         
         public override void OnDisconnected(DisconnectCause cause){
-            connectingText.SetActive(false);
             Debug.Log("disconnected" + cause);
         }       
           void Awake() {
@@ -50,12 +37,10 @@ string gameVersion = "1";
         }
         public override void OnJoinRoomFailed(short returnCode, string message){
             Debug.Log("join room failed" + message);
-            connectingText.SetActive(false);
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
-            GameView.gameObject.SetActive(true);
-            joinRoomView.SetActive(false);
+            SceneManager.LoadSceneAsync("SolarSystemGame");
         }
        public override void OnCreateRoomFailed(short returnCode, string message){
            Debug.Log("failed to create room");

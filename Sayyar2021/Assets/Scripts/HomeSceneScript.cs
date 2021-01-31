@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
-
+using UnityEngine.SceneManagement;
 namespace com.cactusteam.Sayyar{
     public class HomeSceneScript: MonoBehaviourPunCallbacks{
     
@@ -13,35 +13,13 @@ private Button joinButton;
 private Button createButton;
 [SerializeField]
 private GameObject connectingText;
- [SerializeField]
-private GameObject GameView;
 
 string gameVersion = "1";
-
-
-    public void OnClickExitButton(){
-        GameView.SetActive(false);
-        createRoomView.SetActive(false);
-        createButton.gameObject.SetActive(true);
-        joinButton.gameObject.SetActive(true);
-        PhotonNetwork.LeaveRoom();
-        Debug.Log("exited game");
-    }
     public void OnClickJoinButton(){
-        joinRoomView.SetActive(true);
-        joinButton.gameObject.SetActive(false);
-        createButton.gameObject.SetActive(false);
-    }
+        SceneManager.LoadSceneAsync("JoinGameScene");
+          }
     public void OnClickCreateButton(){
-        createRoomView.SetActive(true);
-        joinButton.gameObject.SetActive(false);
-        createButton.gameObject.SetActive(false);
-        createRoom();
-    }
-    public void OnClickRoomCodeConfirmButton(){
-        connectingText.SetActive(true);
-        joinRoomView.SetActive(false);
-        JoinRoom();
+        SceneManager.LoadSceneAsync("CreateGameScene");
     }
         public override void OnConnectedToMaster(){
             Debug.Log("connected to master");
@@ -49,31 +27,7 @@ string gameVersion = "1";
             joinButton.gameObject.SetActive(true);
             connectingText.SetActive(false);
         }
-        public void createRoom(){
-            while(!PhotonNetwork.IsConnected){
-                Connect();
-            }
-            Debug.Log("Connected create room");
-             roomNumber=  UnityEngine.Random.Range(0, 100000);
-            PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom});
-            Debug.Log("Room Created");
-        }
-        public override void OnCreatedRoom(){
-            roomCodeCreateField.text = "Room Number: "+roomNumber;
-        }
-        
-        public void JoinRoom(){
-            while(!PhotonNetwork.IsConnected){
-                Connect();
-            }         
-               string roomCode = roomNumField.text;
-               if(roomCode.Length!=5){
-                   Debug.Log("Room Code length should be 5");
-               }
-          
-            PhotonNetwork.JoinRoom(roomCode);
-            
-        }
+ 
         public override void OnDisconnected(DisconnectCause cause){
             createButton.gameObject.SetActive(true);
             joinButton.gameObject.SetActive(true);
@@ -83,28 +37,22 @@ string gameVersion = "1";
           void Awake() {
             PhotonNetwork.AutomaticallySyncScene = true;
         }
-        public override void OnJoinRoomFailed(short returnCode, string message){
-            Debug.Log("join room failed" + message);
-            connectingText.SetActive(false);
-            createButton.gameObject.SetActive(true);
-            joinButton.gameObject.SetActive(true);
-        }
-        public override void OnJoinedRoom(){
-            Debug.Log("Success! joined room");
-            GameView.gameObject.SetActive(true);
-            joinRoomView.SetActive(false);
-        }
          void Start() {
                createButton.gameObject.SetActive(false);
                joinButton.gameObject.SetActive(false);
                connectingText.SetActive(true);
             Connect();
-
         }
-       public override void OnCreateRoomFailed(short returnCode, string message){
-           Debug.Log("failed to create room");
-           createRoom();
-            
+          public void Connect(){
+            if(PhotonNetwork.IsConnected){
+                Debug.Log("Success");
+            }
+            else{
+                PhotonNetwork.ConnectUsingSettings();
+                PhotonNetwork.GameVersion = gameVersion;
+                Debug.Log("Success");
+            }
+ 
         }
     }
 }
