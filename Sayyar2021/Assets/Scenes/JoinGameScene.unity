@@ -826,8 +826,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: com.cactusteam.Sayyar.PlayerConnectionScript, Assembly-CSharp
+      - m_Target: {fileID: 1128510728}
+        m_TargetAssemblyTypeName: com.cactusteam.Sayyar.JoinRoomScript, Assembly-CSharp
         m_MethodName: OnClickRoomCodeConfirmButton
         m_Mode: 1
         m_Arguments:
