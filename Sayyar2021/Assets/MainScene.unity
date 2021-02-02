@@ -1582,7 +1582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &538752095
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4403,6 +4403,7 @@ GameObject:
   - component: {fileID: 1985502909}
   - component: {fileID: 1985502908}
   - component: {fileID: 1985502907}
+  - component: {fileID: 1985502910}
   m_Layer: 5
   m_Name: registerButton
   m_TagString: Untagged
@@ -4485,6 +4486,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 507138977}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: "ClosePanel\u0640signUp"
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1985502908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4523,6 +4536,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985502905}
   m_CullTransparentMesh: 1
+--- !u!114 &1985502910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985502905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77394e311d80c4cc99f27e02bd562c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependencyStatus: 0
+  lemail: {fileID: 0}
+  lpassword: {fileID: 0}
+  warningLoginText: {fileID: 0}
+  confirmLoginText: {fileID: 0}
+  email: {fileID: 92326694}
+  password: {fileID: 1666200650}
+  username: {fileID: 1326280484}
 --- !u!1 &1986273905
 GameObject:
   m_ObjectHideFlags: 0
@@ -4925,9 +4958,9 @@ MonoBehaviour:
   lpassword: {fileID: 145764500}
   warningLoginText: {fileID: 873796309}
   confirmLoginText: {fileID: 873796309}
-  email: {fileID: 0}
-  password: {fileID: 0}
-  username: {fileID: 0}
+  email: {fileID: 92326694}
+  password: {fileID: 1666200650}
+  username: {fileID: 1326280484}
 --- !u!4 &2108026240
 Transform:
   m_ObjectHideFlags: 0
