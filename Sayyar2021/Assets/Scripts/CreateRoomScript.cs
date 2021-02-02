@@ -16,7 +16,20 @@ private GameObject createRoomView;
 [SerializeField]
 private TMPro.TMP_Text roomCodeCreateField;
  
+
+[SerializeField]
+private TMPro.TMP_Text player1;
+[SerializeField]
+private TMPro.TMP_Text player2;
+[SerializeField]
+private TMPro.TMP_Text player3;
+[SerializeField]
+private TMPro.TMP_Text player4;
+[SerializeField]
+private TMPro.TMP_Text numOfJoinedPlayersText;
+
 private int roomNumber;
+private int numOfJoinedPlayers=0;
 
 
         public void createRoom(){
@@ -42,11 +55,34 @@ private int roomNumber;
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
-            SceneManager.LoadSceneAsync("SolarSystemGame");
+            //PlayerPrefs.setString("Name","Hadeel Alhajri") ;// current user's name from database in enterRoomScrip---> delete it from here
+            PhotonNetwork.NickName = "Hadeel Alhajri";
+           // SceneManager.LoadSceneAsync("SolarSystemGame");
+            numOfJoinedPlayers= PhotonNetwork.CurrentRoom.PlayerCount;
+            numOfJoinedPlayersText.text=numOfJoinedPlayers.ToString();
+           if(PhotonNetwork.CurrentRoom.PlayerCount==1){
+                           Debug.Log("ONLY the host, the host is "+PhotonNetwork.NickName);
+
+                player1.text = PhotonNetwork.NickName;
+           }
         }
        public override void OnCreateRoomFailed(short returnCode, string message){
            Debug.Log("failed to create room");
            createRoom();
         }
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+   {
+       numOfJoinedPlayers= PhotonNetwork.CurrentRoom.PlayerCount;
+      numOfJoinedPlayersText.text=numOfJoinedPlayers.ToString();
+if(numOfJoinedPlayers==2){
+    player2.text= newPlayer.NickName;
+}
+else if(numOfJoinedPlayers==3){
+    player3.text= newPlayer.NickName;
+}else if(numOfJoinedPlayers==4){
+    player4.text= newPlayer.NickName;
+}
+       Debug.Log("player "+newPlayer.NickName+" joined to room "+PhotonNetwork.CurrentRoom.Name+" , we have "+numOfJoinedPlayers+" players");
+   }
     }
 }
