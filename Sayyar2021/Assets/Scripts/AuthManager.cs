@@ -130,8 +130,9 @@ public class AuthManager : MonoBehaviour
     }
 
     public void RegisterButton()
-    {     Debug.LogError("inside RegisterButton" );
+    { 
         //Call the register coroutine passing the email, password, and name
+        Debug.LogFormat("User info" +email.text+"               "+password.text+"               "+username.text);
         StartCoroutine(Register(email.text, password.text,username.text));
 
     }
@@ -142,7 +143,7 @@ public class AuthManager : MonoBehaviour
     }
 
     private IEnumerator Register(string _email, string _password,string _username)
-    {Debug.LogError("inside IEnumerator Register" );
+    {
         string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
                                                                                                                                                                   // Regex arabicRegex = new Regex(arabicCheck);
         bool result = Regex.IsMatch(_password, arabicCheck);
@@ -159,6 +160,8 @@ public class AuthManager : MonoBehaviour
         //Call the Firebase auth signin function passing the email and password
         var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
         //Call the realtime database to save playerInfo
+        Debug.Log("///////"+_email);
+         Debug.Log("///////|||"+_username);
        DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(_email);
        DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").SetValueAsync(_username);
         //Wait until the task completes
