@@ -1,10 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using Firebase;
-using Firebase.Database;
 using Firebase.Auth;
+using Firebase.Database;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using TMPro;
+using System.Linq;
+
+
+
+
 
 public class AuthManager : MonoBehaviour
 {
@@ -21,8 +27,20 @@ public class AuthManager : MonoBehaviour
     [Header("Register")]
     public InputField email;
     public InputField password;
-    public InputField name;
+    public InputField username;
 
+    public GameObject Panel_signUp;
+
+    public void openPanel(){
+        if (Panel_signUp != null)
+        Panel_signUp.SetActive(true);
+
+    }
+    public void ClosePanel(){
+        Panel_signUp.SetActive(false);
+
+    }
+    
 
     void Awake()
     {
@@ -47,15 +65,17 @@ public class AuthManager : MonoBehaviour
         Debug.Log("Setting up Firebase Auth");
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
-        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+        DBreference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
+
     }
 
     //Function for the login button
 
     public void RegisterButton()
-    {
+    {     Debug.LogError("inside RegisterButton" );
         //Call the register coroutine passing the email, password, and name
-        StartCoroutine(Register(email.text, password.text, name.text));
+        StartCoroutine(Register(email.text, password.text,username.text));
+
     }
 
     public void Toggle_Change(bool vlaue)
@@ -63,8 +83,8 @@ public class AuthManager : MonoBehaviour
         Debug.Log(vlaue);
     }
 
-    private IEnumerator Register(string _email, string _password, string _name)
-    {
+    private IEnumerator Register(string _email, string _password,string _username)
+    {Debug.LogError("inside IEnumerator Register" );
         string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
                                                                                                                                                                   // Regex arabicRegex = new Regex(arabicCheck);
         bool result = Regex.IsMatch(_password, arabicCheck);
@@ -81,8 +101,8 @@ public class AuthManager : MonoBehaviour
         //Call the Firebase auth signin function passing the email and password
         var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
         //Call the realtime database to save playerInfo
-        DBreference.Child("players").Child(User.UserID).Child("Email").SetValuAsync(_email);
-        DBreference.Child("players").Child(User.UserID).Child("Name").SetValuAsync(_name);
+       DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(_email);
+       DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").SetValueAsync(_username);
         //Wait until the task completes
         yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
 
