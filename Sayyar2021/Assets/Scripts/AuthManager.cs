@@ -33,35 +33,6 @@ public class AuthManager : MonoBehaviour
     public InputField password;
     public InputField username;
 
-    public GameObject Panel_signUp;
-
-    public void openPanelـsignUp(){
-        if (Panel_signUp != null)
-        Panel_signUp.SetActive(true);
-
-    }
-    public void ClosePanelـsignUp(){
-        Panel_signUp.SetActive(false);
-
-    }
-    
-
-
-    //Login popup varible
-    public GameObject PanelLoginEmail;
-
-    public void OpenPanel(){
-        if(PanelLoginEmail != null){  
-            PanelLoginEmail.SetActive(true); 
-        }
-    }
-
-    public void ClosePanel(){
-     
-            PanelLoginEmail.SetActive(false); 
-        
-    }
-
 
     void Awake()
     {
