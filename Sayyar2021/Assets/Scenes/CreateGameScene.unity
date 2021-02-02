@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195d26216bda7460e9316f5b6a98a254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dependencyStatus: 0
   maxPlayersPerRoom: 4
   createRoomView: {fileID: 755410759}
   roomCodeCreateField: {fileID: 515651975}
