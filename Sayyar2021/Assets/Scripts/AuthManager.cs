@@ -35,12 +35,12 @@ public class AuthManager : MonoBehaviour
 
     public GameObject Panel_signUp;
 
-    public void openPanel(){
+    public void openPanelـsignUp(){
         if (Panel_signUp != null)
         Panel_signUp.SetActive(true);
 
     }
-    public void ClosePanel(){
+    public void ClosePanelـsignUp(){
         Panel_signUp.SetActive(false);
 
     }
