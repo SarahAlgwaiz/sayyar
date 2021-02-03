@@ -67,11 +67,26 @@ public class AuthManager : MonoBehaviour
         lemail.text = "";
         lpassword.text = "";
     }
+     public void ClearRegisterFeilds()
+    {
+        username.text = "";
+        email.text = "";
+        password.text = "";
+    }
 
         public void LoginButton()
     {
         //Call the login coroutine passing the email and password
         StartCoroutine(Login(lemail.text, lpassword.text));
+    }
+
+    //Function for the sign out button
+    public void SignOutButton()
+    {
+        auth.SignOut();
+        UIManager.instance.MainScreen();
+        ClearRegisterFeilds();
+        ClearLoginFeilds();
     }
 
      private IEnumerator Login(string _email, string _password)
@@ -117,15 +132,39 @@ public class AuthManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             // warningLoginText.text = "";
             // confirmLoginText.text = "Logged In";
-           // StartCoroutine(LoadUserData());
+            StartCoroutine(LoadUserData());
 
-            yield return new WaitForSeconds(2);
+          //  yield return new WaitForSeconds(2);
 
            // usernameField.text = User.DisplayName;
-            // UIManager.instance.RegisterScreen(); // Change to user data UI
+             UIManager.instance.HomeScreen(); 
             // confirmLoginText.text = "";
-            // ClearLoginFeilds();
-           // ClearRegisterFeilds();
+             ClearLoginFeilds();
+             ClearRegisterFeilds();
+        }
+    }
+    private IEnumerator LoadUserData()
+    {
+        //Get the currently logged in user data
+         Debug.Log(" ////      " +auth.CurrentUser.UserId);
+        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
+
+         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        { //No data exists yet
+            Debug.Log("No data exists yet");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            Debug.Log("Data has been retrieved  name is : "+snapshot.Child("Username").Value.ToString()+"  the email is: "+snapshot.Child("Email").Value.ToString());
         }
     }
 
@@ -160,8 +199,6 @@ public class AuthManager : MonoBehaviour
         //Call the Firebase auth signin function passing the email and password
         var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
         //Call the realtime database to save playerInfo
-        Debug.Log("///////"+_email);
-         Debug.Log("///////|||"+_username);
        DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(_email);
        DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").SetValueAsync(_username);
         //Wait until the task completes
@@ -198,6 +235,9 @@ public class AuthManager : MonoBehaviour
             Debug.Log(message);
             //  warningRegisterText.text = message;
         }
+         ClearRegisterFeilds();
+         ClearLoginFeilds();
+
         // else
         // {
         //     //User has now been created

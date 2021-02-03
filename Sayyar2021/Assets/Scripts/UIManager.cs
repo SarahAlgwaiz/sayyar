@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject loginUI;
     public GameObject registerUI;
     public GameObject mainScreen;
+    public GameObject homeScreen;
      public GameObject Panel_signUp;
       public GameObject PanelLoginEmail;
 
@@ -34,9 +35,9 @@ public class UIManager : MonoBehaviour
         mainScreen.SetActive(false);
     }
     public void RegisterScreen() // Regester button
-    {   
+    {   registerUI.SetActive(true);
         Panel_signUp.SetActive(true);
-        loginUI.SetActive(false);
+        //loginUI.SetActive(false);
     }
 
     public void MainScreen() //Back button  
@@ -46,6 +47,18 @@ public class UIManager : MonoBehaviour
         loginUI.SetActive(false);      
         registerUI.SetActive(true);
         Panel_signUp.SetActive(false);
+        homeScreen.SetActive(false);     
+
+           }
+
+    public void HomeScreen() //Back button  
+      {   
+               
+        homeScreen.SetActive(true);     
+        loginUI.SetActive(false);      
+        registerUI.SetActive(false);
+        mainScreen.SetActive(false);
+
            }
 
 
