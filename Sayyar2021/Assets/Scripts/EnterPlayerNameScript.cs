@@ -15,15 +15,8 @@ private TMPro.TMP_Text playerNameText;
     // Start is called before the first frame update
     void Start()
     {
-        string name = "Hadeel"; //replace this with the current user's name stored in DB
-        if(PlayerPrefs.HasKey(namePrefKey)){
-            name = PlayerPrefs.GetString(namePrefKey);
-            Debug.Log("name already exists");
-        }
-       else{
-           Debug.Log("new name");
-        PlayerPrefs.SetString(namePrefKey,name);     
-          } 
+
+        string name = "Sarah"; //replace this with the current user's name stored in DB
           PhotonNetwork.NickName = name;
           playerNameText.text = PhotonNetwork.NickName;
 

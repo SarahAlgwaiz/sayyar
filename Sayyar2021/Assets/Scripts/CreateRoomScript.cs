@@ -25,19 +25,8 @@ private GameObject createRoomView;
 private TMPro.TMP_Text roomCodeCreateField;
  
 
-[SerializeField]
-private TMPro.TMP_Text player1;
-[SerializeField]
-private TMPro.TMP_Text player2;
-[SerializeField]
-private TMPro.TMP_Text player3;
-[SerializeField]
-private TMPro.TMP_Text player4;
-[SerializeField]
-private TMPro.TMP_Text numOfJoinedPlayersText;
-
 private int roomNumber;
-private int numOfJoinedPlayers=0;
+
 
 
         public void createRoom(){
@@ -61,7 +50,6 @@ private int numOfJoinedPlayers=0;
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
-
         }
          private void Start() {
             createRoom();
@@ -77,16 +65,7 @@ private int numOfJoinedPlayers=0;
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
-            //PlayerPrefs.setString("Name","Hadeel Alhajri") ;// current user's name from database in enterRoomScrip---> delete it from here
-            PhotonNetwork.NickName = "Hadeel Alhajri";
            // SceneManager.LoadSceneAsync("SolarSystemGame");
-            numOfJoinedPlayers= PhotonNetwork.CurrentRoom.PlayerCount;
-            numOfJoinedPlayersText.text=numOfJoinedPlayers.ToString();
-           if(PhotonNetwork.CurrentRoom.PlayerCount==1){
-                           Debug.Log("ONLY the host, the host is "+PhotonNetwork.NickName);
-
-                player1.text = PhotonNetwork.NickName;
-           }
         }
        public override void OnCreateRoomFailed(short returnCode, string message){
            Debug.Log("failed to create room");
@@ -111,6 +90,7 @@ private int numOfJoinedPlayers=0;
         //await Task.Run(() => reference.Child("VirtualPlayrooms").Child(key1).Child("HostID").SetValueAsync(user.UserId));
         return key;
     }   
+        Firebase.Auth.Fire
     public async Task writeWaitingRoomData(string VPkey){
          reference = reference.Child("WaitingRooms").Push();
         var key = reference.Key;
@@ -124,19 +104,8 @@ private int numOfJoinedPlayers=0;
         //await Task.Run(() =reference.Child("WaitingRooms").Child("1").Child("KindergartnerIDs").setValueAsync("something")); 
         //await Task.Run(() =reference.Child("WaitingRooms").Child(""+roomNumber).Child("VideoID").SetValueAsync(videoID));    
     }
-        public override void OnPlayerEnteredRoom(Player newPlayer)
-   {
-       numOfJoinedPlayers= PhotonNetwork.CurrentRoom.PlayerCount;
-      numOfJoinedPlayersText.text=numOfJoinedPlayers.ToString();
-if(numOfJoinedPlayers==2){
-    player2.text= newPlayer.NickName;
-}
-else if(numOfJoinedPlayers==3){
-    player3.text= newPlayer.NickName;
-}else if(numOfJoinedPlayers==4){
-    player4.text= newPlayer.NickName;
-}
-       Debug.Log("player "+newPlayer.NickName+" joined to room "+PhotonNetwork.CurrentRoom.Name+" , we have "+numOfJoinedPlayers+" players");
-   }
+       
     }
+
+   
 }
