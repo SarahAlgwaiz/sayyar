@@ -92,7 +92,6 @@ private int numOfJoinedPlayers=0;
            Debug.Log("failed to create room");
            createRoom();
         }
-<<<<<<< HEAD
     
     async void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
@@ -111,7 +110,7 @@ private int numOfJoinedPlayers=0;
         //await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("Game").SetValueAsync(key));
         //await Task.Run(() => reference.Child("VirtualPlayrooms").Child(key1).Child("HostID").SetValueAsync(user.UserId));
         return key;
-    }
+    }   
     public async Task writeWaitingRoomData(string VPkey){
          reference = reference.Child("WaitingRooms").Push();
         var key = reference.Key;
@@ -125,7 +124,6 @@ private int numOfJoinedPlayers=0;
         //await Task.Run(() =reference.Child("WaitingRooms").Child("1").Child("KindergartnerIDs").setValueAsync("something")); 
         //await Task.Run(() =reference.Child("WaitingRooms").Child(""+roomNumber).Child("VideoID").SetValueAsync(videoID));    
     }
-=======
         public override void OnPlayerEnteredRoom(Player newPlayer)
    {
        numOfJoinedPlayers= PhotonNetwork.CurrentRoom.PlayerCount;
@@ -140,6 +138,5 @@ else if(numOfJoinedPlayers==3){
 }
        Debug.Log("player "+newPlayer.NickName+" joined to room "+PhotonNetwork.CurrentRoom.Name+" , we have "+numOfJoinedPlayers+" players");
    }
->>>>>>> 25f13038f2a9b6110aec22e96543c123265bd61d
     }
 }
