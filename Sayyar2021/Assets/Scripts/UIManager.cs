@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     public GameObject menuScreen;
     public GameObject Panel_signUp;
     public GameObject PanelLoginEmail;
+    public GameObject Panel_ShowProfile; 
+    public GameObject Panel_EditProfile;
 
     private void Awake()
     {
@@ -68,26 +70,36 @@ public class UIManager : MonoBehaviour
         menuScreen.SetActive(true);     
         loginUI.SetActive(false);      
         registerUI.SetActive(false);
- mainScreen.SetActive(false);
-         homeScreen.SetActive(false);     
-
+        mainScreen.SetActive(false);
+        homeScreen.SetActive(false);     
+        Panel_ShowProfile.SetActive(false);   
+        Panel_EditProfile.SetActive(false);   
            }
 
    
 
-    // public void openPanelـsignUp(){
-    //     if (registerUI != null)
-    //     registerUI.SetActive(true);
+    public void openPanel_ShowProfile(){
+        if (Panel_ShowProfile != null)
+        Panel_ShowProfile.SetActive(true);
+    }
 
+     public void openPanel_EditProfile(){
+        if (Panel_EditProfile != null)
+        Panel_EditProfile.SetActive(true);
+    }
 
-    // }
     public void ClosePanelـsignUp(){
         Panel_signUp.SetActive(false);
+    }
 
+     public void ClosePanel_ShowProfile(){
+       Panel_ShowProfile.SetActive(false);
+    }
 
+     public void ClosePanel_EditProfile(){
+        Panel_EditProfile.SetActive(false);
     }
     
-
 
     //Login popup varible
    
