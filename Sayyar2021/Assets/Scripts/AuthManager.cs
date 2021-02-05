@@ -29,12 +29,24 @@ public class AuthManager : MonoBehaviour
     public InputField lpassword;
     public TMP_Text warningLoginText;
     public TMP_Text confirmLoginText;
+
     //Register variables
     [Header("Register")]
     public InputField email;
     public InputField password;
     public InputField username;
 
+    //Show Profile Info variables
+    [Header("Show Profile ")]
+    public Text P_username;
+    public Text P_email;
+
+    //Show Profile Info variables
+    [Header("Edit Profile ")]
+    public InputField E_username;
+    public InputField E_email;
+    public InputField E_password;
+    public InputField E_ConfirmPass;
 
 
 //___________________________________________________________________________________Awake Function
@@ -105,6 +117,46 @@ public void RegisterButton()
         ClearLoginFeilds();
     }
 
+//___________________________________________________________________________________SaveDataButton Function
+    public void SaveDataButton()
+    {
+        StartCoroutine(UpdateUsername(E_username.text));
+        StartCoroutine(UpdateEmail(E_email.text));
+        StartCoroutine(UpdatePassword(E_password.text,E_ConfirmPass.text));
+    }
+
+//___________________________________________________________________________________MyProfileButton Function
+    public void MyProfileButton()
+    { 
+        StartCoroutine(MyProfile());
+    }
+
+//___________________________________________________________________________________MyProfile Function
+        public IEnumerator MyProfile()
+    {
+        Debug.Log("inside profile button and the id is :"+auth.CurrentUser.UserId);
+
+        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+        Debug.Log("No data exists yet or the object is null");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+            P_username.text = snapshot.Child("Username").Value.ToString();
+            P_email.text = snapshot.Child("Email").Value.ToString();
+        }
+    }
+
+
 //___________________________________________________________________________________Login Function
      private IEnumerator Login(string _email, string _password)
     {
@@ -149,8 +201,6 @@ public void RegisterButton()
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             // warningLoginText.text = "";
             // confirmLoginText.text = "Logged In";
-            StartCoroutine(LoadUserData());
-
           //  yield return new WaitForSeconds(2);
 
            // usernameField.text = User.DisplayName;
@@ -235,33 +285,65 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
        
          ClearRegisterFeilds();
          ClearLoginFeilds();
-
-        
-
     }
-//___________________________________________________________________________________LoadUserData Function
-     private IEnumerator LoadUserData()
-    {
-        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
 
-         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+//___________________________________________________________________________________Update the profile's info Functions
+ private IEnumerator UpdateUsername(string UpdatedName)
+    {
+       var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").SetValueAsync(UpdatedName);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
         if (DBTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
         }
-        else if (DBTask.Result.Value == null)
-        { //No data exists yet
-            Debug.Log("No data exists yet");
-        }
         else
         {
-            //Data has been retrieved
-            DataSnapshot snapshot = DBTask.Result;
-            Debug.Log("Data has been retrieved  name is : "+snapshot.Child("Username").Value.ToString()+"  the email is: "+snapshot.Child("Email").Value.ToString());
+         Debug.Log("Database username is now updated");
         }
     }
     
+ 
+ private IEnumerator UpdateEmail(string UpdatedEmail)
+    {
+         var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(UpdatedEmail);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+         Debug.Log("Database Email is now updated");
+        }
+    }
+ private IEnumerator UpdatePassword(string UpdatedPass,string UpdatedPassConfirm)
+    {
+        if (UpdatedPass.Equals(UpdatedPassConfirm)) {
+        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
+
+         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        // if (DBTask.Exception != null)
+        // {
+        //     Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        // }
+        // else
+        // {
+          Debug.Log("the passwords are the same");
+        //}
+        }else
+        {
+          Debug.Log("the passwords are not the same");
+
+        }
+    }
+
+
+
 //___________________________________________________________________________________Toggle_Change Function
     public void Toggle_Change(bool vlaue)
     {
