@@ -1,10 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
+using Firebase.Auth;
+using Firebase.Database;
+using Firebase;
 
 public class Synchronization : MonoBehaviourPunCallbacks
 {
@@ -19,6 +22,11 @@ private MyPlayer myPlayer;
 private Button start;
 
 private Transform tr;
+
+ [Header("Firebase")]
+    public DependencyStatus dependencyStatus;
+    public DatabaseReference reference;
+    private FirebaseUser user;
  public override void OnPlayerEnteredRoom(Player newPlayer)
    {
         addNewPlayer(newPlayer);
@@ -30,9 +38,34 @@ if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&&
    public void OnClickStartButton(){
        SceneManager.LoadScene("SolarSystemGame");
 
-
    }
+    public override void OnLeftRoom()
+    {
+        removeData();
+    }
+    // public override void OnMasterClientSwitched(Player newMasterClient)
+    // {
+    //     if(PhotonNetwork.LocalPlayer.UserId == newMasterClient.UserId){
+            
+    //     }
+    // }
+
+ 
+ 
    private void Awake() {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith( task =>
+        {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                //If they are avalible Initialize Firebase
+               InitializeFirebase();
+            }
+            else
+            {
+                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });
        getRoomPlayers();
    }
    private void Start() {
@@ -76,5 +109,23 @@ if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&&
     
  
    }
+   public async Task removeKindergartenerData(){
+        string waitingRoomId = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode").OrderByValue().EqualTo(PlayerPrefs.GetString("RoomCode")).Reference.Parent.Key;
+         reference = reference.Root.Child("WaitingRooms").Child(waitingRoomId);
+       
+
+      
+    // await Task.Run(() =>  reference.Child("WaitingRooms").Child(waitingRoomId).Child("KindergartnerIDs").Child(user.UserId).RemoveValueAsync());
+       
+       
+    }
+       
+    
+     void InitializeFirebase(){
+        reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
+            }
+    async void removeData(){
+      await   removeKindergartenerData();
+    }
 }
    

@@ -33,7 +33,7 @@ private TMPro.TMP_Text roomCodeCreateField;
         public void createRoom(){
             Debug.Log("Connected create room");
              roomNumber=  UnityEngine.Random.Range(0, 100000);
-            PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom});
+            PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom,PublishUserId=true});
             Debug.Log("Room Created");
         }
         public override void OnCreatedRoom(){

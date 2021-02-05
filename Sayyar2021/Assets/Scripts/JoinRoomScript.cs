@@ -63,6 +63,7 @@ private bool valid ;
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
+
             SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
 
@@ -83,12 +84,24 @@ private bool valid ;
                 if(!PhotonNetwork.InRoom){
                     return false;
                 }
-                DatabaseReference parent = doesRoomCodeExist.Reference.Parent.Child("KindergartnersID").Child("Kindergartner" + PhotonNetwork.CurrentRoom.PlayerCount);
+                DatabaseReference parent = doesRoomCodeExist.Reference.Parent.Child("KindergartnersID").Child(user.UserId);
                 await Task.Run(() => parent.SetValueAsync(user.UserId));
                 return true;
             }
             return false;
 
         }
+
+
+ public async Task writeKindergartenerData(){
+        string waitingRoomId = reference.Root.Child("WaitingRooms").Child(roomNumField.text).Reference.Parent.Key;
+         reference = reference.Root.Child("WaitingRooms").Child(waitingRoomId);
+       
+  // await Task.Run(() =>  reference.Child("WaitingRooms").Child(waitingRoomId).Child("KindergartnerIDs").SetValueAsync(user.UserId));
+
+
+
+
     }
 }
+
