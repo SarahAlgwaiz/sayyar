@@ -14,6 +14,9 @@ public class Synchronization : MonoBehaviourPunCallbacks
 [SerializeField]
 private TMPro.TMP_Text numOfJoinedPlayersText;
 
+[SerializeField]
+private TMPro.TMP_Text roomCodeText;
+
 private List<MyPlayer> playerList = new List<MyPlayer>();
 [SerializeField]
 private MyPlayer myPlayer;
@@ -69,7 +72,7 @@ if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&&
        getRoomPlayers();
    }
    private void Start() {
-       Debug.Log(PlayerPrefs.GetString("RoomCode"));
+       roomCodeText.text = PlayerPrefs.GetString("RoomCode");
    }
    public void addNewPlayer(Player newPlayer){
        
