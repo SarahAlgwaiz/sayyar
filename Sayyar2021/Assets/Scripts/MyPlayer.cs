@@ -9,6 +9,7 @@ public class MyPlayer : MonoBehaviour
    public Player Player;
 
    public void setPlayerName(Player newPlayer){
+      Debug.Log("in set player name");
    Player = newPlayer;
    playerName.text = newPlayer.NickName;
    }

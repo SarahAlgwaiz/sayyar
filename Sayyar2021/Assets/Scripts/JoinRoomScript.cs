@@ -63,7 +63,7 @@ private bool valid ;
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
-            SceneManager.LoadSceneAsync("SolarSystemGame");
+            SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
 
   async void InitializeFirebase(){

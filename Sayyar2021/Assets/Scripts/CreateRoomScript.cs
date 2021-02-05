@@ -15,6 +15,7 @@ namespace com.cactusteam.Sayyar{
     public DatabaseReference reference;
     private FirebaseUser user;
         
+    
     [Tooltip("Maximum number of players in each room. When a room is full, new players can't join in. Therefore a new room will be created for the new player.")]
     [SerializeField]
     private byte maxPlayersPerRoom = 4;
@@ -25,7 +26,7 @@ private GameObject createRoomView;
 private TMPro.TMP_Text roomCodeCreateField;
  
 
-private int roomNumber;
+ private int roomNumber;
 
 
 
@@ -37,6 +38,7 @@ private int roomNumber;
         }
         public override void OnCreatedRoom(){
             roomCodeCreateField.text = "Room Number: "+roomNumber;
+             PlayerPrefs.SetString("RoomCode",""+roomNumber);
                 FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             dependencyStatus = task.Result;
@@ -65,7 +67,7 @@ private int roomNumber;
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
-           // SceneManager.LoadSceneAsync("SolarSystemGame");
+         SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
        public override void OnCreateRoomFailed(short returnCode, string message){
            Debug.Log("failed to create room");
@@ -90,7 +92,6 @@ private int roomNumber;
         //await Task.Run(() => reference.Child("VirtualPlayrooms").Child(key1).Child("HostID").SetValueAsync(user.UserId));
         return key;
     }   
-        Firebase.Auth.Fire
     public async Task writeWaitingRoomData(string VPkey){
          reference = reference.Child("WaitingRooms").Push();
         var key = reference.Key;
