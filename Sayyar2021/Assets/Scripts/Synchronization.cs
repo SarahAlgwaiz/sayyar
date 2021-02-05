@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class Synchronization : MonoBehaviourPunCallbacks
 {
 [SerializeField]
@@ -11,25 +14,21 @@ private TMPro.TMP_Text numOfJoinedPlayersText;
 private List<MyPlayer> playerList = new List<MyPlayer>();
 [SerializeField]
 private MyPlayer myPlayer;
+
 [SerializeField]
-private GameObject myquad;
+private Button start;
+
 private Transform tr;
  public override void OnPlayerEnteredRoom(Player newPlayer)
    {
         addNewPlayer(newPlayer);
             updatePosition();
-
-    //   Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-    //   numOfJoinedPlayersText.text= "" + PhotonNetwork.CurrentRoom.PlayerCount;
-    //   Player[] playerslist = PhotonNetwork.PlayerList;
-    //   for(int i = 0; i<playerslist.Length; i++){
-    //       Player player = (Player) playerslist.GetValue(i);
-    //       string playerName = player.NickName;
-    //       if(playerList(i) != -1){
-
-    //       }
-    //   }
-    //    Debug.Log("player "+newPlayer.NickName+" joined to room "+PhotonNetwork.CurrentRoom.Name);
+if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&& PhotonNetwork.IsMasterClient){
+    start.interactable=true;
+}
+   }
+   public void OnClickStartButton(){
+       SceneManager.LoadScene("SolarSystemGame");
 
 
    }
@@ -40,6 +39,7 @@ private Transform tr;
        Debug.Log(PlayerPrefs.GetString("RoomCode"));
    }
    public void addNewPlayer(Player newPlayer){
+       
         MyPlayer player = Instantiate(myPlayer, tr);
         if(player != null){
             player.setPlayerName(newPlayer);
@@ -56,9 +56,11 @@ private Transform tr;
 
    }
    public void updatePosition(){
-       int i = 4;
+       int i = 100;
           foreach (MyPlayer player in playerList) {
-              player.gameObject.transform.position.Set(2,i--,0);
+            Debug.Log("update");
+         player.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RectTransform>().localPosition = new Vector3(300,i,0);
+         i-=20;//---------
                }
    }
  public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -71,14 +73,8 @@ private Transform tr;
 
         numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
     updatePosition();
-    //    Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-    //   numOfJoinedPlayersText.text= "" + PhotonNetwork.CurrentRoom.PlayerCount;
-    //   Player[] playerslist = PhotonNetwork.PlayerList;
-    //   for(int i = 0; i<playerslist.Length; i++){
-    //       Player player = (Player) playerslist.GetValue(i);
-    //       string playerName = player.NickName;
-    //   }
-    //    Debug.Log("player "+newPlayer.NickName+" joined to room "+PhotonNetwork.CurrentRoom.Name);
+    
+ 
    }
 }
    
