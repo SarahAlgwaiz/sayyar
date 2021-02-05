@@ -11,8 +11,9 @@ public class UIManager : MonoBehaviour
     public GameObject registerUI;
     public GameObject mainScreen;
     public GameObject homeScreen;
-     public GameObject Panel_signUp;
-      public GameObject PanelLoginEmail;
+    public GameObject menuScreen;
+    public GameObject Panel_signUp;
+    public GameObject PanelLoginEmail;
 
     private void Awake()
     {
@@ -61,6 +62,16 @@ public class UIManager : MonoBehaviour
 
            }
 
+    public void MenuScreen() //Back button  
+      {   
+               
+        menuScreen.SetActive(true);     
+        loginUI.SetActive(false);      
+        registerUI.SetActive(false);
+ mainScreen.SetActive(false);
+         homeScreen.SetActive(false);     
+
+           }
 
    
 

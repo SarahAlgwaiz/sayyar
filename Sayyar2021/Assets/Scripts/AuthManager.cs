@@ -1,3 +1,5 @@
+//___________________________________________________________________________________Using packeges
+
 using System.Collections;
 using UnityEngine;
 using Firebase;
@@ -8,12 +10,12 @@ using System.Text.RegularExpressions;
 using TMPro;
 using System.Linq;
 
-
-
-
+//___________________________________________________________________________________ beging of the class
 
 public class AuthManager : MonoBehaviour
 {
+//___________________________________________________________________________________variables
+
     //Firebase variables
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -34,6 +36,8 @@ public class AuthManager : MonoBehaviour
     public InputField username;
 
 
+
+//___________________________________________________________________________________Awake Function
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -52,6 +56,8 @@ public class AuthManager : MonoBehaviour
         });
     }
 
+
+//___________________________________________________________________________________InitializeFirebase Function
     private void InitializeFirebase()
     {
         Debug.Log("Setting up Firebase Auth");
@@ -61,7 +67,8 @@ public class AuthManager : MonoBehaviour
 
     }
 
-    //Function for the login button
+
+//___________________________________________________________________________________Functions to clearFields
    public void ClearLoginFeilds()
     {
         lemail.text = "";
@@ -74,21 +81,31 @@ public class AuthManager : MonoBehaviour
         password.text = "";
     }
 
+//___________________________________________________________________________________LoginButton Function
         public void LoginButton()
     {
         //Call the login coroutine passing the email and password
         StartCoroutine(Login(lemail.text, lpassword.text));
     }
 
-    //Function for the sign out button
+//___________________________________________________________________________________RegisterButton Function
+public void RegisterButton()
+    { 
+        //Call the register coroutine passing the email, password, and Username
+        StartCoroutine(Register(email.text, password.text,username.text));
+
+    }
+
+//___________________________________________________________________________________SignOutButton Function
     public void SignOutButton()
     {
         auth.SignOut();
-        UIManager.instance.MainScreen();
+        UIManager.instance.MainScreen(); //  move to MainScreen after SignOut
         ClearRegisterFeilds();
         ClearLoginFeilds();
     }
 
+//___________________________________________________________________________________Login Function
      private IEnumerator Login(string _email, string _password)
     {
         //Call the Firebase auth signin function passing the email and password
@@ -143,44 +160,8 @@ public class AuthManager : MonoBehaviour
              ClearRegisterFeilds();
         }
     }
-    private IEnumerator LoadUserData()
-    {
-        //Get the currently logged in user data
-         Debug.Log(" ////      " +auth.CurrentUser.UserId);
-        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
-
-         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else if (DBTask.Result.Value == null)
-        { //No data exists yet
-            Debug.Log("No data exists yet");
-        }
-        else
-        {
-            //Data has been retrieved
-            DataSnapshot snapshot = DBTask.Result;
-
-            Debug.Log("Data has been retrieved  name is : "+snapshot.Child("Username").Value.ToString()+"  the email is: "+snapshot.Child("Email").Value.ToString());
-        }
-    }
-
-    public void RegisterButton()
-    { 
-        //Call the register coroutine passing the email, password, and name
-        Debug.LogFormat("User info" +email.text+"               "+password.text+"               "+username.text);
-        StartCoroutine(Register(email.text, password.text,username.text));
-
-    }
-
-    public void Toggle_Change(bool vlaue)
-    {
-        Debug.Log(vlaue);
-    }
-
+   
+//___________________________________________________________________________________Register Function
     private IEnumerator Register(string _email, string _password,string _username)
     {
         string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
@@ -197,10 +178,25 @@ public class AuthManager : MonoBehaviour
         }
 
         //Call the Firebase auth signin function passing the email and password
-        var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
-        //Call the realtime database to save playerInfo
-       DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(_email);
-       DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").SetValueAsync(_username);
+        var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password).ContinueWith(task => {
+  if (task.IsCanceled) {
+    Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+    return;
+  }
+  if (task.IsFaulted) {
+    Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+    return;
+  }
+
+  // Firebase user has been created.
+  Firebase.Auth.FirebaseUser newUser = task.Result;
+  Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+      newUser.DisplayName, newUser.UserId);
+
+DBreference.Child("playerInfo").Child(newUser.UserId).Child("Email").SetValueAsync(_email); // newUser.UserId is samiller to auth.CurrentUser.UserId
+DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValueAsync(_username);
+});
+       
         //Wait until the task completes
         yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
 
@@ -235,42 +231,40 @@ public class AuthManager : MonoBehaviour
             Debug.Log(message);
             //  warningRegisterText.text = message;
         }
+         //Call the realtime database to save playerInfo
+       
          ClearRegisterFeilds();
          ClearLoginFeilds();
 
-        // else
-        // {
-        //     //User has now been created
-        //     //Now get the result
-        //     User = RegisterTask.Result;
+        
 
-        //     if (User != null)
-        //     {
-        //         //Create a user profile and set the username
-        //        // UserProfile profile = new UserProfile{DisplayName = _username};
+    }
+//___________________________________________________________________________________LoadUserData Function
+     private IEnumerator LoadUserData()
+    {
+        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
 
-        //         //Call the Firebase auth update user profile function passing the profile with the username
-        //        // var ProfileTask = User.UpdateUserProfileAsync(profile);
-        //         //Wait until the task completes
-        //        // yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
+         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
-        //         if (ProfileTask.Exception != null)
-        //         {
-        //             //If there are errors handle them
-        //             Debug.LogWarning(message: $"Failed to register task with {ProfileTask.Exception}");
-        //             FirebaseException firebaseEx = ProfileTask.Exception.GetBaseException() as FirebaseException;
-        //             AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
-        //             warningRegisterText.text = "Username Set Failed!";
-        //         }
-        //         else
-        //         {
-        //             //Username is now set
-        //             //Now return to login screen
-        //             UIManager.instance.LoginScreen();
-        //             //warningRegisterText.text = "";
-        //         }
-        //     }
-        // }
-
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        { //No data exists yet
+            Debug.Log("No data exists yet");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+            Debug.Log("Data has been retrieved  name is : "+snapshot.Child("Username").Value.ToString()+"  the email is: "+snapshot.Child("Email").Value.ToString());
+        }
+    }
+    
+//___________________________________________________________________________________Toggle_Change Function
+    public void Toggle_Change(bool vlaue)
+    {
+        Debug.Log(vlaue);
     }
 }
