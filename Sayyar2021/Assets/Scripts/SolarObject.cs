@@ -10,6 +10,7 @@ public class SolarObject
 
     public float xAxis;
     public float zAxis;
+    public float yAxis;
 
     public float orbitPeriodSeconds;
     public float rotationPeriodSeconds;
@@ -34,6 +35,6 @@ public class SolarObject
         float x = Mathf.Sin(angle) * xAxis;
         float z = Mathf.Cos(angle) * zAxis;
 
-        return new Vector3(x, 0, z);
+        return new Vector3(x/20, 0, (z/20));
     }
 }
