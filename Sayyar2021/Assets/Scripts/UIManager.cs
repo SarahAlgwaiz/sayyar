@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     }
 
     //Functions to change the login screen UI
-    public void LoginScreen() //Back button
+    public void LoginScreen() //Login button
     {
         loginUI.SetActive(true);
         registerUI.SetActive(false);
