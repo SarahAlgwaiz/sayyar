@@ -27,14 +27,15 @@ public class AuthManager : MonoBehaviour
    [Header("Login")]
     public InputField lemail;
     public InputField lpassword;
-    public TMP_Text warningLoginText;
-    public TMP_Text confirmLoginText;
+    public Text ErrorMsgL;
 
     //Register variables
     [Header("Register")]
     public InputField email;
     public InputField password;
     public InputField username;
+    public Text ErrorMsgR;
+
 
     //Show Profile Info variables
     [Header("Show Profile ")]
@@ -131,6 +132,12 @@ public void RegisterButton()
         StartCoroutine(MyProfile());
     }
 
+//___________________________________________________________________________________ResetPassButton Function
+    public void ResetPassButton()
+    { 
+        StartCoroutine(ResetPass());
+    }
+
 //___________________________________________________________________________________MyProfile Function
         public IEnumerator MyProfile()
     {
@@ -191,7 +198,7 @@ public void RegisterButton()
                     message = "Account does not exist";
                     break;
             }
-            warningLoginText.text = message;
+            ErrorMsgL.text = message;
         }
         else
         {
@@ -221,9 +228,11 @@ public void RegisterButton()
         if (result)
         {
             Debug.Log("Password should contain only English characters");
+            ErrorMsgR.text ="Password should contain only English characters";
         }
         if (_password.Length != 6)
         {
+             ErrorMsgR.text ="Password should have length of six characters";
             Debug.Log("Password should have length of six characters");
         }
 
@@ -279,9 +288,8 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
                     break;
             }
             Debug.Log(message);
-            //  warningRegisterText.text = message;
+            ErrorMsgR.text = message;
         }
-         //Call the realtime database to save playerInfo
        
          ClearRegisterFeilds();
          ClearLoginFeilds();
@@ -290,6 +298,8 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
 //___________________________________________________________________________________Update the profile's info Functions
  private IEnumerator UpdateUsername(string UpdatedName)
     {
+        if(UpdatedName != null){
+
        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").SetValueAsync(UpdatedName);
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
@@ -303,11 +313,17 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
          Debug.Log("Database username is now updated");
         }
     }
+    else 
+        Debug.Log(" Name is null ");
+        }
     
  
  private IEnumerator UpdateEmail(string UpdatedEmail)
     {
-         var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(UpdatedEmail);
+        if(!(UpdatedEmail.Equals(""))){
+       
+        var DBTask1 = auth.CurrentUser.UpdateEmailAsync(UpdatedEmail);
+        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(UpdatedEmail);
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -318,29 +334,35 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
         else
         {
          Debug.Log("Database Email is now updated");
-        }
+        }}
+        else 
+        Debug.Log(" Email is null ");
+
     }
  private IEnumerator UpdatePassword(string UpdatedPass,string UpdatedPassConfirm)
     {
+        if(UpdatedPass + UpdatedPassConfirm != null){
         if (UpdatedPass.Equals(UpdatedPassConfirm)) {
-        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
 
-         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Firebase.Auth.FirebaseUser user = auth.CurrentUser;
+        if (user != null) {
+        var DBTask = user.UpdatePasswordAsync(UpdatedPass);
 
-        // if (DBTask.Exception != null)
-        // {
-        //     Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        // }
-        // else
-        // {
-          Debug.Log("the passwords are the same");
-        //}
-        }else
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
         {
-          Debug.Log("the passwords are not the same");
-
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
         }
+        else
+        {
+         Debug.Log("the passwords are the same and updated successfully.");
+        }}
+       }else 
+       {Debug.Log("the passwords are not the same");} 
     }
+     else 
+        Debug.Log(" Password is null ");}
 
 
 
@@ -349,4 +371,21 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
     {
         Debug.Log(vlaue);
     }
+
+//___________________________________________________________________________________ResetPass Function
+ private IEnumerator ResetPass()
+    {
+    string emailAddress =(DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").GetValueAsync()).ToString();
+
+    var Task = auth.SendPasswordResetEmailAsync(emailAddress);
+    
+    yield return new WaitUntil(predicate: () => Task.IsCompleted);
+
+    if (Task.Exception != null) {
+      Debug.LogWarning("SendPasswordResetEmailAsync was canceled.");
+    }
+   else
+    Debug.Log("Password reset email sent successfully.");
+  
+}
 }
