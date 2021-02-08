@@ -199,6 +199,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   session: {fileID: 269047589}
   placablePrefab: {fileID: 542570577421383826, guid: 50ad44e32637a462fb191d5b9ec08ed7, type: 3}
+  Mercury: {fileID: 3885845253069203268, guid: b1c5c1523ef4446d39c611e61e5a67cf, type: 3}
+  Venus: {fileID: 7979434382999846474, guid: dd78836c5e1734262ab1a0bbdfec1077, type: 3}
+  Earth: {fileID: 7765523008238663313, guid: 0e9952cff54f24c518c34303e73ff067, type: 3}
+  Mars: {fileID: 3981193673885259943, guid: 09955ffa216fe401b81c57e3aa26d008, type: 3}
+  Jupiter: {fileID: 8936252349162820525, guid: aaf92bf900dcd476dbdf90b9b5fd3cbc, type: 3}
+  Saturn: {fileID: 5754648943945272369, guid: 90274b8dd3d8d4edaa353631541ee2ff, type: 3}
+  Uranus: {fileID: 6428949619592926398, guid: 37cd3b090f6334be4a874cc2a8aec17c, type: 3}
+  Neptune: {fileID: 1487389192617538027, guid: 2a297fc78347e46b9a79b95df31c5268, type: 3}
+  myPlane: {fileID: 1562845046716497409, guid: 5f7ad0053860c469385ca1c33fe20377, type: 3}
 --- !u!114 &269047592
 MonoBehaviour:
   m_ObjectHideFlags: 0

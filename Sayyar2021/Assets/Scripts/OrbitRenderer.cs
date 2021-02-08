@@ -20,7 +20,6 @@ public class OrbitRenderer
             Vector3 pos = orbit.Evaluate(i / (float)segments);
             points[i] = new Vector3(pos.x, 0, pos.z);
         }
-
         points[segments] = points[0];
 
         lr.positionCount = segments + 1;
