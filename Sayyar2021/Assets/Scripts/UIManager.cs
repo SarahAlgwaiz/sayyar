@@ -16,6 +16,11 @@ public class UIManager : MonoBehaviour
     public GameObject PanelLoginEmail;
     public GameObject Panel_ShowProfile; 
     public GameObject Panel_EditProfile;
+    public GameObject UpdatedMsg;
+    public GameObject ErrorMsgR;
+    public GameObject ErrorMsgL;
+
+
 
     private void Awake()
     {
@@ -40,7 +45,6 @@ public class UIManager : MonoBehaviour
     public void RegisterScreen() // Regester button
     {   registerUI.SetActive(true);
         Panel_signUp.SetActive(true);
-        //loginUI.SetActive(false);
     }
 
     public void MainScreen() //Back button  
@@ -61,6 +65,8 @@ public class UIManager : MonoBehaviour
         loginUI.SetActive(false);      
         registerUI.SetActive(false);
         mainScreen.SetActive(false);
+        PanelLoginEmail.SetActive(false); 
+
 
            }
 
@@ -90,6 +96,7 @@ public class UIManager : MonoBehaviour
 
     public void ClosePanelـsignUp(){
         Panel_signUp.SetActive(false);
+        
     }
 
      public void ClosePanel_ShowProfile(){
@@ -104,6 +111,7 @@ public class UIManager : MonoBehaviour
     public void OpenPanel(){
         if(PanelLoginEmail != null){  
             PanelLoginEmail.SetActive(true); 
+
         }
     }
 
