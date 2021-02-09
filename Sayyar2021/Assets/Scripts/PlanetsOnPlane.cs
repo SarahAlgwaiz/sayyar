@@ -83,9 +83,9 @@ private void Update() {
 
     private void setPosition(){
         for(int i=0; i<planets.Length;i++){
-    float randomX = Random.Range (-10, 10);
-    float randomY = Random.Range (-10, 10);
-     float randomZ = Random.Range (-10, 10); 
+    float randomX = Random.Range(-3, 3);
+    float randomY = Random.Range(-3, 3);
+     float randomZ = Random.Range(-3, 3);
     Vector3 randomPosition = new Vector3 (randomX, randomY, randomZ);    
     Debug.Log("RandomPosition" + randomPosition);
     Debug.Log("Plane local scale " + plane.transform.localScale);

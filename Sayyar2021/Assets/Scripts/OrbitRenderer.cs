@@ -22,7 +22,7 @@ public class OrbitRenderer
         }
         points[segments] = points[0];
 
-        lr.positionCount = segments + 1;
-        lr.SetPositions(points);
+        // lr.positionCount = segments + 1;
+        // lr.SetPositions(points);
     }
 }
