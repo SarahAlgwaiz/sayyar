@@ -175,6 +175,7 @@ MonoBehaviour:
     type: 1
     xAxis: 0
     zAxis: 0
+    yAxis: 0
     orbitPeriodSeconds: 0
     rotationPeriodSeconds: 26.5
     rotationAngle: 7.25

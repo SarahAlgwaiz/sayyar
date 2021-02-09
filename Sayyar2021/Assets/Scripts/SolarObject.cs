@@ -22,10 +22,9 @@ public class SolarObject
     public float rotationPeriodDays = 1;
 
     public bool drawOrbit = true;
-
     public bool isMoving = true;
     public bool isRotating = true;
-
+    
     /// <summary>
     /// Calculate current orbit position
     /// </summary>
@@ -35,6 +34,6 @@ public class SolarObject
         float x = Mathf.Sin(angle) * xAxis;
         float z = Mathf.Cos(angle) * zAxis;
 
-        return new Vector3(x/20, 0, (z/20));
+        return new Vector3(x, 0, z);
     }
 }
