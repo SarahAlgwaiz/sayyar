@@ -37,7 +37,7 @@ private void Awake() {
     private void FixedUpdate() {
       
             rb.position = Vector3.MoveTowards(rb.position, networkedPosition, Time.fixedDeltaTime);
-        rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotaion, Time.fixedDeltaTime*100);
+            rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotaion, Time.fixedDeltaTime*100);
        
     }
 
