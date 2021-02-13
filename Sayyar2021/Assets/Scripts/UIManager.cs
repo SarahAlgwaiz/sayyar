@@ -99,10 +99,7 @@ public class UIManager : MonoBehaviour
      public void ClosePanel_EditProfile(){
         Panel_EditProfile.SetActive(false);
     }
-    
-
-    //Login popup varible
-   
+       
 
     public void OpenPanel(){
         if(PanelLoginEmail != null){  
@@ -113,6 +110,12 @@ public class UIManager : MonoBehaviour
     public void ClosePanel(){
      
             PanelLoginEmail.SetActive(false); 
+        
+    }
+
+    public void ClosePanel_menuScreen(){
+            menuScreen.SetActive(false); 
+            HomeScreen();
         
     }
 
