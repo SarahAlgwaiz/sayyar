@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 3981193673885259964}
   - component: {fileID: 3981193673885259937}
   - component: {fileID: 3981193673885259938}
-  - component: {fileID: -3016962484573004154}
+  - component: {fileID: 6142780246459608121}
+  - component: {fileID: -9209583193713050668}
   m_Layer: 0
   m_Name: Mars
   m_TagString: Planets
@@ -327,7 +328,7 @@ MonoBehaviour:
   rotationProgress: 0
   movementSpeed: 0
   rotationSpeed: 0
---- !u!114 &-3016962484573004154
+--- !u!114 &6142780246459608121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,8 +337,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 3981193673885259943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
+  m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
+--- !u!114 &-9209583193713050668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981193673885259943}
+  m_Enabled: 1
+   isSelected: 0
   isLocked: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 6142780246459608121}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

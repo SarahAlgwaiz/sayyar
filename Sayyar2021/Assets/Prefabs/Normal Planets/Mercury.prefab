@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 3885845253069203266}
   - component: {fileID: 3885845253069203278}
   - component: {fileID: 3885845253069203279}
-  - component: {fileID: 4634748828599573042}
+  - component: {fileID: -2575560997315555723}
+  - component: {fileID: 4100833677482176896}
   m_Layer: 0
   m_Name: Mercury
   m_TagString: Planets
@@ -327,7 +328,7 @@ MonoBehaviour:
   rotationProgress: 0
   movementSpeed: 0
   rotationSpeed: 0
---- !u!114 &4634748828599573042
+--- !u!114 &-2575560997315555723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,8 +337,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 3885845253069203268}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
   isLocked: 0
+=======
+  m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4100833677482176896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3885845253069203268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  isSelected: 0
+  isLocked: 0
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: -2575560997315555723}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+>>>>>>> abcf53ab286d92b1901dbe533116c03245a20bcd

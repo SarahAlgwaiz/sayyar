@@ -42,7 +42,7 @@ using UnityEngine;
          Quaternion pointQuaternion = Quaternion.AngleAxis (rotationAngle, Vector3.forward);
          Vector3 pointPosition;
          
-         pointPosition = new Vector3(radius.x * Mathf.Cos (angle), -.4f, radius.y * Mathf.Sin (angle)+.23f);
+         pointPosition = new Vector3(Mathf.Sin(angle)*radius.y, -2, Mathf.Cos(angle)*radius.x);
          pointPosition = pointQuaternion * pointPosition;
          
          self_lineRenderer.SetPosition(index, pointPosition);        
