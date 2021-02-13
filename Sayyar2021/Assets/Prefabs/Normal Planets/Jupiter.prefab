@@ -14,13 +14,8 @@ GameObject:
   - component: {fileID: 8936252349162820176}
   - component: {fileID: 8936252349162820527}
   - component: {fileID: 8936252349162820526}
-<<<<<<< HEAD
-  - component: {fileID: 6643753297216316562}
-  - component: {fileID: 5073556102754133842}
-=======
   - component: {fileID: 87756191066833270}
   - component: {fileID: 2764006137771832420}
->>>>>>> abcf53ab286d92b1901dbe533116c03245a20bcd
   m_Layer: 0
   m_Name: Jupiter
   m_TagString: Planets

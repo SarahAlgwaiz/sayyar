@@ -328,11 +328,7 @@ MonoBehaviour:
   rotationProgress: 0
   movementSpeed: 0
   rotationSpeed: 0
-<<<<<<< HEAD
---- !u!114 &-2891761591318199415
-=======
 --- !u!114 &6724280724746828256
->>>>>>> abcf53ab286d92b1901dbe533116c03245a20bcd
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,13 +337,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6428949619592926398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelected: 0
-  isLocked: 0
-=======
   m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -375,4 +364,3 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
->>>>>>> abcf53ab286d92b1901dbe533116c03245a20bcd

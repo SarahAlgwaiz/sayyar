@@ -79,7 +79,7 @@ private bool valid ;
         async Task<bool> isRoomCodeValid(){
 
             Query doesRoomCodeExist = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode");
-            Query q1 = doesRoomCodeExist.OrderByValue().EqualTo(roomNumField.text);
+            Query q1 = doesRoomCodeExist.EqualTo(roomNumField.text);
             
             DataSnapshot result = await Task.Run(() => q1.GetValueAsync().Result);
             if(result.Exists){
