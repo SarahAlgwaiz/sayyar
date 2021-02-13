@@ -149,7 +149,7 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Earth(Clone)":
+                   case "NormalEarth(Clone)":
                 if(Vector3.Distance(planets[2].transform.position, selectedObject.transform.position)<=0.4){
                                     Debug.Log(Vector3.Distance(planets[2].transform.position,selectedObject.transform.position));
 
