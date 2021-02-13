@@ -114,7 +114,6 @@ public void disablePlane(){
         {
             Debug.Log("during touch");
             Pose hitPose = s_Hits[0].pose;
-                Debug.Log(Vector3.Distance(planets[0].transform.position,selectedObject.transform.position));
                 if(selectedObject.Selected)
                 {
                     selectedObject.transform.position = hitPose.position;
@@ -125,10 +124,10 @@ public void disablePlane(){
             checkPlanets();
         }       
             private void checkPlanets(){
-
+                    Debug.Log("selected name" + selectedObject.gameObject.name);
             switch(selectedObject.gameObject.name){
-                case "Mercury":
-                if(Vector3.Distance(planets[0].transform.position, selectedObject.transform.position)<=0.23){
+                case "Mercury(Clone)":
+                if(Vector3.Distance(planets[0].transform.position, selectedObject.transform.position)<=0.4){
                  Debug.Log(Vector3.Distance(planets[0].transform.position,selectedObject.transform.position));
 
                     Destroy(selectedObject);
@@ -138,8 +137,8 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Venus":
-                if(Vector3.Distance(planets[1].transform.position, selectedObject.transform.position)<=0.23){
+                   case "Venus(Clone)":
+                if(Vector3.Distance(planets[1].transform.position, selectedObject.transform.position)<=0.4){
                                     Debug.Log(Vector3.Distance(planets[1].transform.position,selectedObject.transform.position));
 
                     Destroy(selectedObject);
@@ -150,8 +149,8 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Earth":
-                if(Vector3.Distance(planets[2].transform.position, selectedObject.transform.position)<=0.23){
+                   case "Earth(Clone)":
+                if(Vector3.Distance(planets[2].transform.position, selectedObject.transform.position)<=0.4){
                                     Debug.Log(Vector3.Distance(planets[2].transform.position,selectedObject.transform.position));
 
                     Destroy(selectedObject);
@@ -162,7 +161,7 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Mars":
+                   case "Mars(Clone)":
                 if(Vector3.Distance(planets[3].transform.position, selectedObject.transform.position)<=0.23){
                                     Debug.Log(Vector3.Distance(planets[3].transform.position,selectedObject.transform.position));
 
@@ -174,7 +173,7 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Jupiter":
+                   case "Jupiter(Clone)":
                 if(Vector3.Distance(planets[4].transform.position, selectedObject.transform.position)<=0.23){
                                     Debug.Log(Vector3.Distance(planets[4].transform.position,selectedObject.transform.position));
 
@@ -187,7 +186,7 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Saturn":
+                   case "Saturn(Clone)":
                 if(Vector3.Distance(planets[5].transform.position, selectedObject.transform.position)<=0.23){
                                     Debug.Log(Vector3.Distance(planets[5].transform.position,selectedObject.transform.position));
 
@@ -200,7 +199,7 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Uranus":
+                   case "Uranus(Clone)":
                 if(Vector3.Distance(planets[6].transform.position, selectedObject.transform.position)<=0.23){
                                     Debug.Log(Vector3.Distance(planets[6].transform.position,selectedObject.transform.position));
 
@@ -213,7 +212,7 @@ public void disablePlane(){
                 }
                 else Debug.Log("incorrect planet!");
                 break;
-                   case "Neptune":
+                   case "Neptune(Clone)":
                 if(Vector3.Distance(planets[7].transform.position, selectedObject.transform.position)<=0.23){
                                     Debug.Log(Vector3.Distance(planets[7].transform.position,selectedObject.transform.position));
 
