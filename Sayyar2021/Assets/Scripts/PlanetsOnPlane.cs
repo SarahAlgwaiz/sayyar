@@ -128,7 +128,9 @@ public void disablePlane(){
 
             switch(selectedObject.gameObject.name){
                 case "Mercury":
-                if(Vector3.Distance(planets[0].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[0].transform.position, selectedObject.transform.position)<=0.23){
+                 Debug.Log(Vector3.Distance(planets[0].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[0].GetComponent<Renderer>().material = planetsMaterial[0];
                     isPlanetInserted[0] = true;
@@ -137,7 +139,9 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Venus":
-                if(Vector3.Distance(planets[1].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[1].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[1].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[1].GetComponent<Renderer>().material = planetsMaterial[1];
                        isPlanetInserted[1] = true;
@@ -147,7 +151,9 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Earth":
-                if(Vector3.Distance(planets[2].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[2].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[2].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[2].GetComponent<Renderer>().material = planetsMaterial[2];
                  isPlanetInserted[2] = true;
@@ -157,7 +163,9 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Mars":
-                if(Vector3.Distance(planets[3].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[3].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[3].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[3].GetComponent<Renderer>().material = planetsMaterial[3];
                     isPlanetInserted[3] = true;
@@ -167,7 +175,9 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Jupiter":
-                if(Vector3.Distance(planets[4].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[4].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[4].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[4].GetComponent<Renderer>().material = planetsMaterial[4];
                     isPlanetInserted[4] = true;
@@ -178,7 +188,9 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Saturn":
-                if(Vector3.Distance(planets[5].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[5].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[5].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[5].GetComponent<Renderer>().material = planetsMaterial[5];
                     isPlanetInserted[5] = true;
@@ -189,7 +201,9 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Uranus":
-                if(Vector3.Distance(planets[6].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[6].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[6].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[6].GetComponent<Renderer>().material = planetsMaterial[6];
                     isPlanetInserted[6] = true;
@@ -200,9 +214,12 @@ public void disablePlane(){
                 else Debug.Log("incorrect planet!");
                 break;
                    case "Neptune":
-                if(Vector3.Distance(planets[7].transform.position, selectedObject.transform.position)<=0.3){
+                if(Vector3.Distance(planets[7].transform.position, selectedObject.transform.position)<=0.23){
+                                    Debug.Log(Vector3.Distance(planets[7].transform.position,selectedObject.transform.position));
+
                     Destroy(selectedObject);
                     planets[7].GetComponent<Renderer>().material = planetsMaterial[7];
+
                     isPlanetInserted[7] = true;
                                         Debug.Log("planet added!");
                 }
