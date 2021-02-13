@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1487389192617538038}
   - component: {fileID: 5049607990219131801}
   - component: {fileID: -1643858485051959274}
+  - component: {fileID: -5345206813359441048}
   m_Layer: 0
   m_Name: Neptune
   m_TagString: Untagged
@@ -363,3 +364,17 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-5345206813359441048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487389192617538027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  isLocked: 0
