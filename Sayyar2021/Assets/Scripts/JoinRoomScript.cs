@@ -78,14 +78,16 @@ private bool valid ;
 
         async Task<bool> isRoomCodeValid(){
 
-            Query doesRoomCodeExist = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode").OrderByValue().EqualTo(roomNumField.text);
-            DataSnapshot result = await Task.Run(() => doesRoomCodeExist.GetValueAsync().Result);
+            Query doesRoomCodeExist = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode");
+            Query q1 = doesRoomCodeExist.OrderByValue().EqualTo(roomNumField.text);
+            
+            DataSnapshot result = await Task.Run(() => q1.GetValueAsync().Result);
             if(result.Exists){
                 PhotonNetwork.JoinRoom(roomNumField.text);
                 if(!PhotonNetwork.InRoom){ // more validation cases (full or code not valid)
                     return false;
                 }
-                // DatabaseReference parent = doesRoomCodeExist.Reference.Parent.Child("KindergartnersID").Child(user.UserId);
+                // DatabaseReference parent = q1.Reference.Parent.Child("KindergartnersID").Child(user.UserId);
                 // await Task.Run(() => parent.SetValueAsync(user.UserId));
                 return true;
             }
