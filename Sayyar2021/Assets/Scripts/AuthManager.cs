@@ -48,7 +48,7 @@ public class AuthManager : MonoBehaviour
     public InputField E_password;
     public InputField E_ConfirmPass;
 
-
+     
 //___________________________________________________________________________________Awake Function
     void Awake()
     {
@@ -245,6 +245,8 @@ public void RegisterButton()
 
 DBreference.Child("playerInfo").Child(newUser.UserId).Child("Email").SetValueAsync(_email); // newUser.UserId is samiller to auth.CurrentUser.UserId
 DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValueAsync(_username);
+DBreference.Child("playerInfo").Child(newUser.UserId).Child("Avatar").SetValueAsync("AvatarA");
+
 });
        
         //Wait until the task completes
@@ -349,4 +351,10 @@ DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValue
     {
         Debug.Log(vlaue);
     }
+
+
+ 
+
+     
+
 }
