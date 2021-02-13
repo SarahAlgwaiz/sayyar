@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3885845253069203278}
   - component: {fileID: 8750293546858714908}
   - component: {fileID: 2441153045414702626}
-  - component: {fileID: -9212333689459513004}
   m_Layer: 0
   m_Name: Mercury
   m_TagString: Untagged
@@ -331,17 +330,3 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-9212333689459513004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3885845253069203268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelected: 0
-  isLocked: 0
