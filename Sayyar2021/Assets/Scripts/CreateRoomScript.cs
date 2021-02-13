@@ -44,7 +44,7 @@ private TMPro.TMP_Text roomCodeCreateField;
             dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
-                //If they are avalible Initialize Firebase
+                //If they are available Initialize Firebase
                 InitializeFirebase();
             }
             else

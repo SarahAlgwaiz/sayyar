@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8128367ec334b5fbffe9ba792c30ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dependencyStatus: 0
   session: {fileID: 269047589}
   placablePrefab: {fileID: 542570577421383826, guid: 50ad44e32637a462fb191d5b9ec08ed7, type: 3}
   planets:
