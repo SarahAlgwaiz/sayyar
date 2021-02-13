@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5754648943945272374}
   - component: {fileID: 1755869996620290308}
   - component: {fileID: 9041928839611272522}
+  - component: {fileID: -6677574761447616888}
   m_Layer: 0
   m_Name: Saturn
   m_TagString: Planets
@@ -354,8 +355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObservedComponentsFoldoutOpen: 1
   Group: 0
-  isSelected: 0
-  isLocked: 0
   prefixField: -1
   observableSearch: 2
   Synchronization: 3
@@ -365,3 +364,17 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-6677574761447616888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754648943945272369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  isLocked: 0

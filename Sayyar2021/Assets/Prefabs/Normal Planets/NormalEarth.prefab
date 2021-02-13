@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7765523008238663319}
   - component: {fileID: 5821709526243841566}
   - component: {fileID: -3506642490451111892}
+  - component: {fileID: 1944884439747390903}
   m_Layer: 0
   m_Name: NormalEarth
   m_TagString: Planets
@@ -348,8 +349,6 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7765523008238663313}
   m_Enabled: 1
-   isSelected: 0
-  isLocked: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
@@ -360,7 +359,22 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 5821709526243841566}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1944884439747390903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765523008238663313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed495e2451d4b938d842d6257c0267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  isLocked: 0
