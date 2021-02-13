@@ -64,28 +64,29 @@ private bool valid ;
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
 
-            SceneManager.LoadSceneAsync("WaitingRoomScene");
+          //  SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
 
   async void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
         valid = await isRoomCodeValid();
         if(valid){
-            SceneManager.LoadSceneAsync("game"); //has joined the room and will now go to the waiting room
+            SceneManager.LoadSceneAsync("WaitingRoomScene"); //has joined the room and will now go to the waiting room
         }
 
             }
 
         async Task<bool> isRoomCodeValid(){
-            Query doesRoomCodeExist = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode").OrderByValue().EqualTo(roomNumField);
-            DataSnapshot result = Task.Run(() => doesRoomCodeExist.GetValueAsync()).Result;
+
+            Query doesRoomCodeExist = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode").OrderByValue().EqualTo(roomNumField.text);
+            DataSnapshot result = await Task.Run(() => doesRoomCodeExist.GetValueAsync().Result);
             if(result.Exists){
                 PhotonNetwork.JoinRoom(roomNumField.text);
-                if(!PhotonNetwork.InRoom){
+                if(!PhotonNetwork.InRoom){ // more validation cases (full or code not valid)
                     return false;
                 }
-                DatabaseReference parent = doesRoomCodeExist.Reference.Parent.Child("KindergartnersID").Child(user.UserId);
-                await Task.Run(() => parent.SetValueAsync(user.UserId));
+                // DatabaseReference parent = doesRoomCodeExist.Reference.Parent.Child("KindergartnersID").Child(user.UserId);
+                // await Task.Run(() => parent.SetValueAsync(user.UserId));
                 return true;
             }
             return false;

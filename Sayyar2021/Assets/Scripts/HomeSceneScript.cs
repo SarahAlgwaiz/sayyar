@@ -97,7 +97,7 @@ string gameVersion = "1";
 
     public async Task setName(){
        Debug.Log("set name");
-        DataSnapshot ds =  await Task.Run(() => reference.Child("playerInfo").Child("1x8VnXozbxgTYLRLPrOxfBldhNu1").Child("Username").GetValueAsync());//replace this with the current user's name stored in DB
+        DataSnapshot ds =  await Task.Run(() => reference.Child("playerInfo").Child("HS0ulVQ1iFUbk0Ud8ZEcNFPxJzY2").Child("Username").GetValueAsync());//replace this with the current user's name stored in DB
          Debug.Log("after ds");
          nameFromFirebase = ds.Value.ToString();
         Debug.Log("name is" + nameFromFirebase);

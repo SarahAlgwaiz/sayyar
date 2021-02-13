@@ -83,7 +83,7 @@ private TMPro.TMP_Text roomCodeCreateField;
         reference = reference.Child("VirtualPlayrooms").Push();
         var key = reference.Key;
         reference = reference.Root;
-        await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("NumOfPlayers").SetValueAsync(maxPlayersPerRoom));
+        //await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("NumOfPlayers").SetValueAsync(maxPlayersPerRoom));// Num of player may change
         await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("VirtualPlayroomID").SetValueAsync(key));
 
        //the following code should have a valid value (not null) otherwise the subsequent async calls will fail
@@ -102,8 +102,8 @@ private TMPro.TMP_Text roomCodeCreateField;
        //the following code should have a valid value (not null) otherwise the subsequent async calls will fail
 
         //await Task.Run(() =>reference.Child("WaitingRooms").Child(key).Child("HostID").SetValueAsync(user.UserId));
-        //await Task.Run(() =reference.Child("WaitingRooms").Child("1").Child("KindergartnerIDs").setValueAsync("something")); 
-        //await Task.Run(() =reference.Child("WaitingRooms").Child(""+roomNumber).Child("VideoID").SetValueAsync(videoID));    
+        //await Task.Run(() =>reference.Child("WaitingRooms").Child("1").Child("KindergartnerIDs").setValueAsync("something")); 
+        //await Task.Run(() =>reference.Child("WaitingRooms").Child(""+roomNumber).Child("VideoID").SetValueAsync(videoID));    
     }
        
     }
