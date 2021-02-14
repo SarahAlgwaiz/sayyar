@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
@@ -24,17 +25,18 @@ namespace com.cactusteam.Sayyar{
 private GameObject createRoomView;
 [SerializeField]
 private TMPro.TMP_Text roomCodeCreateField;
- 
+
+public static string virtualPlayroomKey;
 
  private int roomNumber;
 
 
 
         public void createRoom(){
-            Debug.Log("Connected create room");
-             roomNumber=  UnityEngine.Random.Range(0, 100000);
-            PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom,PublishUserId=true});
-            Debug.Log("Room Created");
+             Debug.Log("Connected create room");
+             roomNumber=  UnityEngine.Random.Range(10000, 100000);
+             PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom,PublishUserId=true});
+             Debug.Log("Room Created");
         }
         public override void OnCreatedRoom(){
             roomCodeCreateField.text = "Room Number: "+roomNumber;
@@ -57,7 +59,7 @@ private TMPro.TMP_Text roomCodeCreateField;
             createRoom();
         }
         public override void OnDisconnected(DisconnectCause cause){
-            Debug.Log("disconnected" + cause);
+            Debug.Log("disconnected from server"); //popup pleeeease
         }       
           void Awake() {
             PhotonNetwork.AutomaticallySyncScene = true;
@@ -76,35 +78,20 @@ private TMPro.TMP_Text roomCodeCreateField;
     
     async void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-        string key = await writeVirtualPlayroomData();
-        await writeWaitingRoomData(key);
+         await writeVirtualPlayroomData();
             }
+
         public async Task<string> writeVirtualPlayroomData(){
         reference = reference.Child("VirtualPlayrooms").Push();
         var key = reference.Key;
         reference = reference.Root;
-        //await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("NumOfPlayers").SetValueAsync(maxPlayersPerRoom));// Num of player may change
+        await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("NumOfPlayers").SetValueAsync(maxPlayersPerRoom));// Num of player may change
         await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("VirtualPlayroomID").SetValueAsync(key));
-
        //the following code should have a valid value (not null) otherwise the subsequent async calls will fail
-
         //await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(key).Child("Game").SetValueAsync(key));
-        //await Task.Run(() => reference.Child("VirtualPlayrooms").Child(key1).Child("HostID").SetValueAsync(user.UserId));
         return key;
     }   
-    public async Task writeWaitingRoomData(string VPkey){
-         reference = reference.Child("WaitingRooms").Push();
-        var key = reference.Key;
-        reference = reference.Root;
-       await Task.Run(() =>  reference.Child("WaitingRooms").Child(key).Child("WaitingRoomID").SetValueAsync(key));
-       await Task.Run(() =>  reference.Child("WaitingRooms").Child(key).Child("RoomCode").SetValueAsync(roomNumber));
-       await Task.Run(() =>  reference.Child("VirtualPlayrooms").Child(VPkey).Child("WaitingRoomID").SetValueAsync(key));
-       //the following code should have a valid value (not null) otherwise the subsequent async calls will fail
-
-        //await Task.Run(() =>reference.Child("WaitingRooms").Child(key).Child("HostID").SetValueAsync(user.UserId));
-        //await Task.Run(() =>reference.Child("WaitingRooms").Child("1").Child("KindergartnerIDs").setValueAsync("something")); 
-        //await Task.Run(() =>reference.Child("WaitingRooms").Child(""+roomNumber).Child("VideoID").SetValueAsync(videoID));    
-    }
+   
        
     }
 

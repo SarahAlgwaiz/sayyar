@@ -7,21 +7,18 @@ using UnityEngine.XR.ARSubsystems;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
-using Firebase;
-using Firebase.Database;
 using Firebase.Auth;
-using System.Threading.Tasks;
+using Firebase.Database;
+using Firebase;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlanetsOnPlane : MonoBehaviour
 {
 
-
-     [Header("Firebase")]
+ [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public DatabaseReference reference;
-    private FirebaseUser user;
- private ARRaycastManager raycastManager;
+    private FirebaseUser user; private ARRaycastManager raycastManager;
  private GameObject spawnedObject;
 
  [SerializeField]
@@ -62,6 +59,7 @@ private void Awake() {
     for(int i=0; i<planets.Length; i++){
         isPlanetInserted[i] = false;
     }
+    InitializeFirebase();
 }
 
 public void disablePlane(){
@@ -131,27 +129,13 @@ public void disablePlane(){
             }
         }
 
- //async void InitializeFirebase(){
-        //reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-        // await saveBadgeData();
-          //}
-        // public async Task saveBadgeData(){
-        //     int badgeID = Random.Range(0,12);
-        //     var path = await Task.Run(() => reference.Child("Badges").Child(""+badgeID).Child("BadgePath").GetValueAsync().Result.Value);
-        //     var result = await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).GetValueAsync().Result);
-        //     if(result.Exists){
-        //       int badgeCount = (int) await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).Child("BadgeCount").GetValueAsync().Result.Value); 
-        //       badgeCount++;
-        //       await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).Child("BadgeCount").SetValueAsync(badgeCount)); 
-        //     }
-        //     else{
-        //     await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).Child("BadgeID").SetValueAsync(badgeID));        
-        //     await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).Child("BadgeCount").SetValueAsync(1));        
-        //     await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).Child("BadgePath").SetValueAsync(path));        
-        //         }
+   void InitializeFirebase(){
+        reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
+            }
+    public async Task writeGameData(){
+            
+     }
 
-        //     //await Task.Run(() => reference.Child("Game").Child(gameID).Child("Badge").Child(""+badgeID).SetValueAsync(badgeID));        
-        // }
   private void finishGame(){
      SceneManager.LoadScene("HomeScene");
   }

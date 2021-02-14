@@ -33,8 +33,9 @@ private bool valid ;
                string roomCode = roomNumField.text;
                if(roomCode.Length!=5){
                    Debug.Log("Room Code length should be 5");
+                   return;
                }
-            //    PhotonNetwork.JoinRoom(roomCode);
+                PhotonNetwork.JoinRoom(roomCode);
                    FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             dependencyStatus = task.Result;
@@ -52,27 +53,36 @@ private bool valid ;
             
         }
         public override void OnDisconnected(DisconnectCause cause){
-            Debug.Log("disconnected" + cause);
+            Debug.Log("disconnected from server"); //popup pleeeease
         }       
           void Awake() {
             PhotonNetwork.AutomaticallySyncScene = true;
         }
         public override void OnJoinRoomFailed(short returnCode, string message){
             Debug.Log("join room failed" + message);
+            Debug.Log(returnCode);
+            switch(returnCode){
+                case 32758:
+                Debug.Log("Room code does not exist"); //popup pleeeease
+                break;
+                case 32765:
+                Debug.Log("Room already full");//popup pleeeease
+                break;
+            }
             valid = false;
         }
         public override void OnJoinedRoom(){
             Debug.Log("Success! joined room");
 
-          //  SceneManager.LoadSceneAsync("WaitingRoomScene");
+           SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
 
   async void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-        valid = await isRoomCodeValid();
-        if(valid){
-            SceneManager.LoadSceneAsync("WaitingRoomScene"); //has joined the room and will now go to the waiting room
-        }
+        //valid = await isRoomCodeValid();
+        // if(valid){
+        //     SceneManager.LoadSceneAsync("WaitingRoomScene"); //has joined the room and will now go to the waiting room
+        // }
 
             }
 
@@ -83,7 +93,7 @@ private bool valid ;
             
             DataSnapshot result = await Task.Run(() => q1.GetValueAsync().Result);
             if(result.Exists){
-                PhotonNetwork.JoinRoom(roomNumField.text);
+                //PhotonNetwork.JoinRoom(roomNumField.text);
                 if(!PhotonNetwork.InRoom){ // more validation cases (full or code not valid)
                     return false;
                 }

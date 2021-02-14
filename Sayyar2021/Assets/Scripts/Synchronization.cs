@@ -9,6 +9,9 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase;
 
+
+//START HERE
+//تسحيل بيانات القيم
 public class Synchronization : MonoBehaviourPunCallbacks
 {
 [SerializeField]
@@ -40,7 +43,6 @@ if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&&
    }
    public void OnClickStartButton(){
        SceneManager.LoadScene("SolarSystemGame");
-
    }
     public override void OnLeftRoom()
     {
@@ -122,7 +124,6 @@ if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&&
        
        
     }
-       
     
      void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;

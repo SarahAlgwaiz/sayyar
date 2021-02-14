@@ -64,7 +64,7 @@ string gameVersion = "1";
   
         public override void OnDisconnected(DisconnectCause cause){
 
-            Debug.Log("disconnected" + cause);
+            Debug.Log("disconnected from server"); //popup pleeeease
         }       
           void Awake() {
             PhotonNetwork.AutomaticallySyncScene = true;
