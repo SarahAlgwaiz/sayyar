@@ -49,7 +49,7 @@ private Vector3 planeSize;
 private LineRenderer lineRenderer;
 private Vector3 solarSystemSize;
 
-private bool[] isPlanetInserted;
+public static bool[] isPlanetInserted;
 
 private bool isGameFinished = true;
 static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
@@ -117,6 +117,7 @@ public void disablePlane(){
                 if(selectedObject.Selected)
                 {
                     selectedObject.transform.position = hitPose.position;
+                    Debug.Log("selected position" + selectedObject.transform.position);
                 }
             }
             
@@ -124,116 +125,9 @@ public void disablePlane(){
             checkPlanets();
         }       
             private void checkPlanets(){
-                    Debug.Log("selected name" + selectedObject.gameObject.name);
-            switch(selectedObject.gameObject.name){
-                case "Mercury(Clone)":
-                if(Vector3.Distance(planets[0].transform.position, selectedObject.transform.position)<=0.4){
-                 Debug.Log(Vector3.Distance(planets[0].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[0].GetComponent<Renderer>().material = planetsMaterial[0];
-                    isPlanetInserted[0] = true;
-                    Debug.Log("planet added!");
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "Venus(Clone)":
-                if(Vector3.Distance(planets[1].transform.position, selectedObject.transform.position)<=0.4){
-                                    Debug.Log(Vector3.Distance(planets[1].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[1].GetComponent<Renderer>().material = planetsMaterial[1];
-                       isPlanetInserted[1] = true;
-                                        Debug.Log("planet added!");
-
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "NormalEarth(Clone)":
-                if(Vector3.Distance(planets[2].transform.position, selectedObject.transform.position)<=0.4){
-                                    Debug.Log(Vector3.Distance(planets[2].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[2].GetComponent<Renderer>().material = planetsMaterial[2];
-                 isPlanetInserted[2] = true;
-                                        Debug.Log("planet added!");
-
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "Mars(Clone)":
-                if(Vector3.Distance(planets[3].transform.position, selectedObject.transform.position)<=0.23){
-                                    Debug.Log(Vector3.Distance(planets[3].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[3].GetComponent<Renderer>().material = planetsMaterial[3];
-                    isPlanetInserted[3] = true;
-                                        Debug.Log("planet added!");
-
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "Jupiter(Clone)":
-                if(Vector3.Distance(planets[4].transform.position, selectedObject.transform.position)<=0.23){
-                                    Debug.Log(Vector3.Distance(planets[4].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[4].GetComponent<Renderer>().material = planetsMaterial[4];
-                    isPlanetInserted[4] = true;
-
-                                        Debug.Log("planet added!");
-
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "Saturn(Clone)":
-                if(Vector3.Distance(planets[5].transform.position, selectedObject.transform.position)<=0.23){
-                                    Debug.Log(Vector3.Distance(planets[5].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[5].GetComponent<Renderer>().material = planetsMaterial[5];
-                    isPlanetInserted[5] = true;
-
-                                        Debug.Log("planet added!");
-
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "Uranus(Clone)":
-                if(Vector3.Distance(planets[6].transform.position, selectedObject.transform.position)<=0.23){
-                                    Debug.Log(Vector3.Distance(planets[6].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[6].GetComponent<Renderer>().material = planetsMaterial[6];
-                    isPlanetInserted[6] = true;
-
-                                        Debug.Log("planet added!");
-
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                   case "Neptune(Clone)":
-                if(Vector3.Distance(planets[7].transform.position, selectedObject.transform.position)<=0.23){
-                                    Debug.Log(Vector3.Distance(planets[7].transform.position,selectedObject.transform.position));
-
-                    Destroy(selectedObject);
-                    planets[7].GetComponent<Renderer>().material = planetsMaterial[7];
-
-                    isPlanetInserted[7] = true;
-                                        Debug.Log("planet added!");
-                }
-                else Debug.Log("incorrect planet!");
-                break;
-                default: break;
-            }
-             for(int i=0; i<planets.Length; i++){
-        if(!isPlanetInserted[i]){
-            isGameFinished = false;
-        }
-            }
-            if(isGameFinished){
+            if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
                 //InitializeFirebase();
-                //finishGame();
+                finishGame();
             }
         }
 
@@ -258,15 +152,15 @@ public void disablePlane(){
 
         //     //await Task.Run(() => reference.Child("Game").Child(gameID).Child("Badge").Child(""+badgeID).SetValueAsync(badgeID));        
         // }
-//   private void finishGame(){
-//      SceneManager.LoadScene("HomeScene");
-//   }
+  private void finishGame(){
+     SceneManager.LoadScene("HomeScene");
+  }
     public void setPosition(){
         for(int i=0; i<planets.Length;i++){
     float randomX = Random.Range(-3, 3);
-    float randomY = Random.Range(-3, 3);
+    //float randomY = Random.Range(-3, 3);
      float randomZ = Random.Range(-3, 3);
-    Vector3 randomPosition = new Vector3 (randomX, randomY, randomZ);    
+    Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
     Debug.Log("RandomPosition" + randomPosition);
     Debug.Log("Plane local scale " + plane.transform.localScale);
      Instantiate(planets[i].transform,randomPosition,Quaternion.identity);
