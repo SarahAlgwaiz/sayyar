@@ -16,9 +16,7 @@ public class UIManager : MonoBehaviour
     public GameObject PanelLoginEmail;
     public GameObject Panel_ShowProfile; 
     public GameObject Panel_EditProfile;
-    public GameObject UpdatedMsg;
-    public GameObject ErrorMsgR;
-    public GameObject ErrorMsgL;
+    
 
 
 
