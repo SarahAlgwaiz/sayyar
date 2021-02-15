@@ -65,8 +65,6 @@ public class AuthManager : MonoBehaviour
             if (dependencyStatus == DependencyStatus.Available)
             {
                 //If they are avalible Initialize Firebase
-
-
                 InitializeFirebase();
             }
             else
@@ -123,7 +121,7 @@ public class AuthManager : MonoBehaviour
     {
         //Call the register coroutine passing the email, password, and Username
         ErrorMsgR.text = "";
-        StartCoroutine(Register(email.text, password.text, username.text));
+        StartCoroutine(Register(email.text, password.text, ArabicFixer.Fix(username.text)));
 
     }
 
@@ -145,7 +143,7 @@ public class AuthManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(UpdateUsername(E_username.text));
+            StartCoroutine(UpdateUsername(ArabicFixer.Fix(E_username.text)));
             StartCoroutine(UpdateEmail(E_email.text));
             StartCoroutine(UpdatePassword(E_password.text, E_ConfirmPass.text));
             ClearEditFeilds();
@@ -184,7 +182,7 @@ public class AuthManager : MonoBehaviour
         {
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
-            P_username.text = ArabicFixer.Fix(snapshot.Child("Username").Value.ToString());
+            P_username.text = snapshot.Child("Username").Value.ToString();
             P_email.text = snapshot.Child("Email").Value.ToString();
         }
     }
@@ -202,11 +200,7 @@ public class AuthManager : MonoBehaviour
         else
         {
 
-
-            var LoginTask = FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync(_email, _password);
-            // if (LoginTask.Result.IsEmailVerified)
-            // {
-
+            var LoginTask = auth.SignInWithEmailAndPasswordAsync(_email, _password);
             //Wait until the task completes
             yield return new WaitUntil(predicate: () => LoginTask.IsCompleted);
 
@@ -240,26 +234,27 @@ public class AuthManager : MonoBehaviour
             }
             else
             {
-                //User is now logged in
-                //Now get the result
-                User = LoginTask.Result;
-                Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
+                if (!Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.IsEmailVerified)
+                {
+                    ErrorMsgL.text = ArabicFixer.Fix("لطفاً تحقق من بريدك الالكتروني");
+                    Debug.Log("verify your email");
+                    auth.SignOut();
+                }
+                else
+                {
+                    //User is now logged in
+                    //Now get the result
+                    User = LoginTask.Result;
+                    Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
 
-                //  yield return new WaitForSeconds(2);
+                    //  yield return new WaitForSeconds(2);
 
-                UIManager.instance.HomeScreen();
+                    UIManager.instance.HomeScreen();
 
-                ClearLoginFeilds();
-                ClearRegisterFeilds();
+                    ClearLoginFeilds();
+                    ClearRegisterFeilds();
+                }
             }
-            // }
-            // else
-            // {
-            //     ErrorMsgL.text = ArabicFixer.Fix("لطفاً تحقق من بريدك الالكتروني");
-            //     Debug.Log("virfy your email");
-
-            //}
-
         }
     }
 
@@ -271,7 +266,7 @@ public class AuthManager : MonoBehaviour
         if (_username.Equals("") || _email.Equals("") || _password.Equals(""))
         {
 
-            ErrorMsgR.text = ArabicFixer.Fix("لطفاً قم بتعبئة بياناتك", useTashkeel, useArabicNumbers);
+            ErrorMsgR.text = ArabicFixer.Fix("لطفاً قم بتعبئة بياناتك");
         }
         else
         {
@@ -351,15 +346,16 @@ public class AuthManager : MonoBehaviour
                     Debug.Log(message);
                     ErrorMsgR.text = ArabicFixer.Fix(message);
                 }
-                else ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ، قم بتأكيد حسابك ");
+                else
+                {
+                    ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ، قم بتأكيد حسابك ");
 
+
+                    ClearLoginFeilds();
+                    ClearRegisterFeilds();
+                }
             }
         }
-        //UIManager.instance.MainScreen(); 
-
-        ClearRegisterFeilds();
-        ClearLoginFeilds();
-
 
     }
 
