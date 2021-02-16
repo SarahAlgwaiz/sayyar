@@ -6,31 +6,46 @@ using Firebase.Database;
 using Firebase.Auth;
 using System.Threading.Tasks;
 using Photon.Pun;
+using Photon;
 using Photon.Realtime;
 public class FirebaseStorageAfterGame : MonoBehaviour
 {
 
+  public static string gameKey;
+
+
      [Header("Firebase")]
     public DependencyStatus dependencyStatus;
-    public DatabaseReference reference;
-    private FirebaseUser user;
+    public static DatabaseReference reference;
+    private static FirebaseUser user;
 
-
-        async void InitializeFirebase(){
+        public static void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-        await saveVirtualPlayroomData();
-       //await saveBadgeData();
           }
 
-     async Task saveVirtualPlayroomData(){
+       public static async Task storeVirtualPlayroomData(){
+         reference = reference.Root;
        if(PhotonNetwork.IsMasterClient)
         await Task.Run(() => reference.Child("VirtualPlayrooms").Child(CreateRoomScript.virtualPlayroomKey).Child("HostID").SetValueAsync(user.UserId));
         else
-        await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(CreateRoomScript.virtualPlayroomKey).Child("KindergartnerIDs").Child(PhotonNetwork.LocalPlayer.userId).setValueAsync(user.UserId)); 
-
+        await Task.Run(() =>reference.Child("VirtualPlayrooms").Child(CreateRoomScript.virtualPlayroomKey).Child("KindergartnerIDs").Child(PhotonNetwork.LocalPlayer.UserId).SetValueAsync(user.UserId));
           }
 
-        public async Task saveBadgeData(){
+   public static async Task storeGameData(){
+         reference = reference.Root;
+       if(PhotonNetwork.IsMasterClient){
+       reference = reference.Child("Game").Push();
+       gameKey = reference.Key;
+       reference = reference.Root;
+       await Task.Run(() => reference.Child("Game").Child(gameKey).Child("GameID").SetValueAsync(gameKey));
+       await Task.Run(() => reference.Child("Game").Child(gameKey).Child("GameTitle").SetValueAsync("تركيب الكواكب"));
+       await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
+       await Task.Run(() => reference.Child("Game").Child(gameKey).Child("NumOfPlayers").SetValueAsync(PhotonNetwork.CurrentRoom.MaxPlayers));
+       }
+
+   }
+        public static async Task storeBadgeData(){
+            reference = reference.Root;
             int badgeID = Random.Range(0,12);
             var path = await Task.Run(() => reference.Child("Badges").Child(""+badgeID).Child("BadgePath").GetValueAsync().Result.Value);
             var result = await Task.Run(() => reference.Child("playerinfo").Child(user.UserId).Child("BadgeIDs").Child(""+badgeID).GetValueAsync().Result);
@@ -47,4 +62,13 @@ public class FirebaseStorageAfterGame : MonoBehaviour
 
             //await Task.Run(() => reference.Child("Game").Child(gameID).Child("Badge").Child(""+badgeID).SetValueAsync(badgeID));        
         }
+        
+          public static async Task storeTimeAndStatus(){
+           reference = reference.Root;
+          if(PhotonNetwork.IsMasterClient){
+       await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Duration").SetValueAsync(Timer.fullDuration));
+       await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
+      }
+      
+  }
 }

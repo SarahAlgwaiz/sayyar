@@ -10,8 +10,6 @@ using Firebase.Database;
 using Firebase;
 
 
-//START HERE
-//تسحيل بيانات القيم
 public class Synchronization : MonoBehaviourPunCallbacks
 {
 [SerializeField]
@@ -37,45 +35,27 @@ private Transform tr;
    {
         addNewPlayer(newPlayer);
             updatePosition();
-if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&& PhotonNetwork.IsMasterClient){
+        if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&& PhotonNetwork.IsMasterClient){
     start.interactable=true;
 }
    }
    public void OnClickStartButton(){
        SceneManager.LoadScene("SolarSystemGame");
    }
-    public override void OnLeftRoom()
-    {
-        removeData();
-    }
-    // public override void OnMasterClientSwitched(Player newMasterClient)
-    // {
-    //     if(PhotonNetwork.LocalPlayer.UserId == newMasterClient.UserId){
-            
-    //     }
-    // }
-
- 
- 
    private void Awake() {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith( task =>
-        {
-            dependencyStatus = task.Result;
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                //If they are avalible Initialize Firebase
-               InitializeFirebase();
-            }
-            else
-            {
-                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
-            }
-        });
+       storeData();
        getRoomPlayers();
+   }
+
+   private async void storeData(){
+
+     FirebaseStorageAfterGame.InitializeFirebase();
+      await FirebaseStorageAfterGame.storeGameData();
    }
    private void Start() {
        roomCodeText.text = PlayerPrefs.GetString("RoomCode");
    }
+
    public void addNewPlayer(Player newPlayer){
        
         MyPlayer player = Instantiate(myPlayer, tr);
@@ -110,26 +90,10 @@ if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount&&
         }
 
         numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
-    updatePosition();
+        updatePosition();
     
  
    }
-   public async Task removeKindergartenerData(){
-        string waitingRoomId = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode").OrderByValue().EqualTo(PlayerPrefs.GetString("RoomCode")).Reference.Parent.Key;
-         reference = reference.Root.Child("WaitingRooms").Child(waitingRoomId);
-       
 
-      
-    // await Task.Run(() =>  reference.Child("WaitingRooms").Child(waitingRoomId).Child("KindergartnerIDs").Child(user.UserId).RemoveValueAsync());
-       
-       
-    }
-    
-     void InitializeFirebase(){
-        reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-            }
-    async void removeData(){
-      await   removeKindergartenerData();
-    }
 }
    

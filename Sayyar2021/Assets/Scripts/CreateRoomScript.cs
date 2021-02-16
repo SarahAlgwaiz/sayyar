@@ -7,8 +7,7 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
 using System.Threading.Tasks;
-namespace com.cactusteam.Sayyar{
-    public class CreateRoomScript: MonoBehaviourPunCallbacks{
+public class CreateRoomScript: MonoBehaviourPunCallbacks{
 
 
          [Header("Firebase")]
@@ -35,10 +34,10 @@ public static string virtualPlayroomKey;
         public void createRoom(){
              Debug.Log("Connected create room");
              roomNumber=  UnityEngine.Random.Range(10000, 100000);
-             PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom,PublishUserId=true});
-             Debug.Log("Room Created");
+             PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions{IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom, PublishUserId=true});
         }
         public override void OnCreatedRoom(){
+            Debug.Log("Room Created"); //popup pleeeease
             roomCodeCreateField.text = "Room Number: "+roomNumber;
              PlayerPrefs.SetString("RoomCode",""+roomNumber);
                 FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -49,7 +48,7 @@ public static string virtualPlayroomKey;
                 //If they are available Initialize Firebase
                 InitializeFirebase();
             }
-            else
+            else 
             {
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
@@ -72,7 +71,7 @@ public static string virtualPlayroomKey;
          SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
        public override void OnCreateRoomFailed(short returnCode, string message){
-           Debug.Log("failed to create room");
+           Debug.Log("failed to create room"); //popup pleeeease
            createRoom();
         }
     
@@ -96,4 +95,4 @@ public static string virtualPlayroomKey;
     }
 
    
-}
+

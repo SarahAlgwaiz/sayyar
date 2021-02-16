@@ -10,7 +10,7 @@ using Photon.Realtime;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase;
-
+using System.Threading.Tasks;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlanetsOnPlane : MonoBehaviour
 {
@@ -48,9 +48,12 @@ private Vector3 solarSystemSize;
 
 public static bool[] isPlanetInserted;
 
+public static string status; 
+
 private bool isGameFinished = true;
 static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 private void Awake() {
+    status = "Ongoing";
     raycastManager = GetComponent<ARRaycastManager>();
     AR_Plane_Manager = GetComponent<ARPlaneManager>();
     lineRenderer = planets[7].GetComponent<LineRenderer>();
@@ -59,7 +62,6 @@ private void Awake() {
     for(int i=0; i<planets.Length; i++){
         isPlanetInserted[i] = false;
     }
-    InitializeFirebase();
 }
 
 public void disablePlane(){
@@ -124,20 +126,20 @@ public void disablePlane(){
         }       
             private void checkPlanets(){
             if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
-                //InitializeFirebase();
+                status= "Won";
                 finishGame();
             }
         }
 
-   void InitializeFirebase(){
-        reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-            }
-    public async Task writeGameData(){
-            
-     }
-
-  private void finishGame(){
+  public void finishGame(){
+      storeData();
      SceneManager.LoadScene("HomeScene");
+  }
+
+  public async void storeData(){
+    FirebaseStorageAfterGame.InitializeFirebase();
+    //await FirebaseStorageAfterGame.storeVirtualPlayroomData();
+    //await FirebaseStorageAfterGame.storeBadgeData();
   }
     public void setPosition(){
         for(int i=0; i<planets.Length;i++){

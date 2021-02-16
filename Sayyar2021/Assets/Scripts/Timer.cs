@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-
+using Firebase;
+using Firebase.Database;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviourPunCallbacks
 {
     private float timeRemaining;
+    public static float fullDuration;
+        public DatabaseReference reference;
+
 public GameObject bar;
 private void Start() {
     if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount){
@@ -24,14 +30,26 @@ private void Start() {
         timeRemaining =8 * 60;
         break;
     }
+    fullDuration = timeRemaining;
     animateBar();
    }
 }
 
-void animateBar(){
+    void animateBar(){
     LeanTween.scaleY(bar,0.01f,timeRemaining).setOnComplete(finishGame);
 }
-void finishGame(){
- Debug.Log("Time has run out!");
+    void finishGame(){
+    Debug.Log("Time has run out!");
+    PlanetsOnPlane.status = "Lost";
+    storeData();
+     SceneManager.LoadScene("HomeScene");
 }
+
+    private async void storeData(){
+    FirebaseStorageAfterGame.InitializeFirebase();
+    //await FirebaseStorageAfterGame.storeVirtualPlayroomData();
+    //await FirebaseStorageAfterGame.storeBadgeData();
+    await FirebaseStorageAfterGame.storeTimeAndStatus();
+    
+    }
 }

@@ -104,17 +104,5 @@ private bool valid ;
             return false;
 
         }
-
-
- public async Task writeKindergartenerData(){
-        string waitingRoomId = reference.Root.Child("WaitingRooms").Child(roomNumField.text).Reference.Parent.Key;
-         reference = reference.Root.Child("WaitingRooms").Child(waitingRoomId);
-       
-  // await Task.Run(() =>  reference.Child("WaitingRooms").Child(waitingRoomId).Child("KindergartnerIDs").SetValueAsync(user.UserId));
-
-
-
-
-    }
 }}
 
