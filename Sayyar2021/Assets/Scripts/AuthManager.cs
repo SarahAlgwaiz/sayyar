@@ -348,13 +348,17 @@ public class AuthManager : MonoBehaviour
                 }
                 else
                 {
-                    ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ، قم بتأكيد حسابك ");
+                    //ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ، قم بتأكيد حسابك ");
 
 
                     ClearLoginFeilds();
                     ClearRegisterFeilds();
                 }
+
             }
+            if (ErrorMsgR.text.Equals(""))
+                ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ، قم بتأكيد حسابك ");
+
         }
 
     }
@@ -393,7 +397,7 @@ public class AuthManager : MonoBehaviour
     {
         string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
                                                                                                                                                                   // Regex arabicRegex = new Regex(arabicCheck);
-        if (!(UpdatedEmail.Equals("")) && !Regex.IsMatch(UpdatedEmail, arabicCheck))
+        if (!(UpdatedEmail.Equals("")))
         {
 
             var DBTask1 = auth.CurrentUser.UpdateEmailAsync(UpdatedEmail);
@@ -408,8 +412,8 @@ public class AuthManager : MonoBehaviour
                 if (AuthError.EmailAlreadyInUse.Equals(errorCode))
                     UpdatedMsg.text = ArabicFixer.Fix("البريد الالكتروني مستخدم مسبقاً");
 
-                if (AuthError.InvalidEmail.Equals(errorCode))
-                    UpdatedMsg.text = ArabicFixer.Fix("البريد الالمتروني غير صحيح");
+                else if (AuthError.InvalidEmail.Equals(errorCode) || Regex.IsMatch(UpdatedEmail, arabicCheck))
+                    UpdatedMsg.text = ArabicFixer.Fix("البريد الالكتروني غير صحيح");
             }
             else
             {
@@ -418,14 +422,12 @@ public class AuthManager : MonoBehaviour
                 UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
 
             }
+
         }
-        else
-        {
-            if (UpdatedEmail.Equals(""))
-            { Debug.Log(" Email is null "); }
-            else { UpdatedMsg.text = ArabicFixer.Fix("البريد الالمتروني غير صحيح"); }
-        }
-        // UpdatedMsg.text = "* Kindly enter an email if you want to update it";
+        else Debug.Log(" email is null ");
+
+
+
 
 
     }
@@ -436,36 +438,35 @@ public class AuthManager : MonoBehaviour
 
         if (!(UpdatedPass.Equals("")) && !(UpdatedPassConfirm.Equals("")))
         {
-            if (UpdatedPass.Equals(UpdatedPassConfirm) && UpdatedPass.Length == 6)
+            Firebase.Auth.FirebaseUser user = auth.CurrentUser;
+            if (user != null)
             {
-                if (Regex.IsMatch(UpdatedPass, arabicCheck))
+                var DBTask = user.UpdatePasswordAsync(UpdatedPass);
+
+                yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+                if (DBTask.Exception != null)
                 {
-                    UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور يجب ان تحتوي على الاحرف الانجليزية فقط");
+                    if (Regex.IsMatch(UpdatedPass, arabicCheck) || Regex.IsMatch(UpdatedPassConfirm, arabicCheck))
+                        UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور يجب ان تحتوي على الاحرف الانجليزية فقط");
+
+                    else if (!UpdatedPass.Equals(UpdatedPassConfirm))
+                    {
+                        Debug.Log("the passwords are not the same");
+                        UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور غير متطابقة");
+                    }
+                    else if (UpdatedPass.Length != 6 || UpdatedPassConfirm.Length != 6)
+                        UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور يجب ان تكون ٦ رموز");
                 }
+
                 else
                 {
-                    Firebase.Auth.FirebaseUser user = auth.CurrentUser;
-                    if (user != null)
-                    {
-                        var DBTask = user.UpdatePasswordAsync(UpdatedPass);
-
-                        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-                        if (DBTask.Exception != null)
-                        {
-                            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-                        }
-                        else
-                        {
-                            Debug.Log("the passwords are the same and updated successfully.");
-                            UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
-                        }
-                    }
+                    Debug.Log("the passwords are the same and updated successfully.");
+                    UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
                 }
             }
-            else if (!(UpdatedPass.Equals(UpdatedPassConfirm)))
-            { Debug.Log("the passwords are not the same"); UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور غير متطابقة"); }
-            else { UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور يجب ان تكون ٦ رموز"); }
+
+
         }
         else
             Debug.Log(" Password is null ");
