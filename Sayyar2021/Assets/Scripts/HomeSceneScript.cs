@@ -41,25 +41,13 @@ string gameVersion = "1";
         SceneManager.LoadScene("CreateGameScene", LoadSceneMode.Single);
     }
         public override void OnConnectedToMaster(){
-             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith( task =>
-        {
-            dependencyStatus = task.Result;
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                //If they are avalible Initialize Firebase
-               InitializeFirebase();
-            }
-            else
-            {
-                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
-            }
-        });  
+             
             Debug.Log("Photon Nickname" + PhotonNetwork.NickName);
             Debug.Log("connected to master");
             createButton.gameObject.SetActive(true);
             joinButton.gameObject.SetActive(true);
             connectingText.SetActive(false);
-           playerNameText.text = name;
+           playerNameText.text = nameFromFirebase;
         }
   
         public override void OnDisconnected(DisconnectCause cause){
@@ -74,6 +62,19 @@ string gameVersion = "1";
                joinButton.gameObject.SetActive(false);
                connectingText.SetActive(true);
             Connect();
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith( task =>
+        {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                //If they are avalible Initialize Firebase
+               InitializeFirebase();
+            }
+            else
+            {
+                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });  
              
         }
           public void Connect(){
@@ -91,18 +92,17 @@ string gameVersion = "1";
    public async void InitializeFirebase(){
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
       Debug.Log("initialize");
-        await Task.Run(() => setName());
+        await setName();
             }
-
 
     public async Task setName(){
        Debug.Log("set name");
-        DataSnapshot ds =  await Task.Run(() => reference.Child("playerInfo").Child("HS0ulVQ1iFUbk0Ud8ZEcNFPxJzY2").Child("Username").GetValueAsync());//replace this with the current user's name stored in DB
+        DataSnapshot ds =  await Task.Run(() => reference.Child("playerInfo").Child("A2KP5BlspjYdfhBc61qm1WnusKZ2").Child("Username").GetValueAsync());//replace this with the current user's name stored in DB
          Debug.Log("after ds");
-         nameFromFirebase = ds.Value.ToString();
+         await Task.Run(() =>nameFromFirebase = ds.Value.ToString());
         Debug.Log("name is" + nameFromFirebase);
          Debug.Log("after set active");
-          PhotonNetwork.NickName = nameFromFirebase;
+          await Task.Run(() =>PhotonNetwork.NickName = nameFromFirebase);
           
          // PlayerPrefs.SetString("UID",user.UserId);
         Debug.Log("after nickname");
