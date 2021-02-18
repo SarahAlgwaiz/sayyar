@@ -15,9 +15,9 @@ public class UIManager : MonoBehaviour
     public GameObject menuScreen;
     public GameObject Panel_signUp;
     public GameObject PanelLoginEmail;
-    public GameObject Panel_ShowProfile; 
+    public GameObject Panel_ShowProfile;
     public GameObject Panel_EditProfile;
-    
+
 
 
 
@@ -42,91 +42,102 @@ public class UIManager : MonoBehaviour
         mainScreen.SetActive(false);
     }
     public void RegisterScreen() // Regester button
-    {   registerUI.SetActive(true);
+    {
+        registerUI.SetActive(true);
         Panel_signUp.SetActive(true);
     }
 
     public void MainScreen() //Back button  
-      {   
-               
-        mainScreen.SetActive(true);     
-        loginUI.SetActive(false);      
+    {
+
+        mainScreen.SetActive(true);
+        loginUI.SetActive(false);
         registerUI.SetActive(true);
         Panel_signUp.SetActive(false);
-        homeScreen.SetActive(false);     
+        homeScreen.SetActive(false);
 
-           }
+    }
 
     public void HomeScreen() //Back button  
-      {   
-               
-        homeScreen.SetActive(true);     
-        loginUI.SetActive(false);      
+    {
+
+        homeScreen.SetActive(true);
+        loginUI.SetActive(false);
         registerUI.SetActive(false);
         mainScreen.SetActive(false);
-        PanelLoginEmail.SetActive(false); 
+        PanelLoginEmail.SetActive(false);
 
 
-           }
+    }
 
     public void MenuScreen() //Back button  
-      {   
-               
-        menuScreen.SetActive(true);     
-        loginUI.SetActive(false);      
+    {
+
+        menuScreen.SetActive(true);
+        loginUI.SetActive(false);
         registerUI.SetActive(false);
         mainScreen.SetActive(false);
-        homeScreen.SetActive(false);     
-        Panel_ShowProfile.SetActive(false);   
-        Panel_EditProfile.SetActive(false);   
-           }
-
-   
-
-    public void openPanel_ShowProfile(){
-        if (Panel_ShowProfile != null)
-        Panel_ShowProfile.SetActive(true);
-    }
-
-     public void openPanel_EditProfile(){
-        if (Panel_EditProfile != null)
-        Panel_EditProfile.SetActive(true);
-    }
-
-    public void ClosePanelـsignUp(){
-        Panel_signUp.SetActive(false);
-        
-    }
-
-     public void ClosePanel_ShowProfile(){
-       Panel_ShowProfile.SetActive(false);
-    }
-
-     public void ClosePanel_EditProfile(){
+        homeScreen.SetActive(false);
+        Panel_ShowProfile.SetActive(false);
         Panel_EditProfile.SetActive(false);
     }
-       
 
-    public void OpenPanel(){
-        if(PanelLoginEmail != null){  
-            PanelLoginEmail.SetActive(true); 
+
+
+    public void openPanel_ShowProfile()
+    {
+        if (Panel_ShowProfile != null)
+            Panel_ShowProfile.SetActive(true);
+    }
+
+    public void openPanel_EditProfile()
+    {
+        if (Panel_EditProfile != null)
+            Panel_EditProfile.SetActive(true);
+    }
+
+    public void ClosePanelـsignUp()
+    {
+        Panel_signUp.SetActive(false);
+
+    }
+
+    public void ClosePanel_ShowProfile()
+    {
+        Panel_ShowProfile.SetActive(false);
+    }
+
+    public void ClosePanel_EditProfile()
+    {
+        Panel_EditProfile.SetActive(false);
+    }
+
+
+    public void OpenPanel()
+    {
+        if (PanelLoginEmail != null)
+        {
+            PanelLoginEmail.SetActive(true);
 
         }
     }
 
-    public void ClosePanel(){
-     
-            PanelLoginEmail.SetActive(false); 
-        
+    public void ClosePanel()
+    {
+
+        PanelLoginEmail.SetActive(false);
+
     }
 
-    public void ClosePanel_menuScreen(){
-            menuScreen.SetActive(false); 
-            HomeScreen();
-        
+    public void ClosePanel_menuScreen()
+    {
+        menuScreen.SetActive(false);
+        HomeScreen();
+
     }
 
-    public void showBadgesButton(){
+    public void showBadgesButton()
+    {
 
         SceneManager.LoadSceneAsync("badges");
 

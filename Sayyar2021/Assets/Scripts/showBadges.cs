@@ -24,27 +24,29 @@ public class showBadges : MonoBehaviour
     public GameObject parentPanel;
     public GameObject VideosPanel;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        parentPanel.SetActive(true); 
+        parentPanel.SetActive(true);
         VideosPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    
 
-    public void popUp_Cancel_Button(){
+
+    public void popUp_Cancel_Button()
+    {
         parentPanel.SetActive(false);
     }
 
-    public void SUN_Button(){
+    public void SUN_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -59,7 +61,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void EARTH_Button(){
+    public void EARTH_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(true);
@@ -74,7 +77,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void JUPITER_Button(){
+    public void JUPITER_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -89,7 +93,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void MARS_Button(){
+    public void MARS_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -104,7 +109,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void MERCURY_Button(){
+    public void MERCURY_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -119,7 +125,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void NEPTUNE_Button(){
+    public void NEPTUNE_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -134,7 +141,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void SATURN_Button(){
+    public void SATURN_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -149,7 +157,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void URANUS_Button(){
+    public void URANUS_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -164,7 +173,8 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void VENUS_Button(){
+    public void VENUS_Button()
+    {
 
         VideosPanel.SetActive(true);
         EARTH_VID.SetActive(false);
@@ -179,9 +189,10 @@ public class showBadges : MonoBehaviour
 
     }
 
-    public void video_Cancel_Button(){
+    public void video_Cancel_Button()
+    {
         VideosPanel.SetActive(false);
     }
 
-  
+
 }
