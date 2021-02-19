@@ -55,6 +55,10 @@ public class AuthManager : MonoBehaviour
     public TextMeshProUGUI UpdatedMsg;
 
 
+    //Variable to prepare Badges After login
+    public GameObject holdedScript;
+
+
     //___________________________________________________________________________________Awake Function
     void Awake()
     {
@@ -243,6 +247,7 @@ public class AuthManager : MonoBehaviour
                 else
                 {
                     //User is now logged in
+                    holdedScript.SetActive(true);
                     //Now get the result
                     User = LoginTask.Result;
                     Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
