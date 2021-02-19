@@ -163,6 +163,15 @@ MonoBehaviour:
   VENUS_VID: {fileID: 1060066934}
   parentPanel: {fileID: 824194470}
   VideosPanel: {fileID: 862446393}
+  sunButton: {fileID: 971429222}
+  earthButton: {fileID: 1290521161}
+  jupiterButton: {fileID: 1547531745}
+  marsButton: {fileID: 1413021848}
+  mercuryButton: {fileID: 1572568028}
+  neptuneButton: {fileID: 1861651509}
+  saturnButton: {fileID: 1784216527}
+  uransButton: {fileID: 417295054}
+  venusButton: {fileID: 1125974606}
 --- !u!4 &100762327
 Transform:
   m_ObjectHideFlags: 0
@@ -170,12 +179,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100762325}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1134.3048, y: 1266.1022, z: -8.918784}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -67.84632, y: 70.89375, z: -2.6116498}
+  m_LocalScale: {x: 0.29282576, y: 0.29282576, z: 0.29282576}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1007931744}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &284345449
 GameObject:
@@ -525,7 +534,7 @@ RectTransform:
   - {fileID: 1922703632}
   - {fileID: 1821281331}
   m_Father: {fileID: 1007931744}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -754,7 +763,7 @@ GameObject:
   - component: {fileID: 1007931742}
   - component: {fileID: 1007931741}
   m_Layer: 5
-  m_Name: Main
+  m_Name: showBadges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -832,6 +841,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 100762327}
   - {fileID: 824194471}
   m_Father: {fileID: 0}
   m_RootOrder: 3

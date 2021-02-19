@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase;
+using System.Threading.Tasks;
+using Firebase.Auth;
+using Firebase.Database;
+
 
 public class showBadges : MonoBehaviour
 {
 
-    // Will attach a VideoPlayer to the main camera.
-    GameObject camera = GameObject.Find("Main Camera");
+    //DB variables definitions 
+    public FirebaseAuth auth;
+    public FirebaseUser User;
+    public DatabaseReference DBreference;
 
-    // Videos definition
+    // Videos definitions
     public GameObject EARTH_VID;
     public GameObject JUPITER_VID;
     public GameObject MARS_VID;
@@ -24,23 +31,59 @@ public class showBadges : MonoBehaviour
     public GameObject parentPanel;
     public GameObject VideosPanel;
 
+    //Planet Buttons definition
+    public Button sunButton, earthButton, jupiterButton, marsButton, mercuryButton, neptuneButton, saturnButton, uransButton, venusButton;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        parentPanel.SetActive(true);
+        parentPanel.SetActive(false);
         VideosPanel.SetActive(false);
+
+        //initially make all planet buttons unclickable
+        sunButton.interactable = false;
+        earthButton.interactable = false;
+        jupiterButton.interactable = false;
+        marsButton.interactable = false;
+        mercuryButton.interactable = false;
+        neptuneButton.interactable = false;
+        saturnButton.interactable = false;
+        uransButton.interactable = false;
+        venusButton.interactable = false;
+
+
+
+        getOwnedBadges(); //محتارة وين المفروض اناديها 
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void InitializeFirebase()
+    {
+        Debug.Log("Setting up Firebase Auth");
+        //Set the authentication instance object
+        auth = FirebaseAuth.DefaultInstance;
+        DBreference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
+
+
+
+    }
+
+    public async Task getOwnedBadges()
     {
 
+        InitializeFirebase();
+        DBreference = DBreference.Root;
+        var OwnedBadges = await Task.Run(() => DBreference.Child("playerInfo").Child("" + User.UserId).Child("Badges").Child("EARTH_BAD").GetValueAsync().Result);
+        if (OwnedBadges.Exists)
+        {
+            sunButton.interactable = true;
+
+        }
     }
 
-
-
-    public void popUp_Cancel_Button()
+    public void popUp_Cancel_Button() // Badges pop up screen
     {
         parentPanel.SetActive(false);
     }

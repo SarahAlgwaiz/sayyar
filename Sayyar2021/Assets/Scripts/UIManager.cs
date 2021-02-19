@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public GameObject PanelLoginEmail;
     public GameObject Panel_ShowProfile;
     public GameObject Panel_EditProfile;
+    public GameObject Panel_Badges;
 
 
 
@@ -139,7 +140,7 @@ public class UIManager : MonoBehaviour
     public void showBadgesButton()
     {
 
-        SceneManager.LoadSceneAsync("badges");
+        Panel_Badges.SetActive(true);
 
     }
 
