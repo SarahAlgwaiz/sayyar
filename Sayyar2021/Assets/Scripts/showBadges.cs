@@ -82,10 +82,13 @@ public class showBadges : MonoBehaviour
 
 
         ///EARTH 
+        Debug.Log("Iam in getOwned ");
         DataSnapshot BadgeID = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("EARTH_BAD").GetValueAsync().Result);
         if (BadgeID.Exists)
         {
+            Debug.Log("Earth exists!!!!");
             earthButton.interactable = true;
+            Debug.Log("Interactable!!!!!");
             var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("EARTH_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
             if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
             {
