@@ -6,7 +6,7 @@ using Firebase;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
-using TMPro;
+
 
 public class showBadges : MonoBehaviour
 {
@@ -15,8 +15,6 @@ public class showBadges : MonoBehaviour
     public FirebaseAuth auth;
     public FirebaseUser User;
     public DatabaseReference DBreference;
-    public DependencyStatus dependencyStatus;
-    public DatabaseReference reference;
 
     // Videos definitions
     public GameObject EARTH_VID;
@@ -32,186 +30,62 @@ public class showBadges : MonoBehaviour
     //Other components definition
     public GameObject parentPanel;
     public GameObject VideosPanel;
-    public GameObject showBadgesPanel;
 
     //Planet Buttons definition
     public Button sunButton, earthButton, jupiterButton, marsButton, mercuryButton, neptuneButton, saturnButton, uransButton, venusButton;
-    // Planets Count definition 
-    public TextMeshProUGUI sunCount, earthCount, jupiterCount, marsCount, mercuryCount, neptuneCount, saturnCount, uransCount, venusCount;
-    // Planets Count BG definition 
-    public GameObject sunBG, earthBG, jupiterBG, marsBG, mercuryBG, neptuneBG, saturnBG, uransBG, venusBG;
-    void Awake()
-    {
-        //Check that all of the necessary dependencies for Firebase are present on the system
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
-            dependencyStatus = task.Result;
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                //If they are avalible Initialize Firebase
-                InitializeFirebase();
-            }
-            else
-            {
-                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
-            }
-        });
 
 
-    }
     // Start is called before the first frame update
-
     void Start()
     {
-        getOwnedBadges();
+        parentPanel.SetActive(false);
+        VideosPanel.SetActive(false);
+
+        //initially make all planet buttons unclickable
+        sunButton.interactable = false;
+        earthButton.interactable = false;
+        jupiterButton.interactable = false;
+        marsButton.interactable = false;
+        mercuryButton.interactable = false;
+        neptuneButton.interactable = false;
+        saturnButton.interactable = false;
+        uransButton.interactable = false;
+        venusButton.interactable = false;
+
+
+
+        getOwnedBadges(); //محتارة وين المفروض اناديها 
+
+
     }
 
-
-
-    void InitializeFirebase()
+    private void InitializeFirebase()
     {
-        Debug.Log("Setting up Firebase Auth inside show Badges");
+        Debug.Log("Setting up Firebase Auth");
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
 
+
+
     }
 
-    public async void getOwnedBadges()
+    public async Task getOwnedBadges()
     {
 
-
-        ///EARTH 
-        DataSnapshot BadgeID = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("EARTH_BAD").GetValueAsync().Result);
-        if (BadgeID.Exists)
-        {
-            earthButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("EARTH_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                earthCount.text = "X" + BadgeCount;
-                earthBG.SetActive(true);
-            }
-        }
-
-        ///SUN 
-        DataSnapshot BadgeID2 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("SUN_BAD").GetValueAsync().Result);
-        if (BadgeID2.Exists)
+        InitializeFirebase();
+        DBreference = DBreference.Root;
+        var OwnedBadges = await Task.Run(() => DBreference.Child("playerInfo").Child("" + User.UserId).Child("Badges").Child("EARTH_BAD").GetValueAsync().Result);
+        if (OwnedBadges.Exists)
         {
             sunButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("SUN_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                sunCount.text = "X" + BadgeCount;
-                sunBG.SetActive(true);
-            }
+
         }
-
-        ///MERCURY_BAD 
-        DataSnapshot BadgeID3 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("MERCURY_BAD").GetValueAsync().Result);
-        if (BadgeID3.Exists)
-        {
-            mercuryButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("MERCURY_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                mercuryCount.text = "X" + BadgeCount;
-                mercuryBG.SetActive(true);
-            }
-        }
-
-
-        ///VENUS_BAD 
-        DataSnapshot BadgeID4 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("VENUS_BAD").GetValueAsync().Result);
-        if (BadgeID4.Exists)
-        {
-            venusButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("VENUS_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                venusCount.text = "X" + BadgeCount;
-                venusBG.SetActive(true);
-            }
-        }
-
-
-        ///MARS_BAD 
-        DataSnapshot BadgeID5 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("MARS_BAD").GetValueAsync().Result);
-        if (BadgeID5.Exists)
-        {
-            marsButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("MARS_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                marsCount.text = "X" + BadgeCount;
-                marsBG.SetActive(true);
-            }
-        }
-
-        ///JUPITER_BAD 
-        DataSnapshot BadgeID6 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("JUPITER_BAD").GetValueAsync().Result);
-        if (BadgeID6.Exists)
-        {
-            jupiterButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("JUPITER_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                jupiterCount.text = "X" + BadgeCount;
-                jupiterBG.SetActive(true);
-            }
-        }
-
-        ///SATURN_BAD 
-        DataSnapshot BadgeID7 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("SATURN_BAD").GetValueAsync().Result);
-        if (BadgeID7.Exists)
-        {
-            saturnButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("SATURN_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                saturnCount.text = "X" + BadgeCount;
-                saturnBG.SetActive(true);
-            }
-        }
-
-
-
-        ///URANUS_BAD 
-        DataSnapshot BadgeID8 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("URANUS_BAD").GetValueAsync().Result);
-        if (BadgeID8.Exists)
-        {
-            uransButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("URANUS_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                uransCount.text = "X" + BadgeCount;
-                uransBG.SetActive(true);
-            }
-        }
-
-
-        ///NEPTUNE_BAD 
-        DataSnapshot BadgeID9 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("NEPTUNE_BAD").GetValueAsync().Result);
-        if (BadgeID9.Exists)
-        {
-            neptuneButton.interactable = true;
-            var BadgeCount = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("NEPTUNE_BAD").Child("BadgeCount").GetValueAsync().Result.Value);
-            if (BadgeCount != null && !(("" + BadgeCount).Equals("1")))
-            {
-                neptuneCount.text = "X" + BadgeCount;
-                neptuneBG.SetActive(true);
-            }
-        }
-
-
-
     }
 
     public void popUp_Cancel_Button() // Badges pop up screen
     {
         parentPanel.SetActive(false);
-        showBadgesPanel.SetActive(false);
-
     }
 
     public void SUN_Button()

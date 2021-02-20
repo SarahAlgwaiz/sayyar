@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
@@ -19,9 +18,6 @@ public class UIManager : MonoBehaviour
     public GameObject Panel_ShowProfile;
     public GameObject Panel_EditProfile;
     public GameObject Panel_Badges;
-    public GameObject parentPanel;
-
-    public GameObject videoPanel;
 
 
 
@@ -145,8 +141,6 @@ public class UIManager : MonoBehaviour
     {
 
         Panel_Badges.SetActive(true);
-        parentPanel.SetActive(true);
-        videoPanel.SetActive(false);
 
     }
 
