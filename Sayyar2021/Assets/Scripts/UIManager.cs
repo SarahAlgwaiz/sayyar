@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
         loginUI.SetActive(false);
         registerUI.SetActive(false);
         mainScreen.SetActive(false);
-        homeScreen.SetActive(false);
+        //homeScreen.SetActive(false);
         Panel_ShowProfile.SetActive(false);
         Panel_EditProfile.SetActive(false);
     }
