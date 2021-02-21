@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
+using ArabicSupport;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,7 +24,8 @@ public class UIManager : MonoBehaviour
     public GameObject parentPanel;
     public GameObject videoPanel;
     public GameObject FrogetPasswordPanel;
-
+    public GameObject JoinRoomPanel;
+    public InputField Num1;
 
 
 
@@ -158,6 +161,17 @@ public class UIManager : MonoBehaviour
     public void CloseResetPasswordPanel()
     {
         FrogetPasswordPanel.SetActive(false);
+    }
+
+    public void JoinRoomButton()
+    {
+        JoinRoomPanel.SetActive(true);
+        Num1.ActivateInputField();
+    }
+
+    public void CloseJoinRoomPanelButton()
+    {
+        JoinRoomPanel.SetActive(false);
     }
 
 }
