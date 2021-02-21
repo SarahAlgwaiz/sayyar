@@ -54,6 +54,11 @@ public class AuthManager : MonoBehaviour
     public InputField E_ConfirmPass;
     public TextMeshProUGUI UpdatedMsg;
 
+    [Header("Reset Password Info")]
+    public InputField E_ResetPass;
+    public TextMeshProUGUI ResetErrorMsg;
+
+
 
     //Variable to prepare Badges After login
     public GameObject holdedScript;
@@ -94,6 +99,11 @@ public class AuthManager : MonoBehaviour
         lemail.text = "";
         lpassword.text = "";
         ErrorMsgL.text = ArabicFixer.Fix("");
+    }
+    public void ClearResetPasswordFeilds()
+    {
+        E_ResetPass.text = "";
+        ResetErrorMsg.text = ArabicFixer.Fix("");
     }
     public void ClearRegisterFeilds()
     {
@@ -489,18 +499,28 @@ public class AuthManager : MonoBehaviour
     //___________________________________________________________________________________ResetPass Function
     private IEnumerator ResetPass()
     {
-        string emailAddress = (DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").GetValueAsync()).ToString();
-
-        var Task = auth.SendPasswordResetEmailAsync(emailAddress);
-
-        yield return new WaitUntil(predicate: () => Task.IsCompleted);
-
-        if (Task.Exception != null)
+        string emailAddress = E_ResetPass.text;
+        //(DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").GetValueAsync()).ToString();
+        if (emailAddress != "")
         {
-            Debug.LogWarning("SendPasswordResetEmailAsync was canceled.");
+            var Task = auth.SendPasswordResetEmailAsync(emailAddress);
+
+            yield return new WaitUntil(predicate: () => Task.IsCompleted);
+
+            if (Task.Exception != null)
+            {
+                //HERE Email verfication
+                Debug.LogWarning("SendPasswordResetEmailAsync was canceled.");
+            }
+            else
+                Debug.Log("Password reset email sent successfully.");
+            ResetErrorMsg.text = ArabicFixer.Fix("لطفاً تحقق من بريدك الالكتروني");
+
         }
         else
-            Debug.Log("Password reset email sent successfully.");
-
+        {
+            ResetErrorMsg.text = ArabicFixer.Fix("يرجى إدخال البريد الإلكتروني");
+        }
     }
+
 }

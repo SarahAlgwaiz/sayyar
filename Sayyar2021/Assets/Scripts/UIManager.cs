@@ -20,8 +20,8 @@ public class UIManager : MonoBehaviour
     public GameObject Panel_EditProfile;
     public GameObject Panel_Badges;
     public GameObject parentPanel;
-
     public GameObject videoPanel;
+    public GameObject FrogetPasswordPanel;
 
 
 
@@ -148,6 +148,16 @@ public class UIManager : MonoBehaviour
         parentPanel.SetActive(true);
         videoPanel.SetActive(false);
 
+    }
+
+    public void ResetPasswordButton()
+    {
+        FrogetPasswordPanel.SetActive(true);
+    }
+
+    public void CloseResetPasswordPanel()
+    {
+        FrogetPasswordPanel.SetActive(false);
     }
 
 }
