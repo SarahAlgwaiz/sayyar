@@ -21,19 +21,10 @@ private void Awake() {
     networkedPosition = new Vector3();
     networkedRotaion = new Quaternion();
 }
-
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
+    void Start(){
+        PhotonNetwork.SendRate = 20;
+        PhotonNetwork.SerializationRate = 10;
+    }
     private void FixedUpdate() {
       
             rb.position = Vector3.MoveTowards(rb.position, networkedPosition, Time.fixedDeltaTime);
@@ -44,21 +35,20 @@ private void Awake() {
     public void OnPhotonSerializeView(PhotonStream stream , PhotonMessageInfo Info) 
     {
 
-
-if(stream.IsWriting){
+    if(stream.IsWriting){
 
     //Then, PhotonView is mine and I am the one who controls this player. 
     //should send position, velocity etc. data to the other players
-stream.SendNext(rb.position);
-stream.SendNext(rb.rotation);
+    stream.SendNext(rb.position);
+    stream.SendNext(rb.rotation);
 //stream.SendNext(rb.scale);
 
-}else
-{
+    }
+    else
+    {
     //called on my player gameobject that existis in remote player's game
     networkedPosition = (Vector3)stream.ReceiveNext();
    networkedRotaion = (Quaternion)stream.ReceiveNext();
-
 
 }
     }
