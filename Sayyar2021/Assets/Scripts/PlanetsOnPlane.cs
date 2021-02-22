@@ -29,9 +29,7 @@ public class PlanetsOnPlane : MonoBehaviour
 private GameObject placablePrefab;
 
 [SerializeField]
-private GameObject[] planets;
-[SerializeField]
-private Material[] planetsMaterial;
+public static GameObject[] planets;
 
 [SerializeField]
 private Camera ARCamera;
@@ -40,20 +38,16 @@ private PlacementObject selectedObject;
 
 [SerializeField] 
 private ARPlane plane;
-
-private Vector3 planeSize;
-
 private LineRenderer lineRenderer;
 private Vector3 solarSystemSize;
 
 public static bool[] isPlanetInserted;
 
 public static string status; 
-
-private bool isGameFinished = true;
 static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 private void Awake() {
     status = "Ongoing";
+    storeDataBeforeGame();
     raycastManager = GetComponent<ARRaycastManager>();
     AR_Plane_Manager = GetComponent<ARPlaneManager>();
     lineRenderer = planets[7].GetComponent<LineRenderer>();
@@ -132,12 +126,16 @@ public void disablePlane(){
         }
 
   public void finishGame(){
-      storeData();
+      //storeDataAfterGame();
      SceneManager.LoadScene("HomeScene");
   }
 
-  public async void storeData(){
-    FirebaseStorageAfterGame.InitializeFirebase();
+public async void storeDataBeforeGame(){
+     FirebaseStorageAfterGame.InitializeFirebase();
+      await FirebaseStorageAfterGame.storeGameData();
+}
+
+  public async void storeDataAfterGame(){
     //await FirebaseStorageAfterGame.storeVirtualPlayroomData();
     //await FirebaseStorageAfterGame.storeBadgeData();
   }
@@ -149,7 +147,7 @@ public void disablePlane(){
     Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
     Debug.Log("RandomPosition" + randomPosition);
     Debug.Log("Plane local scale " + plane.transform.localScale);
-     Instantiate(planets[i].transform,randomPosition,Quaternion.identity);
+     PhotonNetwork.Instantiate(planets[i].name,randomPosition,Quaternion.identity,1,null);
         }
 }
     }
