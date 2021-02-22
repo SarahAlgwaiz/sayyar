@@ -5097,6 +5097,10 @@ MonoBehaviour:
   Panel_Badges: {fileID: 1273356944}
   parentPanel: {fileID: 1273356944}
   videoPanel: {fileID: 1780516932}
+  FrogetPasswordPanel: {fileID: 0}
+  JoinRoomPanel: {fileID: 0}
+  Num1: {fileID: 0}
+  CreateRoomPanel: {fileID: 0}
 --- !u!1 &517563210
 GameObject:
   m_ObjectHideFlags: 0
@@ -8847,6 +8851,8 @@ MonoBehaviour:
   E_password: {fileID: 0}
   E_ConfirmPass: {fileID: 0}
   UpdatedMsg: {fileID: 0}
+  E_ResetPass: {fileID: 0}
+  ResetErrorMsg: {fileID: 0}
   holdedScript: {fileID: 0}
 --- !u!1 &959696970
 GameObject:
@@ -15938,6 +15944,8 @@ MonoBehaviour:
   E_password: {fileID: 0}
   E_ConfirmPass: {fileID: 0}
   UpdatedMsg: {fileID: 0}
+  E_ResetPass: {fileID: 0}
+  ResetErrorMsg: {fileID: 0}
   holdedScript: {fileID: 0}
 --- !u!1 &1986273905
 GameObject:
@@ -16584,6 +16592,8 @@ MonoBehaviour:
   E_password: {fileID: 0}
   E_ConfirmPass: {fileID: 0}
   UpdatedMsg: {fileID: 0}
+  E_ResetPass: {fileID: 0}
+  ResetErrorMsg: {fileID: 0}
   holdedScript: {fileID: 0}
 --- !u!1 &2032357714
 GameObject:
@@ -17347,6 +17357,8 @@ MonoBehaviour:
   E_password: {fileID: 496572483}
   E_ConfirmPass: {fileID: 391448567}
   UpdatedMsg: {fileID: 9173695}
+  E_ResetPass: {fileID: 0}
+  ResetErrorMsg: {fileID: 0}
   holdedScript: {fileID: 1868957067}
 --- !u!4 &2108026240
 Transform:
