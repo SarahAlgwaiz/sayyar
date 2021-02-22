@@ -8,7 +8,6 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
 using System.Threading.Tasks;
-<<<<<<< Updated upstream
 using TMPro;
 using ArabicSupport;
 
@@ -41,35 +40,6 @@ namespace com.cactusteam.Sayyar
         private bool valid;
 
         public void OnClickRoomCodeConfirmButton()
-=======
-namespace com.cactusteam.Sayyar{
-    public class JoinRoomScript: MonoBehaviourPunCallbacks{
-    
-     [Header("Firebase")]
-    public DependencyStatus dependencyStatus;
-    public DatabaseReference reference;
-    private FirebaseUser user;
-
-[SerializeField]
-private GameObject joinRoomView;
-[SerializeField]
-private Button roomCodeConfirmButton;
-[SerializeField]
-private TMPro.TMP_InputField roomNumField;
-
-    public void OnClickRoomCodeConfirmButton(){
-        JoinRoom();
-    }
-        
-        public void JoinRoom(){    
-               string roomCode = roomNumField.text;
-               if(roomCode.Length!=5){
-                   Debug.Log("Room Code length should be 5");
-                   return;
-               }
-                PhotonNetwork.JoinRoom(roomCode);
-                   FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
->>>>>>> Stashed changes
         {
 
             JoinRoom();
