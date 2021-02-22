@@ -60,7 +60,7 @@ public class CreateRoomScript : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("Room Created"); //popup pleeeease >> Where this should apear ? @HadeelHamad
-        roomCodeCreateField.text = "Room Number: " + roomNumber;
+        //roomCodeCreateField.text = "Room Number: " + roomNumber;
         PlayerPrefs.SetString("RoomCode", "" + roomNumber);
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
 {
