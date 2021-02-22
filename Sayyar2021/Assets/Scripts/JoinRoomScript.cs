@@ -27,10 +27,10 @@ namespace com.cactusteam.Sayyar
         // [SerializeField]
         // private Button roomCodeConfirmButton;
         //[SerializeField]
-        //The above lines I don't no what is for and not used in this class @SarahAlgwaiz please deleted if not neccessary كل الحب
+        //The above lines I don't no what is for and not used in this class @HadeelHamad please deleted if not neccessary كل الحب
 
 
-        //private TMP_InputField roomNumField; >>> the following line is alternative for Fron-End matters <3  Num1.text + Num2.text + Num3.text + Num4.text + Num5.text @SarahAlgwaiz
+        //private TMP_InputField roomNumField; >>> the following line is alternative for Fron-End matters <3  Num1.text + Num2.text + Num3.text + Num4.text + Num5.text @HadeelHamad
 
         [Header("JoinRoomCode")]
         public InputField Num1, Num2, Num3, Num4, Num5;
@@ -51,7 +51,7 @@ namespace com.cactusteam.Sayyar
             string roomCode = Num1.text + Num2.text + Num3.text + Num4.text + Num5.text;
             if (roomCode.Length != 5)
             {
-                ErrorMsg.text = ArabicFixer.Fix("لطفًا أدخل رقم الغرفة كاملًا");
+                ErrorMsg.text = ArabicFixer.Fix("لطفًا أدخل رقم قاعدة الانطلاق كاملًا");
                 Debug.Log("Room Code length should be 5");
                 return;
             }
@@ -74,7 +74,7 @@ namespace com.cactusteam.Sayyar
         }
         public override void OnDisconnected(DisconnectCause cause)
         {
-            Debug.Log("disconnected from server"); //popup pleeeease, Where this should apear ? @SarahAlgwaiz
+            Debug.Log("disconnected from server"); //popup pleeeease, Where this should apear ? @HadeelHamad
         }
         void Awake()
         {
@@ -88,11 +88,11 @@ namespace com.cactusteam.Sayyar
             {
                 case 32758:
                     Debug.Log("Room code does not exist"); //popup pleeeease >> 
-                    ErrorMsg.text = ArabicFixer.Fix("رقم الغرفة المدخلة غير متوفرة");
+                    ErrorMsg.text = ArabicFixer.Fix("رقم قاعدة الانطلاق المدخلة غير متوفرة");
                     break;
                 case 32765:
                     Debug.Log("Room already full");//popup pleeeease
-                    ErrorMsg.text = ArabicFixer.Fix("رقم الغرفة المدخلة ممتلئة");
+                    ErrorMsg.text = ArabicFixer.Fix("رقم قاعدة الانطلاق المدخلة ممتلئة");
                     break;
             }
             valid = false;

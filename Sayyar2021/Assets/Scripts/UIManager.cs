@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public GameObject FrogetPasswordPanel;
     public GameObject JoinRoomPanel;
     public InputField Num1;
+    public GameObject CreateRoomPanel;
 
 
 
@@ -172,6 +173,16 @@ public class UIManager : MonoBehaviour
     public void CloseJoinRoomPanelButton()
     {
         JoinRoomPanel.SetActive(false);
+    }
+
+     public void CreateRoomButton()
+    {
+        CreateRoomPanel.SetActive(true);
+    }
+
+    public void CloseCreateRoomPanelButton()
+    {
+        CreateRoomPanel.SetActive(false);
     }
 
 }
