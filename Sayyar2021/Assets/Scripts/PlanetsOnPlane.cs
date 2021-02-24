@@ -29,7 +29,7 @@ public class PlanetsOnPlane : MonoBehaviour
 private GameObject placablePrefab;
 
 [SerializeField]
-public static GameObject[] planets;
+public  GameObject[] planets;
 
 [SerializeField]
 private Camera ARCamera;
@@ -38,7 +38,6 @@ private PlacementObject selectedObject;
 
 [SerializeField] 
 private ARPlane plane;
-private LineRenderer lineRenderer;
 private Vector3 solarSystemSize;
 
 public static bool[] isPlanetInserted;
@@ -50,8 +49,6 @@ private void Awake() {
     storeDataBeforeGame();
     raycastManager = GetComponent<ARRaycastManager>();
     AR_Plane_Manager = GetComponent<ARPlaneManager>();
-    lineRenderer = planets[7].GetComponent<LineRenderer>();
-    AR_Plane_Manager.enabled = true;
     isPlanetInserted = new bool[8];
     for(int i=0; i<planets.Length; i++){
         isPlanetInserted[i] = false;
@@ -72,10 +69,9 @@ public void disablePlane(){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
-            spawnedObject = Instantiate(placablePrefab,hitPose.position,Quaternion.identity);
-            Debug.Log("IF");
-            solarSystemSize = new Vector2 (lineRenderer.bounds.size.x, lineRenderer.bounds.size.z);
-            Debug.Log("SOLAR SYSTEM SIZE: " + solarSystemSize);
+         if(PhotonNetwork.IsMasterClient){
+            spawnedObject =  PhotonNetwork.InstantiateRoomObject(placablePrefab.name,hitPose.position,Quaternion.identity,1);
+         }
             disablePlane();
         }
         else{
@@ -118,7 +114,7 @@ public void disablePlane(){
             }
             checkPlanets();
         }       
-            private void checkPlanets(){
+            private void checkPlanets(){        
             if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
                 status= "Won";
                 finishGame();
@@ -140,6 +136,7 @@ public async void storeDataBeforeGame(){
     //await FirebaseStorageAfterGame.storeBadgeData();
   }
     public void setPosition(){
+     if(PhotonNetwork.IsMasterClient){
         for(int i=0; i<planets.Length;i++){
     float randomX = Random.Range(-3, 3);
     //float randomY = Random.Range(-3, 3);
@@ -147,7 +144,10 @@ public async void storeDataBeforeGame(){
     Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
     Debug.Log("RandomPosition" + randomPosition);
     Debug.Log("Plane local scale " + plane.transform.localScale);
-     PhotonNetwork.Instantiate(planets[i].name,randomPosition,Quaternion.identity,1,null);
+    PhotonNetwork.InstantiateRoomObject(planets[i].name,randomPosition,Quaternion.identity,1);
+    planets[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+    }
+
         }
 }
     }
