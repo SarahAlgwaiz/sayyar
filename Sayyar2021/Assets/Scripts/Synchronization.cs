@@ -43,6 +43,7 @@ private Transform tr;
        SceneManager.LoadScene("SolarSystemGame");
    }
    private void Awake() {
+       PhotonNetwork.AutomaticallySyncScene = true;
        storeData();
        getRoomPlayers();
    }
@@ -53,7 +54,8 @@ private Transform tr;
       await FirebaseStorageAfterGame.storeGameData();
    }
    private void Start() {
-       roomCodeText.text = PlayerPrefs.GetString("RoomCode");
+       roomCodeText.text = PhotonNetwork.CurrentRoom.Name;
+       Debug.Log(roomCodeText.text);
    }
 
    public void addNewPlayer(Player newPlayer){
