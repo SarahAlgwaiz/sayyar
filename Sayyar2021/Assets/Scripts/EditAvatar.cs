@@ -24,7 +24,7 @@ public class EditAvatar : MonoBehaviour
 
     public GameObject Panel_EditAvatar;
      string ChoosenAvatar;
-     public GameObject AvatarA, AvatarB, AvatarC, AvatarD, AvatarE, AvatarF;
+     public GameObject AvatarA, AvatarB, AvatarC, AvatarD, AvatarE, AvatarF, DAvatarA, DAvatarB, DAvatarC, DAvatarD, DAvatarE, DAvatarF;
 
 //___________________________________________________________________________________InitializeFirebase Function
     private void InitializeFirebase()
@@ -45,6 +45,13 @@ public void AvatarAChoosen(){
        AvatarD.SetActive(false);
        AvatarE.SetActive(false);
        AvatarF.SetActive(false);
+
+       DAvatarA.SetActive(true);
+       DAvatarB.SetActive(false);
+       DAvatarC.SetActive(false);
+       DAvatarD.SetActive(false);
+       DAvatarE.SetActive(false);
+       DAvatarF.SetActive(false);
        ChoosenAvatar = "AvatarA";
      }
 
@@ -55,6 +62,13 @@ public void AvatarAChoosen(){
        AvatarD.SetActive(false);
        AvatarE.SetActive(false);
        AvatarF.SetActive(false);
+
+       DAvatarA.SetActive(false);
+       DAvatarB.SetActive(true);
+       DAvatarC.SetActive(false);
+       DAvatarD.SetActive(false);
+       DAvatarE.SetActive(false);
+       DAvatarF.SetActive(false);
        ChoosenAvatar = "AvatarB";
      }
 
@@ -65,6 +79,13 @@ public void AvatarAChoosen(){
        AvatarD.SetActive(false);
        AvatarE.SetActive(false);
        AvatarF.SetActive(false);
+
+       DAvatarA.SetActive(false);
+       DAvatarB.SetActive(false);
+       DAvatarC.SetActive(true);
+       DAvatarD.SetActive(false);
+       DAvatarE.SetActive(false);
+       DAvatarF.SetActive(false);
        ChoosenAvatar = "AvatarC";
      }
 
@@ -75,6 +96,13 @@ public void AvatarAChoosen(){
        AvatarD.SetActive(true);
        AvatarE.SetActive(false);
        AvatarF.SetActive(false);
+
+       DAvatarA.SetActive(false);
+       DAvatarB.SetActive(false);
+       DAvatarC.SetActive(false);
+       DAvatarD.SetActive(true);
+       DAvatarE.SetActive(false);
+       DAvatarF.SetActive(false);
        ChoosenAvatar = "AvatarD";
      }
 
@@ -85,6 +113,13 @@ public void AvatarAChoosen(){
        AvatarD.SetActive(false);
        AvatarE.SetActive(true);
        AvatarF.SetActive(false);
+
+       DAvatarA.SetActive(false);
+       DAvatarB.SetActive(false);
+       DAvatarC.SetActive(false);
+       DAvatarD.SetActive(false);
+       DAvatarE.SetActive(true);
+       DAvatarF.SetActive(false);
        ChoosenAvatar = "AvatarE";
      }
 
@@ -95,6 +130,13 @@ public void AvatarAChoosen(){
        AvatarD.SetActive(false);
        AvatarE.SetActive(false);
        AvatarF.SetActive(true);
+
+       DAvatarA.SetActive(false);
+       DAvatarB.SetActive(false);
+       DAvatarC.SetActive(false);
+       DAvatarD.SetActive(false);
+       DAvatarE.SetActive(false);
+       DAvatarF.SetActive(true);
        ChoosenAvatar = "AvatarF";
      }
 
@@ -145,6 +187,11 @@ public void AvatarAChoosen(){
     { 
         StartCoroutine(DisplayDB());
     }
+
+    //  private void start()
+    // { 
+    //     StartCoroutine(DisplayDB());
+    // }
 
 //___________________________________________________________________________________When logged in, this function will take the stored avatar from the firebase and then display it
         private IEnumerator DisplayDB()

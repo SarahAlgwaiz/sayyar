@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 
         mainScreen.SetActive(true);
         loginUI.SetActive(false);
-        registerUI.SetActive(true);
+        registerUI.SetActive(false);
         Panel_signUp.SetActive(false);
         homeScreen.SetActive(false);
 
@@ -184,5 +184,7 @@ public class UIManager : MonoBehaviour
     {
         CreateRoomPanel.SetActive(false);
     }
+
+    
 
 }
