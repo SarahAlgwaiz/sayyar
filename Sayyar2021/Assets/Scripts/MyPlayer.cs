@@ -26,9 +26,11 @@ public class MyPlayer : MonoBehaviour
     public Sprite avaterD;
     public Sprite avaterE;
     public Sprite avaterF;
+    public Image renderer;
 
     [Header("playersAvatar")]
-    public Image PlayerAvatar;
+    public GameObject PlayerAvatar;
+
 
     [Header("playersName")]
     public TMPro.TMP_Text PlayerName;
@@ -44,7 +46,7 @@ public class MyPlayer : MonoBehaviour
 
     }
 
-    
+
 
     public async void toCall()
     {
@@ -68,39 +70,41 @@ public class MyPlayer : MonoBehaviour
 
 
     public async void setPlayerName(Player newPlayer)
-    {
+    {Player = newPlayer;
         await Task.Run(() => toCall());
         Debug.Log("in set player name");
         var userID = newPlayer.NickName;
 
         var playerAvatarDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Avatar").GetValueAsync().Result.Value);
-        Debug.Log("avatar from DB "+ playerAvatarDB);
-        switch (playerAvatarDB+"")
+        renderer = PlayerAvatar.GetComponent<Image>();
+        Debug.Log("avatar from DB " + playerAvatarDB);
+        switch (playerAvatarDB + "")
         {
-            case "avatarA":
-                PlayerAvatar.sprite = avaterA;
+            case "AvatarA":
+                renderer.sprite = avaterA;
                 break;
-            case "avatarB":
-                PlayerAvatar.sprite = avaterB;
+            case "AvatarB":
+                renderer.sprite = avaterB;
                 break;
-            case "avatarC":
-                PlayerAvatar.sprite = avaterC;
+            case "AvatarC":
+                renderer.sprite = avaterC;
                 break;
-            case "avatarD":
-                PlayerAvatar.sprite = avaterD;
+            case "AvatarD":
+                renderer.sprite = avaterD;
                 break;
-            case "avatarE":
-                PlayerAvatar.sprite = avaterE;
+            case "AvatarE":
+                renderer.sprite = avaterE;
                 break;
-            case "avatarF":
-                PlayerAvatar.sprite = avaterF;
+            case "AvatarF":
+                renderer.sprite = avaterF;
                 break;
+
 
         }
 
         var playerNameDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Username").GetValueAsync().Result.Value);
-var toString = playerNameDB+"";
-        PlayerName.text = toString;//ArabicFixer.Fix(toString);
+        var toString = playerNameDB + "";
+        PlayerName.text = toString;
 
     }
 }

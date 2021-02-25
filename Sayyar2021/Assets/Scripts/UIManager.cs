@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
         registerUI.SetActive(false);
         mainScreen.SetActive(false);
         PanelLoginEmail.SetActive(false);
-
+        //SceneManager.LoadScene("HomeScene");
 
     }
 
@@ -175,7 +175,7 @@ public class UIManager : MonoBehaviour
         JoinRoomPanel.SetActive(false);
     }
 
-     public void CreateRoomButton()
+    public void CreateRoomButton()
     {
         CreateRoomPanel.SetActive(true);
     }
@@ -185,6 +185,6 @@ public class UIManager : MonoBehaviour
         CreateRoomPanel.SetActive(false);
     }
 
-    
+
 
 }

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6485387127611182257}
   - component: {fileID: 5463295630642441249}
-  - component: {fileID: 8679633401320069484}
+  - component: {fileID: 4734945324084860741}
+  - component: {fileID: 9104256398108455939}
   m_Layer: 5
   m_Name: HostAvater
   m_TagString: Untagged
@@ -45,7 +46,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2207392051195012121}
   m_CullTransparentMesh: 1
---- !u!114 &8679633401320069484
+--- !u!212 &4734945324084860741
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207392051195012121}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &9104256398108455939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,5 +318,6 @@ MonoBehaviour:
   avaterD: {fileID: 21300000, guid: 24cd82a1d059f417395b2f69e551b7bb, type: 3}
   avaterE: {fileID: 21300000, guid: b32820a58df5c426c9826457fb476e56, type: 3}
   avaterF: {fileID: 21300000, guid: eb339566152cf4b038a0472e43e31f96, type: 3}
-  PlayerAvatar: {fileID: 8679633401320069484}
+  renderer: {fileID: 4734945324084860741}
+  PlayerAvatar: {fileID: 2207392051195012121}
   PlayerName: {fileID: 5660613236108015003}

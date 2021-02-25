@@ -119,11 +119,22 @@ public class Synchronization : MonoBehaviourPunCallbacks
         }
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        int index = playerList.FindIndex(x => x.Player == otherPlayer);
+    {Debug.Log("on player left");
+        int index = -1;
+        foreach (MyPlayer playerInfo in playerList)
+        {
+            if(playerInfo.Player.Equals(otherPlayer))
+            {
+                index = playerList.IndexOf(playerInfo);
+                Debug.Log("Index is "+index);
+            }
+        }
+        //int index = playerList.FindIndex(x => x.Player.Equals(otherPlayer));
         if (index != -1)
         {
+            Debug.Log("Before ddestroy !");
             Destroy(playerList[index].gameObject);
+            Debug.Log("After destroy ");
             playerList.RemoveAt(index);
         }
 
@@ -132,6 +143,10 @@ public class Synchronization : MonoBehaviourPunCallbacks
 
 
     }
+     public void onClickExitGameButton(){
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("MainScene");//change it later to HomeScene 
+        }
 
 }
 
