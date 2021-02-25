@@ -140,6 +140,7 @@ public class Synchronization : MonoBehaviourPunCallbacks
 
         //  numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
         updatePosition();
+            start.interactable = false;
 
 
     }
