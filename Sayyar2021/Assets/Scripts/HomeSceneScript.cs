@@ -21,6 +21,7 @@ namespace com.cactusteam.Sayyar
         public DependencyStatus dependencyStatus;
         public DatabaseReference reference;
         private FirebaseUser user;
+        public FirebaseAuth auth;
 
         [SerializeField]
         private Button joinButton;
@@ -109,13 +110,14 @@ namespace com.cactusteam.Sayyar
 
         public async Task setName()
         {
-            Debug.Log("set name");
-            DataSnapshot ds = await Task.Run(() => reference.Child("playerInfo").Child("A2KP5BlspjYdfhBc61qm1WnusKZ2").Child("Username").GetValueAsync());//replace this with the current user's name stored in DB
-            Debug.Log("after ds");
-            await Task.Run(() => nameFromFirebase = ds.Value.ToString());
-            Debug.Log("name is" + nameFromFirebase);
-            Debug.Log("after set active");
-            await Task.Run(() => PhotonNetwork.NickName = nameFromFirebase);
+            // Debug.Log("set name");
+            // DataSnapshot ds = await Task.Run(() => reference.Child("playerInfo").Child("A2KP5BlspjYdfhBc61qm1WnusKZ2").Child("Username").GetValueAsync());//replace this with the current user's name stored in DB
+            // Debug.Log("after ds");
+            // await Task.Run(() => nameFromFirebase = ds.Value.ToString());
+            // Debug.Log("name is" + nameFromFirebase);
+            // Debug.Log("after set active");
+            var userID = auth.CurrentUser.UserId ;
+            await Task.Run(() => PhotonNetwork.NickName = userID );
 
             // PlayerPrefs.SetString("UID",user.UserId);
             Debug.Log("after nickname");

@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase;
+using TMPro;
 
 
 public class Synchronization : MonoBehaviourPunCallbacks
 {
-[SerializeField]
-private TMPro.TMP_Text numOfJoinedPlayersText;
+// [SerializeField]
+// private TMPro.TMP_Text numOfJoinedPlayersText;
 
 [SerializeField]
 private TMPro.TMP_Text roomCodeText;
@@ -26,6 +27,27 @@ private MyPlayer myPlayer;
 private Button start;
 
 private Transform tr;
+
+        // [Header("avatars")]
+        // public Sprite avaterA ;
+        // public Sprite avaterB ; 
+        // public Sprite avaterC ;
+        // public Sprite avaterD ;
+        // public Sprite avaterE ;
+        // public Sprite avaterF ;
+
+        // [Header("playersAvatar")]
+        // public Image HostAvatar ;
+        // public Image PlayerONEAvatar ;
+        // public Image PlayerTWOAvatar ;
+        // public Image PlayerTHREEAvatar ;
+
+        // [Header("playersName")]
+        // public TMP_Text HostName;
+        // public TMP_Text PlayerONEName;
+        // public TMP_Text PlayerTWOName;
+        // public TMP_Text PlayerTHREEName;
+
 
  [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -65,7 +87,7 @@ private Transform tr;
             player.setPlayerName(newPlayer);
             playerList.Add(player);
         }
-        numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
+       // numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
    }
    public void getRoomPlayers(){
        foreach (KeyValuePair <int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players){
@@ -91,7 +113,7 @@ private Transform tr;
             playerList.RemoveAt(index);
         }
 
-        numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
+      //  numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
         updatePosition();
     
  
