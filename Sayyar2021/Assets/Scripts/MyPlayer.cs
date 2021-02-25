@@ -8,35 +8,34 @@ using Firebase;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
-using TMPro;
 
 
 
 public class MyPlayer : MonoBehaviour
 {
-public FirebaseAuth auth;
+    public FirebaseAuth auth;
     public FirebaseUser User;
     public DatabaseReference DBreference;
-        public DependencyStatus dependencyStatus;
+    public DependencyStatus dependencyStatus;
 
 
-   [Header("avatars")]
-        public Sprite avaterA ;
-        public Sprite avaterB ; 
-        public Sprite avaterC ;
-        public Sprite avaterD ;
-        public Sprite avaterE ;
-        public Sprite avaterF ;
+    [Header("avatars")]
+    public Sprite avaterA;
+    public Sprite avaterB;
+    public Sprite avaterC;
+    public Sprite avaterD;
+    public Sprite avaterE;
+    public Sprite avaterF;
 
-        [Header("playersAvatar")]
-        public Image PlayerAvatar ;
+    [Header("playersAvatar")]
+    public Image PlayerAvatar;
 
-        [Header("playersName")]
-        public TMPro.TMP_Text PlayerName;
+    [Header("playersName")]
+    public TMPro.TMP_Text PlayerName;
 
-   public Player Player;
+    public Player Player;
 
-   void InitializeFirebase()
+    void InitializeFirebase()
     {
         Debug.Log("Setting up Firebase Auth inside show Badges");
         //Set the authentication instance object
@@ -45,7 +44,9 @@ public FirebaseAuth auth;
 
     }
 
-     public async void toCall()
+    
+
+    public async void toCall()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -66,39 +67,40 @@ public FirebaseAuth auth;
     }
 
 
-    public async void setPlayerName(Player newPlayer){
-        await Task.Run(() => toCall());
-      Debug.Log("in set player name");
-   var userID = newPlayer.NickName;
-
-    var playerAvatarDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Avatar").GetValueAsync());
-
-    switch (playerAvatarDB)
+    public async void setPlayerName(Player newPlayer)
     {
-        case "avaterA":
-        PlayerAvatar.sprite = avaterA;
-        break;
-        case "avaterB":
-        PlayerAvatar.sprite = avaterB;
-        break;
-        case "avaterC":
-        PlayerAvatar.sprite = avaterC;
-        break;
-        case "avaterD":
-        PlayerAvatar.sprite = avaterD;
-        break;
-        case "avaterE":
-        PlayerAvatar.sprite = avaterE;
-        break;
-        case "avaterF":
-        PlayerAvatar.sprite = avaterF;
-        break;
+        await Task.Run(() => toCall());
+        Debug.Log("in set player name");
+        var userID = newPlayer.NickName;
+
+        var playerAvatarDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Avatar").GetValueAsync().Result.Value);
+        Debug.Log("avatar from DB "+ playerAvatarDB);
+        switch (playerAvatarDB+"")
+        {
+            case "avatarA":
+                PlayerAvatar.sprite = avaterA;
+                break;
+            case "avatarB":
+                PlayerAvatar.sprite = avaterB;
+                break;
+            case "avatarC":
+                PlayerAvatar.sprite = avaterC;
+                break;
+            case "avatarD":
+                PlayerAvatar.sprite = avaterD;
+                break;
+            case "avatarE":
+                PlayerAvatar.sprite = avaterE;
+                break;
+            case "avatarF":
+                PlayerAvatar.sprite = avaterF;
+                break;
+
+        }
+
+        var playerNameDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Username").GetValueAsync().Result.Value);
+var toString = playerNameDB+"";
+        PlayerName.text = toString;//ArabicFixer.Fix(toString);
 
     }
-
-var playerNameDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Username").GetValueAsync());
-
-PlayerName.text = ArabicFixer.Fix(playerNameDB);
-
-   }
 }

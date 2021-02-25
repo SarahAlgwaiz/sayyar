@@ -214,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &80539846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,28 +222,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80539845}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ca48eb426ac14e10a4cb356f8263f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomCodeText: {fileID: 1714699396}
-  myPlayer: {fileID: 1308332271691356734, guid: 9e47401079175403698bd62fefc2a05e, type: 3}
+  myPlayer: {fileID: 7492993675932870584, guid: 98ca6ccf377764586b0beab984e6a19b, type: 3}
   start: {fileID: 1489984356}
-  avaterA: {fileID: 21300000, guid: faacf163485b549bf9dfa240a24138a2, type: 3}
-  avaterB: {fileID: 21300000, guid: 42572a93c0eb34281aae3f0cc16b0f31, type: 3}
-  avaterC: {fileID: 21300000, guid: 397c094da7b954e0ea5f7e8eb0e6eedb, type: 3}
-  avaterD: {fileID: 21300000, guid: 24cd82a1d059f417395b2f69e551b7bb, type: 3}
-  avaterE: {fileID: 21300000, guid: b32820a58df5c426c9826457fb476e56, type: 3}
-  avaterF: {fileID: 21300000, guid: eb339566152cf4b038a0472e43e31f96, type: 3}
-  HostAvatar: {fileID: 400997950}
-  PlayerONEAvatar: {fileID: 1077409291}
-  PlayerTWOAvatar: {fileID: 1340401895}
-  PlayerTHREEAvatar: {fileID: 274240250}
-  HostName: {fileID: 2021775765}
-  PlayerONEName: {fileID: 1802525479}
-  PlayerTWOName: {fileID: 1968783086}
-  PlayerTHREEName: {fileID: 1634581243}
+  playerBG: {fileID: 0}
   dependencyStatus: 0
 --- !u!4 &80539847
 Transform:
@@ -277,7 +264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &157841910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +500,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 367947658}
   m_OnClick:
     m_PersistentCalls:
@@ -1033,7 +1020,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1263,6 +1250,7 @@ GameObject:
   - component: {fileID: 1050234589}
   - component: {fileID: 1050234588}
   - component: {fileID: 1050234587}
+  - component: {fileID: 1050234591}
   m_Layer: 5
   m_Name: New Design
   m_TagString: Untagged
@@ -1365,6 +1353,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1050234591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050234586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca48eb426ac14e10a4cb356f8263f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomCodeText: {fileID: 1714699396}
+  myPlayer: {fileID: 7492993675932870584, guid: 98ca6ccf377764586b0beab984e6a19b, type: 3}
+  start: {fileID: 1489984356}
+  playerBG: {fileID: 13579668}
+  dependencyStatus: 0
 --- !u!1 &1075023657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,7 +1864,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1489984357}
   m_OnClick:
     m_PersistentCalls:

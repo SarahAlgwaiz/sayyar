@@ -48,12 +48,12 @@ namespace com.cactusteam.Sayyar
         public override void OnConnectedToMaster()
         {
 
-            Debug.Log("Photon Nickname" + PhotonNetwork.NickName);
+            Debug.Log("Photon Nickname " + PhotonNetwork.NickName);
             Debug.Log("connected to master");
             createButton.interactable = true;
             joinButton.interactable = true;
-           // connectingText.SetActive(false);
-           // playerNameText.text = nameFromFirebase;
+            // connectingText.SetActive(false);
+            // playerNameText.text = nameFromFirebase;
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -105,6 +105,8 @@ namespace com.cactusteam.Sayyar
         {
             reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
             Debug.Log("initialize");
+            auth = FirebaseAuth.DefaultInstance;
+
             await setName();
         }
 
@@ -116,8 +118,9 @@ namespace com.cactusteam.Sayyar
             // await Task.Run(() => nameFromFirebase = ds.Value.ToString());
             // Debug.Log("name is" + nameFromFirebase);
             // Debug.Log("after set active");
-            var userID = auth.CurrentUser.UserId ;
-            await Task.Run(() => PhotonNetwork.NickName = userID );
+            var userID = auth.CurrentUser.UserId;
+            Debug.Log("user id is " + userID);
+            await Task.Run(() => PhotonNetwork.NickName = userID);
 
             // PlayerPrefs.SetString("UID",user.UserId);
             Debug.Log("after nickname");
