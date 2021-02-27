@@ -142,7 +142,8 @@ public class AuthManager : MonoBehaviour
     public void SignOutButton()
     {
         auth.SignOut();
-        UIManager.instance.MainScreen(); //  move to MainScreen after SignOut
+        //UIManager.instance.MainScreen(); //  move to MainScreen after SignOut
+        SceneManager.LoadScene("MainScreen");
         ClearRegisterFeilds();
         ClearLoginFeilds();
     }
