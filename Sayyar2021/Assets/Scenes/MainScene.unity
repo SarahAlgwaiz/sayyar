@@ -6703,19 +6703,9 @@ MonoBehaviour:
   loginUI: {fileID: 2003056901}
   registerUI: {fileID: 166439679}
   mainScreen: {fileID: 1350768935}
-  homeScreen: {fileID: 2072148954}
-  menuScreen: {fileID: 1383328428}
   Panel_signUp: {fileID: 1709807772}
   PanelLoginEmail: {fileID: 538752094}
-  Panel_ShowProfile: {fileID: 1767693769}
-  Panel_EditProfile: {fileID: 411223151}
-  Panel_Badges: {fileID: 1273356944}
-  parentPanel: {fileID: 2133508996}
-  videoPanel: {fileID: 1780516932}
   FrogetPasswordPanel: {fileID: 1088270671}
-  JoinRoomPanel: {fileID: 1011276736}
-  Num1: {fileID: 224152705}
-  CreateRoomPanel: {fileID: 701325566}
 --- !u!1 &509098608
 GameObject:
   m_ObjectHideFlags: 0
@@ -8106,7 +8096,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 369, y: 504}
+  m_AnchoredPosition: {x: 377, y: 480}
   m_SizeDelta: {x: 117, y: 117}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &640690873
@@ -11190,7 +11180,6 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
-  holdedScript: {fileID: 0}
 --- !u!1 &960869650
 GameObject:
   m_ObjectHideFlags: 0
@@ -19314,7 +19303,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1834979843}
   m_TextViewport: {fileID: 1156159639}
   m_TextComponent: {fileID: 82145699}
-  m_Placeholder: {fileID: 0}
+  m_Placeholder: {fileID: 638758426}
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
@@ -20803,7 +20792,6 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
-  holdedScript: {fileID: 0}
 --- !u!1 &1986273905
 GameObject:
   m_ObjectHideFlags: 0
@@ -21585,7 +21573,6 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
-  holdedScript: {fileID: 0}
 --- !u!1 &2028081006
 GameObject:
   m_ObjectHideFlags: 0
@@ -22483,7 +22470,6 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 9173695}
   E_ResetPass: {fileID: 1186663478}
   ResetErrorMsg: {fileID: 1200654219}
-  holdedScript: {fileID: 1868957067}
 --- !u!4 &2108026240
 Transform:
   m_ObjectHideFlags: 0
