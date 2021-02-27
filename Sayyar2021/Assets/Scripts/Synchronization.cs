@@ -146,7 +146,7 @@ public class Synchronization : MonoBehaviourPunCallbacks
     }
      public void onClickExitGameButton(){
             PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene("MainScene");//change it later to HomeScene 
+            SceneManager.LoadScene("HomeScene");//change it later to HomeScene 
         }
 
 }
