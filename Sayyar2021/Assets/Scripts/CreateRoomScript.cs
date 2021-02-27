@@ -53,8 +53,9 @@ public class CreateRoomScript : MonoBehaviourPunCallbacks
             ErrorMsg.text = ArabicFixer.Fix("الرجاء اختيار عدد اللاعبين");
             return;
         }
-        Debug.Log("Connected create room");
+        Debug.Log("Connected create room and max is "+maxPlayersPerRoom);
         roomNumber = UnityEngine.Random.Range(10000, 100000);
+        Debug.Log("In create the room num is "+roomNumber);
         PhotonNetwork.CreateRoom(roomNumber.ToString("00000"), new RoomOptions { IsVisible = false, IsOpen = true, MaxPlayers = maxPlayersPerRoom, PublishUserId = true });
     }
     public override void OnCreatedRoom()
