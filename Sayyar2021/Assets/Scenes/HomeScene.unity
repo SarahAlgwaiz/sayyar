@@ -809,7 +809,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -2448,7 +2448,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -4031,7 +4031,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -4320,7 +4320,6 @@ MonoBehaviour:
   JoinRoomPanel: {fileID: 1724216075}
   Num1: {fileID: 564503256}
   CreateRoomPanel: {fileID: 8990678}
-  holdedScript: {fileID: 1970655905}
 --- !u!4 &569401511
 Transform:
   m_ObjectHideFlags: 0
@@ -5414,7 +5413,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -5455,7 +5454,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749726262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f592504c84149f7bd6c26583c1f5bb, type: 3}
   m_Name: 
@@ -5818,7 +5817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &844190411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8703,7 +8702,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -9736,7 +9735,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -14238,6 +14237,8 @@ GameObject:
   - component: {fileID: 1865600974}
   - component: {fileID: 1865600973}
   - component: {fileID: 1865600972}
+  - component: {fileID: 1865600977}
+  - component: {fileID: 1865600978}
   m_Layer: 0
   m_Name: HomeScreen
   m_TagString: Untagged
@@ -14366,6 +14367,84 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1865600977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865600970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f592504c84149f7bd6c26583c1f5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependencyStatus: 0
+  EARTH_VID: {fileID: 2106436312}
+  JUPITER_VID: {fileID: 301205134}
+  MARS_VID: {fileID: 532353720}
+  MERCURY_VID: {fileID: 1980825005}
+  NEPTUNE_VID: {fileID: 748282224}
+  SATURN_VID: {fileID: 103867392}
+  SUN_VID: {fileID: 1250281493}
+  URANUS_VID: {fileID: 2078583123}
+  VENUS_VID: {fileID: 1169396379}
+  parentPanel: {fileID: 323647855}
+  VideosPanel: {fileID: 1738353797}
+  showBadgesPanel: {fileID: 308034806}
+  sunButton: {fileID: 1530002657}
+  earthButton: {fileID: 1027556604}
+  jupiterButton: {fileID: 1790142174}
+  marsButton: {fileID: 1387413073}
+  mercuryButton: {fileID: 2122293292}
+  neptuneButton: {fileID: 2108654565}
+  saturnButton: {fileID: 1647238797}
+  uransButton: {fileID: 1126955751}
+  venusButton: {fileID: 1103431390}
+  sunCount: {fileID: 13503928}
+  earthCount: {fileID: 1189940231}
+  jupiterCount: {fileID: 1628194608}
+  marsCount: {fileID: 1156792384}
+  mercuryCount: {fileID: 1156769636}
+  neptuneCount: {fileID: 1401362611}
+  saturnCount: {fileID: 1233042348}
+  uransCount: {fileID: 817313092}
+  venusCount: {fileID: 256135468}
+  sunBG: {fileID: 1426988307}
+  earthBG: {fileID: 13126408}
+  jupiterBG: {fileID: 1293248035}
+  marsBG: {fileID: 1102835221}
+  mercuryBG: {fileID: 318914874}
+  neptuneBG: {fileID: 940697918}
+  saturnBG: {fileID: 1412726681}
+  uransBG: {fileID: 1019241024}
+  venusBG: {fileID: 586926218}
+--- !u!114 &1865600978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865600970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7396fe903b362419a8bc2dc5f9a9f155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependencyStatus: 0
+  Panel_EditAvatar: {fileID: 671818185}
+  AvatarA: {fileID: 359528323}
+  AvatarB: {fileID: 1830194249}
+  AvatarC: {fileID: 1932685691}
+  AvatarD: {fileID: 924113424}
+  AvatarE: {fileID: 402106600}
+  AvatarF: {fileID: 881838576}
+  DAvatarA: {fileID: 597553692}
+  DAvatarB: {fileID: 760365533}
+  DAvatarC: {fileID: 657583896}
+  DAvatarD: {fileID: 1871768828}
+  DAvatarE: {fileID: 1218096804}
+  DAvatarF: {fileID: 74715272}
 --- !u!1 &1871768828
 GameObject:
   m_ObjectHideFlags: 0
@@ -15145,7 +15224,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -15642,7 +15721,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -15845,7 +15924,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:

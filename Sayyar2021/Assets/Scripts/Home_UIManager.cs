@@ -19,10 +19,10 @@ public class Home_UIManager : MonoBehaviour
     public InputField Num1;
     public GameObject CreateRoomPanel;
   //Variable to prepare Badges After login
-    public GameObject holdedScript;
+   // public GameObject holdedScript;
     private void Awake()
     {
-        holdedScript.SetActive(true);
+        
         if (instance == null)
         {
             instance = this;
@@ -34,14 +34,17 @@ public class Home_UIManager : MonoBehaviour
         }
     }
 
- public void HomeScreen() //Back button  
-    {
-
-        homeScreen.SetActive(true);
-        
-        //SceneManager.LoadScene("HomeScene");
-
+    void start(){
+        //holdedScript.SetActive(true);
     }
+//  public void HomeScreen() //Back button  
+//     {
+
+//         homeScreen.SetActive(true);
+        
+//         //SceneManager.LoadScene("HomeScene");
+
+//     }
 
     public void MenuScreen() //Back button  
     {
@@ -76,7 +79,7 @@ public void openPanel_ShowProfile()
      public void ClosePanel_menuScreen()
     {
         menuScreen.SetActive(false);
-        HomeScreen();
+        //HomeScreen();
 
     }
 

@@ -188,10 +188,10 @@ public void AvatarAChoosen(){
         StartCoroutine(DisplayDB());
     }
 
-    //  private void start()
-    // { 
-    //     StartCoroutine(DisplayDB());
-    // }
+     private void Awake()
+    { 
+        StartCoroutine(DisplayDB());
+    }
 
 //___________________________________________________________________________________When logged in, this function will take the stored avatar from the firebase and then display it
         private IEnumerator DisplayDB()

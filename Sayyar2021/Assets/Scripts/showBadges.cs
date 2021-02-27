@@ -64,6 +64,8 @@ public class showBadges : MonoBehaviour
     void Start()
     {
         getOwnedBadges();
+
+        
     }
 
 
