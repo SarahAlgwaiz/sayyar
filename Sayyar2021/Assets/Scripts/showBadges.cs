@@ -42,6 +42,7 @@ public class showBadges : MonoBehaviour
     public GameObject sunBG, earthBG, jupiterBG, marsBG, mercuryBG, neptuneBG, saturnBG, uransBG, venusBG;
     void Awake()
     {
+     
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -50,6 +51,7 @@ public class showBadges : MonoBehaviour
             {
                 //If they are avalible Initialize Firebase
                 InitializeFirebase();
+                getOwnedBadges();
             }
             else
             {
@@ -61,12 +63,12 @@ public class showBadges : MonoBehaviour
     }
     // Start is called before the first frame update
 
-    void Start()
-    {
-        getOwnedBadges();
+    // void Start()
+    // {
+        
 
         
-    }
+    // }
 
 
 

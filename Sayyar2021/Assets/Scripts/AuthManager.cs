@@ -66,6 +66,8 @@ public class AuthManager : MonoBehaviour
     //___________________________________________________________________________________Awake Function
     void Awake()
     {
+
+        
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -124,6 +126,7 @@ public class AuthManager : MonoBehaviour
     //___________________________________________________________________________________LoginButton Function
     public void LoginButton()
     {
+        
         //Call the login coroutine passing the email and password
         ErrorMsgL.text = "";
         StartCoroutine(Login(lemail.text, lpassword.text));
@@ -143,9 +146,8 @@ public class AuthManager : MonoBehaviour
     {
         auth.SignOut();
         //UIManager.instance.MainScreen(); //  move to MainScreen after SignOut
-        SceneManager.LoadScene("MainScreen");
-        ClearRegisterFeilds();
-        ClearLoginFeilds();
+        SceneManager.LoadScene("MainScene");
+       
     }
 
     //___________________________________________________________________________________SaveDataButton Function

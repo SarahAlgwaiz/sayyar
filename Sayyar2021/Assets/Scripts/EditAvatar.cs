@@ -190,13 +190,14 @@ public void AvatarAChoosen(){
 
      private void Awake()
     { 
+      InitializeFirebase();
         StartCoroutine(DisplayDB());
     }
 
 //___________________________________________________________________________________When logged in, this function will take the stored avatar from the firebase and then display it
         private IEnumerator DisplayDB()
     {
-        InitializeFirebase();
+        
 
         var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
