@@ -14,19 +14,10 @@ public class UIManager : MonoBehaviour
     public GameObject loginUI;
     public GameObject registerUI;
     public GameObject mainScreen;
-    public GameObject homeScreen;
-    public GameObject menuScreen;
     public GameObject Panel_signUp;
     public GameObject PanelLoginEmail;
-    public GameObject Panel_ShowProfile;
-    public GameObject Panel_EditProfile;
-    public GameObject Panel_Badges;
-    public GameObject parentPanel;
-    public GameObject videoPanel;
     public GameObject FrogetPasswordPanel;
-    public GameObject JoinRoomPanel;
-    public InputField Num1;
-    public GameObject CreateRoomPanel;
+    
 
 
 
@@ -63,47 +54,11 @@ public class UIManager : MonoBehaviour
         loginUI.SetActive(false);
         registerUI.SetActive(false);
         Panel_signUp.SetActive(false);
-        homeScreen.SetActive(false);
 
     }
 
-    public void HomeScreen() //Back button  
-    {
 
-        homeScreen.SetActive(true);
-        loginUI.SetActive(false);
-        registerUI.SetActive(false);
-        mainScreen.SetActive(false);
-        PanelLoginEmail.SetActive(false);
-        //SceneManager.LoadScene("HomeScene");
-
-    }
-
-    public void MenuScreen() //Back button  
-    {
-
-        menuScreen.SetActive(true);
-        loginUI.SetActive(false);
-        registerUI.SetActive(false);
-        mainScreen.SetActive(false);
-        //homeScreen.SetActive(false);
-        Panel_ShowProfile.SetActive(false);
-        Panel_EditProfile.SetActive(false);
-    }
-
-
-
-    public void openPanel_ShowProfile()
-    {
-        if (Panel_ShowProfile != null)
-            Panel_ShowProfile.SetActive(true);
-    }
-
-    public void openPanel_EditProfile()
-    {
-        if (Panel_EditProfile != null)
-            Panel_EditProfile.SetActive(true);
-    }
+    
 
     public void ClosePanelـsignUp()
     {
@@ -111,15 +66,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ClosePanel_ShowProfile()
-    {
-        Panel_ShowProfile.SetActive(false);
-    }
-
-    public void ClosePanel_EditProfile()
-    {
-        Panel_EditProfile.SetActive(false);
-    }
+   
 
 
     public void OpenPanel()
@@ -138,21 +85,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ClosePanel_menuScreen()
-    {
-        menuScreen.SetActive(false);
-        HomeScreen();
-
-    }
-
-    public void showBadgesButton()
-    {
-
-        Panel_Badges.SetActive(true);
-        parentPanel.SetActive(true);
-        videoPanel.SetActive(false);
-
-    }
+   
 
     public void ResetPasswordButton()
     {
@@ -164,26 +97,7 @@ public class UIManager : MonoBehaviour
         FrogetPasswordPanel.SetActive(false);
     }
 
-    public void JoinRoomButton()
-    {
-        JoinRoomPanel.SetActive(true);
-        Num1.ActivateInputField();
-    }
-
-    public void CloseJoinRoomPanelButton()
-    {
-        JoinRoomPanel.SetActive(false);
-    }
-
-    public void CreateRoomButton()
-    {
-        CreateRoomPanel.SetActive(true);
-    }
-
-    public void CloseCreateRoomPanelButton()
-    {
-        CreateRoomPanel.SetActive(false);
-    }
+    
 
 
 

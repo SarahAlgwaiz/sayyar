@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using TMPro;
 using ArabicSupport;
-
+using UnityEngine.SceneManagement;
 //___________________________________________________________________________________ beging of the class
 
 public class AuthManager : MonoBehaviour
@@ -60,8 +60,7 @@ public class AuthManager : MonoBehaviour
 
 
 
-    //Variable to prepare Badges After login
-    public GameObject holdedScript;
+  
 
 
     //___________________________________________________________________________________Awake Function
@@ -257,14 +256,17 @@ public class AuthManager : MonoBehaviour
                 else
                 {
                     //User is now logged in
-                    holdedScript.SetActive(true);
+                    
                     //Now get the result
                     User = LoginTask.Result;
                     Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
 
                     //  yield return new WaitForSeconds(2);
+        
+                SceneManager.LoadScene("HomeScene");
 
-                    UIManager.instance.HomeScreen();
+
+                    // Home_UIManager.instance.HomeScreen();
 
                     ClearLoginFeilds();
                     ClearRegisterFeilds();
