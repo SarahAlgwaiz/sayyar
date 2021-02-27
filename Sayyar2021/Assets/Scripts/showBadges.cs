@@ -51,14 +51,14 @@ public class showBadges : MonoBehaviour
             {
                 //If they are avalible Initialize Firebase
                 InitializeFirebase();
-                getOwnedBadges();
+                
             }
             else
             {
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
-
+getOwnedBadges();
 
     }
     // Start is called before the first frame update
