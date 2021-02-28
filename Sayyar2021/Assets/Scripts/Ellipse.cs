@@ -11,8 +11,6 @@ using UnityEngine;
  
      private Vector3[] positions;
      private LineRenderer self_lineRenderer;
-     
-     
      void OnValidate()
      {
          UpdateEllipse();
@@ -40,8 +38,7 @@ using UnityEngine;
      {
          Quaternion pointQuaternion = Quaternion.AngleAxis (rotationAngle, Vector3.forward);
          Vector3 pointPosition;
-         
-         pointPosition = new Vector3(Mathf.Sin(angle)*radius.y, -2, Mathf.Cos(angle)*radius.x);
+         pointPosition = new Vector3(Mathf.Sin(angle)*radius.y, -0.2f, Mathf.Cos(angle)*radius.x);
          pointPosition = pointQuaternion * pointPosition;
          
          self_lineRenderer.SetPosition(index, pointPosition);        

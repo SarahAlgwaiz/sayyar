@@ -45,6 +45,7 @@ public static bool[] isPlanetInserted;
 public static string status; 
 static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 private void Awake() {
+    PhotonNetwork.AutomaticallySyncScene = true;
     status = "Ongoing";
     storeDataBeforeGame();
     raycastManager = GetComponent<ARRaycastManager>();
@@ -69,9 +70,10 @@ public void disablePlane(){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
-         if(PhotonNetwork.IsMasterClient){
-            spawnedObject =  PhotonNetwork.InstantiateRoomObject(placablePrefab.name,hitPose.position,Quaternion.identity,1);
-         }
+      //   if(PhotonNetwork.IsMasterClient){
+           // spawnedObject =  PhotonNetwork.InstantiateRoomObject(placablePrefab.name,hitPose.position,Quaternion.identity,0, null);
+       //  }
+       spawnedObject= Instantiate(placablePrefab,hitPose.position,Quaternion.identity);
             disablePlane();
         }
         else{
@@ -136,7 +138,7 @@ public async void storeDataBeforeGame(){
     //await FirebaseStorageAfterGame.storeBadgeData();
   }
     public void setPosition(){
-     if(PhotonNetwork.IsMasterClient){
+    // if(PhotonNetwork.IsMasterClient){
         for(int i=0; i<planets.Length;i++){
     float randomX = Random.Range(-3, 3);
     //float randomY = Random.Range(-3, 3);
@@ -144,11 +146,11 @@ public async void storeDataBeforeGame(){
     Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
     Debug.Log("RandomPosition" + randomPosition);
     Debug.Log("Plane local scale " + plane.transform.localScale);
-    PhotonNetwork.InstantiateRoomObject(planets[i].name,randomPosition,Quaternion.identity,1);
+    //PhotonNetwork.InstantiateRoomObject(planets[i].name,randomPosition,Quaternion.identity,0, null);
+    Instantiate(planets[i],randomPosition,Quaternion.identity);
     planets[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
     }
-
-        }
+      //  }
 }
     }
 

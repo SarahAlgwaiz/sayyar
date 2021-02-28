@@ -377,7 +377,7 @@ public class AuthManager : MonoBehaviour
 
             }
             if (ErrorMsgR.text.Equals(""))
-                ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ، قم بتأكيد حسابك ");
+                ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ");
 
         }
 

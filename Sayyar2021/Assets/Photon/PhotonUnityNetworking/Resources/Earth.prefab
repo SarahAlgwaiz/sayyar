@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -4439410024309935850}
   - component: {fileID: -9000457682898552959}
   - component: {fileID: 4683963982956393831}
+  - component: {fileID: -5852741775641516559}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Planets
@@ -232,3 +233,15 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-5852741775641516559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765523008238663313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

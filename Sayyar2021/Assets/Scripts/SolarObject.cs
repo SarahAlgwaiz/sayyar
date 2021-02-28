@@ -34,6 +34,6 @@ public class SolarObject
         float x = Mathf.Sin(angle) * xAxis;
         float z = Mathf.Cos(angle) * zAxis;
 
-        return new Vector3(x,-2, z);
+        return new Vector3(x ,2, z);
     }
 }

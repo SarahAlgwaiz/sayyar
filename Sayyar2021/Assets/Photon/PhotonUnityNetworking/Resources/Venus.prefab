@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: -1848108055585824700}
   - component: {fileID: -2410251386633578028}
   - component: {fileID: -7687988875937896372}
+  - component: {fileID: -3428180105705931857}
+  - component: {fileID: -2002021595511543295}
   m_Layer: 0
   m_Name: Venus
   m_TagString: Planets
@@ -193,7 +195,9 @@ MonoBehaviour:
   observableSearch: 0
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -7687988875937896372}
+  - {fileID: -3428180105705931857}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -213,3 +217,31 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-3428180105705931857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979434382999846474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-2002021595511543295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979434382999846474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
