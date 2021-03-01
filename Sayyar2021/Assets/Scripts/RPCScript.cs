@@ -19,13 +19,12 @@ public class RPCScript : MonoBehaviour
      //  for(int i =0; i<PlanetsOnPlane.planets.Length; i++){
       //     isTaken[i]= false;
      //  }
-    public static void solarSystemCall(GameObject solarSystem, Vector3 placePosition){
+    public static void solarSystemCall(PhotonView photonView, GameObject solarSystem, Vector3 placePosition){
         object[] parameters = new object[2];
         parameters[0] = solarSystem;
         parameters[1] = placePosition;
         photonView.RPC("initializeSolarSystem", RpcTarget.All,parameters);
     }
-    
     public static GameObject initializeSolarSystem(GameObject solarSystem, Vector3 placePosition){
                 Debug.Log("PhotonView" + photonView != null);
                 Debug.Log("Is Mine: " + photonView.IsMine);
@@ -51,7 +50,6 @@ public class RPCScript : MonoBehaviour
     PhotonNetwork.Instantiate(planets[i].name,randomPosition,Quaternion.identity);
         }
         }
-
     }
     }
 

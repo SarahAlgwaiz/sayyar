@@ -72,7 +72,7 @@ public void disablePlane(){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
-            RPCScript.solarSystemCall(placablePrefab,hitPose.position);
+            RPCScript.solarSystemCall(this.gameObject.GetComponent<PhotonView>(),placablePrefab,hitPose.position);
         }
         }
     }
