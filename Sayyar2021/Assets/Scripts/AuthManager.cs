@@ -161,7 +161,7 @@ public class AuthManager : MonoBehaviour
         {
             StartCoroutine(UpdateUsername(ArabicFixer.Fix(E_username.text)));
             StartCoroutine(UpdateEmail(E_email.text));
-            StartCoroutine(UpdatePassword(E_password.text, E_ConfirmPass.text));
+           // StartCoroutine(UpdatePassword(E_password.text, E_ConfirmPass.text));
             ClearEditFeilds();
         }
     }
@@ -170,6 +170,11 @@ public class AuthManager : MonoBehaviour
     public void MyProfileButton()
     {
         StartCoroutine(MyProfile());
+    }
+     //___________________________________________________________________________________MyProfileButton Function
+    public void EditProfileButton()
+    {
+        StartCoroutine(EditProfile());
     }
 
     //___________________________________________________________________________________ResetPassButton Function
@@ -202,6 +207,31 @@ public class AuthManager : MonoBehaviour
             P_email.text = snapshot.Child("Email").Value.ToString();
         }
     }
+
+     public IEnumerator EditProfile()
+    {
+        Debug.Log("inside profile button and the id is :" + auth.CurrentUser.UserId);
+
+        var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.Log("No data exists yet or the object is null");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+            E_username.text = snapshot.Child("Username").Value.ToString();
+            E_email.text = snapshot.Child("Email").Value.ToString();
+        }
+    }
+
 
 
     //___________________________________________________________________________________Login Function
@@ -250,14 +280,14 @@ public class AuthManager : MonoBehaviour
             }
             else
             {
-                if (!Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.IsEmailVerified)
-                {
-                    ErrorMsgL.text = ArabicFixer.Fix("لطفاً تحقق من بريدك الالكتروني");
-                    Debug.Log("verify your email");
-                    auth.SignOut();
-                }
-                else
-                {
+                // if (!Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.IsEmailVerified)
+                // {
+                //     ErrorMsgL.text = ArabicFixer.Fix("لطفاً تحقق من بريدك الالكتروني");
+                //     Debug.Log("verify your email");
+                //     auth.SignOut();
+                // }
+                // else
+                // {
                     //User is now logged in
                     
                     //Now get the result
@@ -273,7 +303,7 @@ public class AuthManager : MonoBehaviour
 
                     ClearLoginFeilds();
                     ClearRegisterFeilds();
-                }
+                // }
             }
         }
     }
@@ -319,7 +349,7 @@ public class AuthManager : MonoBehaviour
                 //Call the Firebase auth signin function passing the email and password
                 var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password).ContinueWith(task =>
                 {
-                    auth.CurrentUser.SendEmailVerificationAsync();
+                   // auth.CurrentUser.SendEmailVerificationAsync();
                     // Firebase user has been created.
                     Firebase.Auth.FirebaseUser newUser = task.Result;
                     Debug.LogFormat("Firebase user created successfully: {0} ({1})",
