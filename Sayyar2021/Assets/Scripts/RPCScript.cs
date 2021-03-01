@@ -7,13 +7,18 @@ public class RPCScript : MonoBehaviour
 {
     public bool[] isTaken;
 
-    public static PhotonView photonView;
-    private void Awake() {
+
+    Rigidbody rb; 
+    Vector3 networkedPosition; 
+    Quaternion networkedRotaion;
+
+
+    private static PhotonView photonView;
+
+
      //  for(int i =0; i<PlanetsOnPlane.planets.Length; i++){
       //     isTaken[i]= false;
      //  }
-    }
-
     public static void solarSystemCall(GameObject solarSystem, Vector3 placePosition){
         object[] parameters = new object[2];
         parameters[0] = solarSystem;
@@ -21,9 +26,6 @@ public class RPCScript : MonoBehaviour
         photonView.RPC("initializeSolarSystem", RpcTarget.All,parameters);
     }
     
-    private void Start() { 
-        photonView = GetComponent<PhotonView>();
-    }
     public static GameObject initializeSolarSystem(GameObject solarSystem, Vector3 placePosition){
                 Debug.Log("PhotonView" + photonView != null);
                 Debug.Log("Is Mine: " + photonView.IsMine);
@@ -51,6 +53,46 @@ public class RPCScript : MonoBehaviour
         }
 
     }
+    }
+
+private void Awake() {
+    
+    rb = GetComponent<Rigidbody>();
+    photonView = GetComponent<PhotonView>();
+
+    networkedPosition = new Vector3();
+    networkedRotaion = new Quaternion();
+}
+    void Start(){
+        PhotonNetwork.SendRate = 20;
+        PhotonNetwork.SerializationRate = 10;
+    }
+    private void FixedUpdate() {
+      
+            rb.position = Vector3.MoveTowards(rb.position, networkedPosition, Time.fixedDeltaTime);
+            rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotaion, Time.fixedDeltaTime*100);
+       
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream , PhotonMessageInfo Info) 
+    {
+
+    if(stream.IsWriting){
+
+    //Then, PhotonView is mine and I am the one who controls this player. 
+    //should send position, velocity etc. data to the other players
+    stream.SendNext(rb.position);
+    stream.SendNext(rb.rotation);
+//stream.SendNext(rb.scale);
+
+    }
+    else
+    {
+    //called on my player gameobject that existis in remote player's game
+    networkedPosition = (Vector3)stream.ReceiveNext();
+   networkedRotaion = (Quaternion)stream.ReceiveNext();
+
+}
     }
 }
     
