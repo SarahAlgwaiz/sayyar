@@ -72,17 +72,8 @@ public void disablePlane(){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
-      //   if(PhotonNetwork.IsMasterClient){
-       spawnedObject =  RPCScript.initializeSolarSystem(placablePrefab,touchPosition);
-       //  }
-       //spawnedObject= Instantiate(placablePrefab,hitPose.position,Quaternion.identity);
-            disablePlane();
+            RPCScript.solarSystemCall(placablePrefab,hitPose.position);
         }
-        else{
-            spawnedObject.transform.position = hitPose.position;
-            spawnedObject.transform.rotation = hitPose.rotation;
-            Debug.Log("ELSE");
-        } 
         }
     }
         if(Input.touchCount>0){

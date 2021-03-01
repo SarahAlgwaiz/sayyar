@@ -14,10 +14,23 @@ public class RPCScript : MonoBehaviour
      //  }
     }
 
+    public static void solarSystemCall(GameObject solarSystem, Vector3 placePosition){
+        object[] parameters = new object[2];
+        parameters[0] = solarSystem;
+        parameters[1] = placePosition;
+        photonView.RPC("initializeSolarSystem", RpcTarget.All,parameters);
+    }
+    
     private void Start() { 
         photonView = GetComponent<PhotonView>();
     }
     public static GameObject initializeSolarSystem(GameObject solarSystem, Vector3 placePosition){
+                Debug.Log("PhotonView" + photonView != null);
+                Debug.Log("Is Mine: " + photonView.IsMine);
+                Debug.Log("Is MasterClient: " + PhotonNetwork.IsMasterClient);
+                Debug.Log("Solar system name : " + solarSystem.name);
+                Debug.Log("Place position : " + placePosition);
+
           if(photonView.IsMine){
         if(PhotonNetwork.IsMasterClient){
             return PhotonNetwork.Instantiate(solarSystem.name,placePosition,Quaternion.identity,0, null); 
