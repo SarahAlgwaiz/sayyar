@@ -45,13 +45,17 @@ namespace com.cactusteam.Sayyar
         {
             SceneManager.LoadScene("CreateGameScene", LoadSceneMode.Single);
         }
+
+        public void activateButtons(){
+            createButton.interactable = true;
+            joinButton.interactable = true;
+        }
         public override void OnConnectedToMaster()
         {
 
             Debug.Log("Photon Nickname " + PhotonNetwork.NickName);
             Debug.Log("connected to master");
-            createButton.interactable = true;
-            joinButton.interactable = true;
+            activateButtons();
             // connectingText.SetActive(false);
             // playerNameText.text = nameFromFirebase;
         }
@@ -70,6 +74,10 @@ namespace com.cactusteam.Sayyar
             // createButton.interactable = false;
             // joinButton.interactable = false;
             //connectingText.SetActive(true);
+            if(PhotonNetwork.IsConnectedAndReady){
+              activateButtons();
+            }
+            else 
             Connect();
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
        {
