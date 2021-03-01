@@ -21,9 +21,9 @@ public class SolarObject
     public float orbitPeriodYears = 1;
     public float rotationPeriodDays = 1;
 
-    public bool drawOrbit = true;
-    public bool isMoving = true;
-    public bool isRotating = true;
+    public bool drawOrbit;
+    public bool isMoving;
+    public bool isRotating;
     
     /// <summary>
     /// Calculate current orbit position

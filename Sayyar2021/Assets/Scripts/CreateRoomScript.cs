@@ -32,7 +32,7 @@ public class CreateRoomScript : MonoBehaviourPunCallbacks
 
     [Tooltip("Maximum number of players in each room. When a room is full, new players can't join in. Therefore a new room will be created for the new player.")]
     [SerializeField]
-    private byte maxPlayersPerRoom = 0;
+    private byte maxPlayersPerRoom = 2;
 
     [SerializeField]
     private GameObject createRoomView;

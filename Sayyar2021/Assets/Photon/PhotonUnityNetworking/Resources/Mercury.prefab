@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3885845253069203264}
   - component: {fileID: 3885845253069203265}
   - component: {fileID: 3885845253069203266}
-  - component: {fileID: 3885845253069203279}
   - component: {fileID: -1563243943196996697}
   - component: {fileID: 1290655973027849071}
   - component: {fileID: -4692937524357079486}
@@ -103,38 +102,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3885845253069203279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3885845253069203268}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7532b501d18425cac552e89b0439f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solarObject:
-    type: 2
-    xAxis: 0.5
-    zAxis: 0.75
-    yAxis: 0
-    orbitPeriodSeconds: 0.24
-    rotationPeriodSeconds: 176
-    rotationAngle: 2
-    isRotationClockwise: 0
-    realWorldSimulation: 0
-    orbitPeriodYears: 0.24
-    rotationPeriodDays: 176
-    drawOrbit: 1
-    isMoving: 1
-    isRotating: 1
-  orbitProgress: 0
-  isActive: 1
-  rotationProgress: 0
-  movementSpeed: 0
-  rotationSpeed: 0
 --- !u!114 &-1563243943196996697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +183,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &3691358015613583542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 1
+  m_SynchronizeVelocity: 0
+  m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &6649768144824958576

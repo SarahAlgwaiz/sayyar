@@ -18,7 +18,8 @@ public class PlanetsOnPlane : MonoBehaviour
  [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public DatabaseReference reference;
-    private FirebaseUser user; private ARRaycastManager raycastManager;
+    private FirebaseUser user;
+    private ARRaycastManager raycastManager;
  private GameObject spawnedObject;
 
  [SerializeField]
@@ -61,6 +62,7 @@ public void disablePlane(){
    AR_Plane_Manager.enabled = false;
 }
    public void onClickExitGameButton(){
+                   Debug.Log("inside onClick");
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("HomeScene");
         }
@@ -71,9 +73,9 @@ public void disablePlane(){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
       //   if(PhotonNetwork.IsMasterClient){
-           // spawnedObject =  PhotonNetwork.InstantiateRoomObject(placablePrefab.name,hitPose.position,Quaternion.identity,0, null);
+       spawnedObject =  RPCsScript.initializeSolarSystem(placablePrefab,touchPosition);
        //  }
-       spawnedObject= Instantiate(placablePrefab,hitPose.position,Quaternion.identity);
+       //spawnedObject= Instantiate(placablePrefab,hitPose.position,Quaternion.identity);
             disablePlane();
         }
         else{
@@ -82,11 +84,10 @@ public void disablePlane(){
             Debug.Log("ELSE");
         } 
         }
-   
     }
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
-            touchPosition = touch.position;
+            Vector2 tp = touch.position;
             if(touch.phase == TouchPhase.Began){
                Debug.Log("touch begin");
                 //selectedObject.transform.localScale = new Vector3 (0.125f,0.125f,0.125f);
@@ -102,7 +103,8 @@ public void disablePlane(){
                      }
                 }
             }
-         if(raycastManager.Raycast(touchPosition, s_Hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinInfinity))
+              
+        if(raycastManager.Raycast(tp, s_Hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinInfinity))
         {
             Debug.Log("during touch");
             Pose hitPose = s_Hits[0].pose;
@@ -111,6 +113,10 @@ public void disablePlane(){
                     selectedObject.transform.position = hitPose.position;
                     Debug.Log("selected position" + selectedObject.transform.position);
                 }
+            }
+            if(TouchPhase.Ended == touch.phase){
+                selectedObject.Selected = false;
+                  Debug.Log("touch end");
             }
             
             }
@@ -139,18 +145,10 @@ public async void storeDataBeforeGame(){
   }
     public void setPosition(){
     // if(PhotonNetwork.IsMasterClient){
-        for(int i=0; i<planets.Length;i++){
-    float randomX = Random.Range(-3, 3);
-    //float randomY = Random.Range(-3, 3);
-     float randomZ = Random.Range(-3, 3);
-    Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
-    Debug.Log("RandomPosition" + randomPosition);
-    Debug.Log("Plane local scale " + plane.transform.localScale);
-    //PhotonNetwork.InstantiateRoomObject(planets[i].name,randomPosition,Quaternion.identity,0, null);
-    Instantiate(planets[i],randomPosition,Quaternion.identity);
-    planets[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+    RPCsScript.initializePlanetsRPC(planets);
+    //Instantiate(planets[i],randomPosition,Quaternion.identity);
+    //planets[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
     }
       //  }
 }
-    }
 
