@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -6291161026341657023}
   - component: {fileID: 5301658568089722078}
   - component: {fileID: 7949420793612366912}
+  - component: {fileID: 5757221339655732037}
   m_Layer: 0
   m_Name: Saturn
   m_TagString: Planets
@@ -194,3 +195,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5757221339655732037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754648943945272369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fe2a687d0204c259dfe31554f93d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTaken: 

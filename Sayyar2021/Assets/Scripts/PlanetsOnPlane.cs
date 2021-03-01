@@ -73,7 +73,7 @@ public void disablePlane(){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
       //   if(PhotonNetwork.IsMasterClient){
-       spawnedObject =  RPCsScript.initializeSolarSystem(placablePrefab,touchPosition);
+       spawnedObject =  RPCScript.initializeSolarSystem(placablePrefab,touchPosition);
        //  }
        //spawnedObject= Instantiate(placablePrefab,hitPose.position,Quaternion.identity);
             disablePlane();
@@ -145,7 +145,7 @@ public async void storeDataBeforeGame(){
   }
     public void setPosition(){
     // if(PhotonNetwork.IsMasterClient){
-    RPCsScript.initializePlanetsRPC(planets);
+    RPCScript.initializePlanetsRPC(planets);
     //Instantiate(planets[i],randomPosition,Quaternion.identity);
     //planets[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
     }

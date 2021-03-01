@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon;
-public class RPCsScript : MonoBehaviour
+public class RPCScript : MonoBehaviour
 {
     public bool[] isTaken;
 
@@ -16,7 +16,6 @@ public class RPCsScript : MonoBehaviour
 
     private void Start() { 
         photonView = GetComponent<PhotonView>();
-      
     }
     public static GameObject initializeSolarSystem(GameObject solarSystem, Vector3 placePosition){
           if(photonView.IsMine){
