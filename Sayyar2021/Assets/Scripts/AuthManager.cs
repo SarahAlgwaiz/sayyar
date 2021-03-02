@@ -163,6 +163,7 @@ public class AuthManager : MonoBehaviour
             StartCoroutine(UpdateEmail(E_email.text));
            // StartCoroutine(UpdatePassword(E_password.text, E_ConfirmPass.text));
             ClearEditFeilds();
+            Home_UIManager.instance.ClosePanel_EditProfile();
         }
     }
 
@@ -407,7 +408,8 @@ public class AuthManager : MonoBehaviour
 
             }
             if (ErrorMsgR.text.Equals(""))
-                ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ");
+              ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ");
+                UIManager.instance.LoginScreen();
 
         }
 
@@ -430,7 +432,7 @@ public class AuthManager : MonoBehaviour
             else
             {
                 Debug.Log("Database username is now updated");
-                UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
+                //UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
 
             }
         }
@@ -469,7 +471,7 @@ public class AuthManager : MonoBehaviour
             {
                 var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(UpdatedEmail);
                 Debug.Log("Database Email is now updated");
-                UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
+              //  UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
 
             }
 
@@ -512,7 +514,7 @@ public class AuthManager : MonoBehaviour
                 else
                 {
                     Debug.Log("the passwords are the same and updated successfully.");
-                    UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
+                   // UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
                 }
             }
 
