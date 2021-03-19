@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+@objc public class SwiftFile_FP : NSObject {
+    
+    @objc public static let shared = SwiftFile_FP()
+    @objc public func fingerprintMethodInSwift(){
+        
+        print("It wooorrrrrrkkkk fiiinnnaaaallllyyyy !!!!!!!!!!!!@@@@@@@@@@@@@")
+    }
+}

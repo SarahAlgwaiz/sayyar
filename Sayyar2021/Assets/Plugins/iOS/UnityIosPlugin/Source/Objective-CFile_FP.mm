@@ -6,3 +6,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#include "UnityFramework/UnityFramework-Swift.h"
+
+extern "C" {
+    
+#pragma mark - Functions
+    
+void _CMethod_FP() {
+       
+        [[SwiftFile_FP shared] fingerprintMethodInSwift];
+       
+    }
+}
+
