@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using ArabicSupport;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class UIManager : MonoBehaviour
 {
@@ -100,9 +101,10 @@ public class UIManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern int _CMethod_FP();
 
-public void fingerprintButton(){ 
-_CMethod_FP();
-}
+    public void fingerprintButton()
+    { 
+       _CMethod_FP();
+    }
 
 
 
