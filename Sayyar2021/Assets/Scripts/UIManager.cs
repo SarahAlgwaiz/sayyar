@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
     
 
 
-
     private void Awake()
     {
         if (instance == null)
@@ -97,7 +96,13 @@ public class UIManager : MonoBehaviour
         FrogetPasswordPanel.SetActive(false);
     }
 
-    
+    //////////////All Work Below is fingerprint code 
+    [DllImport("__Internal")]
+    private static extern int _CMethod_FP();
+
+public void fingerprintButton(){ 
+_CMethod_FP();
+}
 
 
 
