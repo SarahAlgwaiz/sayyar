@@ -85,12 +85,10 @@ public void disablePlane(){
 
               disablePlane();
         }
-
 //         else       
 //           if(PhotonNetwork.IsMasterClient){
 // spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name,Vector3.zero,Quaternion.identity,0, null);
 //         }
-
     }
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
@@ -119,7 +117,6 @@ public void disablePlane(){
                        // }
                     }
                 }
-              
         if(raycastManager.Raycast(tp, s_Hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinInfinity))
         {
             Debug.Log("during touch");

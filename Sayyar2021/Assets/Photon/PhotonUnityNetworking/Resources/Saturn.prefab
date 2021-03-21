@@ -185,6 +185,7 @@ MonoBehaviour:
   OwnershipTransfer: 2
   ObservedComponents:
   - {fileID: 5301658568089722078}
+  - {fileID: 6385613820739764754}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
 --- !u!114 &6385613820739764754
 MonoBehaviour:
