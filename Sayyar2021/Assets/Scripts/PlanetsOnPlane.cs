@@ -72,6 +72,11 @@ public void disablePlane(){
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("HomeScene");
         }
+
+        [PunRPC]
+        public void updateSpawnedObj(GameObject spawnedObj){
+            spawnedObject = spawnedObj;
+        }
   private void Update() {
       if(PhotonNetwork.CurrentRoom.PlayerCount == 1){
             onClickExitGameButton();
@@ -84,6 +89,7 @@ public void disablePlane(){
         if(spawnedObject==null){
                     if(PhotonNetwork.IsMasterClient){
             spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name,hitPose.position,Quaternion.identity,0, null);
+            this.GetComponent<PhotonView>().RPC("updateSpawnedObj",RpcTarget.Others,spawnedObject);
                     }
         }
 
