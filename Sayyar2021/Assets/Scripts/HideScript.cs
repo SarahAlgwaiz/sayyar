@@ -16,7 +16,6 @@ public class HideScript : MonoBehaviour, IPunObservable
     else
     {
     isAvailable = (bool)stream.ReceiveNext();
-
 }
     }
     // Update is called once per frame
@@ -27,7 +26,7 @@ public class HideScript : MonoBehaviour, IPunObservable
            Debug.Log("Inside Not Mine");
             if(!isAvailable){
         Debug.Log("Inside Not Available");
-               this.gameObject.GetComponent<Renderer>().material.color = new Color (0.8f,0.8f,0.8f); //dark
+               this.gameObject.GetComponent<Renderer>().material.color = new Color (0.4f,0.4f,0.4f); //dark
             }
            else {
           Debug.Log("Inside  Available");
@@ -38,12 +37,16 @@ public class HideScript : MonoBehaviour, IPunObservable
          Debug.Log("Inside Mine");
         this.gameObject.GetComponent<Renderer>().material.color = new Color (1f,1f,1f);
         if(this.gameObject.GetComponent<PlacementObject>().Moving){
+          Debug.Log("Inside Moving");
+
             isAvailable = false;
         }
         else{
+            Debug.Log("Inside Not Moving");
             isAvailable = true;
 
         }
         }
+        Debug.Log("Available: " + isAvailable);
     }
 }
