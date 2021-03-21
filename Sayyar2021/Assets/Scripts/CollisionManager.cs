@@ -1,9 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class CollisionManager : MonoBehaviour
+public class CollisionManager : MonoBehaviour, IPunObservable
 {
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo messageInfo){
+       if(stream.IsWriting){
+    stream.SendNext(PlanetsOnPlane.isPlanetInserted);
+    }
+    else
+    {
+      bool[] planetsArr =  (bool[]) stream.ReceiveNext();
+      for(int i =0; i<planetsArr.Length; i++){
+        if(planetsArr[i])
+        PlanetsOnPlane.isPlanetInserted[i] = planetsArr[i];
+      }
+  }
+    }
+
+
      private void OnTriggerEnter(Collider other) {
        Debug.Log("collided outside");
        Debug.Log("other " + other.gameObject.name);
@@ -13,6 +29,7 @@ public class CollisionManager : MonoBehaviour
             Debug.Log("collided inside");
             this.gameObject.SetActive(false);
             Debug.Log("after destroy");
+        other.GetComponent<PhotonView>().RequestOwnership();
             switch(name){
                  case "Mercury(Clone)":
                  PlanetsOnPlane.isPlanetInserted[0] = true;

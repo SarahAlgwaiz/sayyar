@@ -71,7 +71,10 @@ public void disablePlane(){
             SceneManager.LoadScene("HomeScene");
         }
   private void Update() {
-
+      if(PhotonNetwork.CurrentRoom.PlayerCount == 1){
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("HomeScene");
+      }
       PhotonView photonView;
     Vector2 touchPosition = default;
     if(AR_Plane_Manager.enabled){
@@ -138,7 +141,7 @@ public void disablePlane(){
             }
         }
             checkPlanets();
-        }       
+        }
             private void checkPlanets(){        
             if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
                 status= "Won";
