@@ -10,41 +10,47 @@ public class CollisionManager : MonoBehaviour
        Debug.Log("other " + other.gameObject.name);
        Debug.Log("name " + name);
         if((other.gameObject.name + "(Clone)") == name){
-         other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+        // other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             Debug.Log("collided inside");
             Debug.Log("after destroy");
-           this.gameObject.SetActive(false);
             switch(name){
                  case "Mercury(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{0});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{0,other});
                  Debug.Log("planet 0 done");
                  break;
                  case "Venus(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{1});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{1,other});
+
                  Debug.Log("planet 1 done");
                  break;
                  case "Earth(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{2});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{2,other});
+
                 Debug.Log("planet 2 done");
                  break;
                   case "Mars(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{3});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{3,other});
+
                  Debug.Log("planet 3 done");
                   break;
                   case "Jupiter(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{4});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{4,other});
+
                   Debug.Log("planet 4 done");
                   break;
                    case "Saturn(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{5});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{5,other});
+
                  Debug.Log("planet 5 done");
                    break;
                    case "Uranus(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{6});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{6,other});
+
                   Debug.Log("planet 6 done");
                    break;
                     case "Neptune(Clone)":
-                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{7});
+                 this.gameObject.GetComponent<PhotonView>().RPC("updatePlanetInsertion",RpcTarget.All,new object[]{7,other});
+
                    Debug.Log("planet 7 done");
                     break;
                     default: break;
@@ -54,8 +60,10 @@ public class CollisionManager : MonoBehaviour
 
 
         [PunRPC]
-        public void updatePlanetInsertion(int planetNumber){
-          Debug.Log("inside RPC");
+        public void updatePlanetInsertion(int planetNumber, Collider other){
+        Debug.Log("inside RPC");
+        other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+        this.gameObject.SetActive(false);
         switch(planetNumber){
           case 0:
           PlanetsOnPlane.isPlanetInserted[0] = true;
