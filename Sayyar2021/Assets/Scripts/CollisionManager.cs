@@ -13,7 +13,7 @@ public class CollisionManager : MonoBehaviour
        Debug.Log("name " + name);
         if((other.gameObject.name + "(Clone)") == name){
         other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
-                        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
 
             Debug.Log("collided inside");
             Debug.Log("after destroy");
@@ -21,7 +21,7 @@ public class CollisionManager : MonoBehaviour
                  case "Mercury(Clone)":
                  photonView.RPC("updatePlanetInsertion",RpcTarget.Others,0,other);
                 this.gameObject.SetActive(false);
-                 Destroy(this);
+                 PhotonNetwork.Destroy(photonView);
                  Debug.Log("planet 0 done");
                  break;
                  case "Venus(Clone)":
@@ -71,6 +71,7 @@ public class CollisionManager : MonoBehaviour
         Debug.Log("inside RPC");
         other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
         this.gameObject.SetActive(false);
+        PhotonNetwork.Destroy(this.gameObject.GetComponent<PhotonView>());
         switch(planetNumber){
           case 0:
           PlanetsOnPlane.isPlanetInserted[0] = true;
