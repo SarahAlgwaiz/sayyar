@@ -1,0 +1,8 @@
+
+public class exitGameScript : MonoBehaviour
+{
+   public void onClickExitGameButton(){
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("HomeScene");
+        }
+}

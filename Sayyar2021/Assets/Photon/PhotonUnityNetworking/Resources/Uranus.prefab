@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 6428949619592926407}
   - component: {fileID: 6428949619592926404}
   - component: {fileID: 6428949619592926405}
+  - component: {fileID: 6428949619592926403}
   - component: {fileID: -4921235997513142402}
-  - component: {fileID: -6655766739137152420}
   - component: {fileID: -7303801047273386850}
   - component: {fileID: -3226699264076418268}
   - component: {fileID: 1423188666375467098}
-  - component: {fileID: -3048139407562065751}
-  - component: {fileID: -3715183179112294093}
+  - component: {fileID: 3684183476915784739}
+  - component: {fileID: 8715609523318669786}
+  - component: {fileID: 6900090380820153209}
   m_Layer: 0
   m_Name: Uranus
   m_TagString: Planets
@@ -102,6 +103,38 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6428949619592926403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428949619592926398}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7532b501d18425cac552e89b0439f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solarObject:
+    type: 8
+    xAxis: 2
+    zAxis: 2.25
+    yAxis: 0
+    orbitPeriodSeconds: 84
+    rotationPeriodSeconds: 0.71
+    rotationAngle: 97
+    isRotationClockwise: 0
+    realWorldSimulation: 0
+    orbitPeriodYears: 84
+    rotationPeriodDays: 0.71
+    drawOrbit: 1
+    isMoving: 1
+    isRotating: 1
+  orbitProgress: 0
+  isActive: 1
+  rotationProgress: 0
+  movementSpeed: 0
+  rotationSpeed: 0
 --- !u!114 &-4921235997513142402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,18 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSelected: 0
   isLocked: 0
---- !u!114 &-6655766739137152420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428949619592926398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dd25b8bd833d4ed8b1bc02e7a5dbf82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &-7303801047273386850
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,9 +182,9 @@ MonoBehaviour:
   prefixField: -1
   observableSearch: 0
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 2
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 1423188666375467098}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -183,7 +204,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &-3048139407562065751
+--- !u!114 &3684183476915784739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,10 +213,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6428949619592926398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 605360527096e47c5b8ea5a3aca35004, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3715183179112294093
+--- !u!114 &8715609523318669786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +225,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6428949619592926398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25fe2a687d0204c259dfe31554f93d53, type: 3}
+  m_Script: {fileID: 11500000, guid: 1998dffab13a4479fb330a2178220b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTaken: 
+  isAvailable: 1
+--- !u!114 &6900090380820153209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428949619592926398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba8766e7cac444af947e79f72c83561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

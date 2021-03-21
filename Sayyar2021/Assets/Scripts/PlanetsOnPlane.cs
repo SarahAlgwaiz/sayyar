@@ -43,6 +43,8 @@ private Vector3 solarSystemSize;
 
 public static bool[] isPlanetInserted;
 
+static bool isSelectedMine;
+
 public static string status; 
 static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 private void Awake() {
@@ -57,8 +59,10 @@ private void Awake() {
     }
 }
 
+
 public void disablePlane(){
-      setPosition();
+    Debug.Log("inside disabled");
+    setPosition();
    AR_Plane_Manager.enabled = false;
 }
    public void onClickExitGameButton(){
@@ -67,14 +71,26 @@ public void disablePlane(){
             SceneManager.LoadScene("HomeScene");
         }
   private void Update() {
+
+      PhotonView photonView;
     Vector2 touchPosition = default;
     if(AR_Plane_Manager.enabled){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
         var hitPose = s_Hits[0].pose;
         if(spawnedObject==null){
-            RPCScript.solarSystemCall(this.gameObject.GetComponent<PhotonView>(),placablePrefab,hitPose.position);
+                    if(PhotonNetwork.IsMasterClient){
+            spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name,hitPose.position,Quaternion.identity,0, null);
+                    }
         }
+
+              disablePlane();
         }
+
+//         else       
+//           if(PhotonNetwork.IsMasterClient){
+// spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name,Vector3.zero,Quaternion.identity,0, null);
+//         }
+
     }
         if(Input.touchCount>0){
             Touch touch = Input.GetTouch(0);
@@ -86,31 +102,44 @@ public void disablePlane(){
                 RaycastHit hit;
                 if(Physics.Raycast(ray, out hit)){
                      selectedObject = hit.transform.GetComponent<PlacementObject>();
-                     if(selectedObject != null){
+                    //hit.transform.GetComponent<RequestOwnershipScript>().RequestOwnership();     
+                    //photonView =  hit.transform.GetComponent<PhotonView>();
+                    //if(photonView.IsMine)
+                  //  isSelectedMine = true;
+                  //  else isSelectedMine = false;
+                 //   if(isSelectedMine){
+                 if(selectedObject != null){
                          PlacementObject[] otherObj = (PlacementObject[]) FindObjectsOfType(typeof(PlacementObject));
+                         selectedObject.Moving = true;
                          foreach(PlacementObject obj in otherObj){
                              obj.Selected = selectedObject == obj;
+
                          }
                      }
+                       // }
+                    }
                 }
-            }
               
         if(raycastManager.Raycast(tp, s_Hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinInfinity))
         {
             Debug.Log("during touch");
             Pose hitPose = s_Hits[0].pose;
+            // if(isSelectedMine){
+
                 if(selectedObject.Selected)
                 {
                     selectedObject.transform.position = hitPose.position;
                     Debug.Log("selected position" + selectedObject.transform.position);
+                    selectedObject.Moving = true;
                 }
-            }
             if(TouchPhase.Ended == touch.phase){
                 selectedObject.Selected = false;
+                selectedObject.Moving = false;
                   Debug.Log("touch end");
             }
-            
+       // }
             }
+        }
             checkPlanets();
         }       
             private void checkPlanets(){        
@@ -135,11 +164,16 @@ public async void storeDataBeforeGame(){
     //await FirebaseStorageAfterGame.storeBadgeData();
   }
     public void setPosition(){
-    // if(PhotonNetwork.IsMasterClient){
-    RPCScript.initializePlanetsRPC(planets);
-    //Instantiate(planets[i],randomPosition,Quaternion.identity);
-    //planets[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+        if(PhotonNetwork.IsMasterClient){
+        for(int i=0; i<planets.Length;i++){
+    float randomX = Random.Range(-3, 3);
+    float randomY = Random.Range(-3, 3);
+    float randomZ = Random.Range(-3, 3);
+    Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
+    PhotonNetwork.Instantiate(planets[i].name,randomPosition,Quaternion.identity,0,null);
+    
+        }
+        }
     }
-      //  }
 }
 

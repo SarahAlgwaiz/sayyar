@@ -9,6 +9,9 @@ public class PlacementObject : MonoBehaviour
     [SerializeField]
     private bool isLocked;
 
+    private bool IsMoving;
+
+
     public bool Selected 
     { 
         get 
@@ -20,6 +23,19 @@ public class PlacementObject : MonoBehaviour
             isSelected = value;
         }
     }
+
+        public bool Moving 
+    { 
+        get 
+        {
+            return this.IsMoving;
+        }
+        set 
+        {
+            IsMoving = value;
+        }
+    }
+
 
     public bool Locked 
     { 
