@@ -43,6 +43,7 @@ private Vector3 solarSystemSize;
 
 public static bool[] isPlanetInserted;
 
+public static GameObject[] planetsObj;
 static bool isSelectedMine;
 
 public static string status; 
@@ -54,6 +55,7 @@ private void Awake() {
     raycastManager = GetComponent<ARRaycastManager>();
     AR_Plane_Manager = GetComponent<ARPlaneManager>();
     isPlanetInserted = new bool[8];
+    planetsObj = new GameObject[8];
     for(int i=0; i<planets.Length; i++){
         isPlanetInserted[i] = false;
     }
@@ -142,11 +144,20 @@ public void disablePlane(){
             checkPlanets();
         }
             private void checkPlanets(){        
-            if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
+            //if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
+          
+            if(  spawnedObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.name == "mercury_ORIGIN" &&
+              spawnedObject.transform.GetChild(2).gameObject.GetComponent<Renderer>().material.name == "venus_ORIGIN" &&
+                spawnedObject.transform.GetChild(3).gameObject.GetComponent<Renderer>().material.name == "earth_ORIGIN" &&
+                  spawnedObject.transform.GetChild(4).gameObject.GetComponent<Renderer>().material.name == "mars_ORIGIN" &&
+                    spawnedObject.transform.GetChild(5).gameObject.GetComponent<Renderer>().material.name == "jupiter_ORIGIN" &&
+                      spawnedObject.transform.GetChild(6).gameObject.GetComponent<Renderer>().material.name == "saturn_ORIGIN" &&
+                        spawnedObject.transform.GetChild(7).gameObject.GetComponent<Renderer>().material.name == "uranus_ORIGIN"&& 
+                          spawnedObject.transform.GetChild(8).gameObject.GetComponent<Renderer>().material.name == "neptune_ORIGIN"){
                 status= "Won";
                 finishGame();
+                          }
             }
-        }
 
   public void finishGame(){
       //storeDataAfterGame();
@@ -169,7 +180,7 @@ public async void storeDataBeforeGame(){
     float randomY = Random.Range(-3, 3);
     float randomZ = Random.Range(-3, 3);
     Vector3 randomPosition = new Vector3 (randomX, 0, randomZ);    
-    PhotonNetwork.Instantiate(planets[i].name,randomPosition,Quaternion.identity,0,null);
+ PhotonNetwork.Instantiate(planets[i].name,randomPosition,Quaternion.identity,0,null);
     
         }
         }
