@@ -180,12 +180,13 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 0
-  Synchronization: 3
+  observableSearch: 1
+  Synchronization: 1
   OwnershipTransfer: 2
   ObservedComponents:
-  - {fileID: 8715609523318669786}
   - {fileID: 1423188666375467098}
+  - {fileID: 3684183476915784739}
+  - {fileID: 8715609523318669786}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
