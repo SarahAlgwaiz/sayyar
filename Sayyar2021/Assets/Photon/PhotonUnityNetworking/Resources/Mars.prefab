@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: -6190685206791083370}
   - component: {fileID: 6773161727923341654}
   - component: {fileID: -6197006346191652125}
-  - component: {fileID: -6404020589166657814}
   - component: {fileID: 2612749302522925429}
   - component: {fileID: 2315533934902080368}
   - component: {fileID: -1155454986329451369}
@@ -186,7 +185,6 @@ MonoBehaviour:
   OwnershipTransfer: 2
   ObservedComponents:
   - {fileID: -6197006346191652125}
-  - {fileID: -6404020589166657814}
   - {fileID: 2612749302522925429}
   - {fileID: 2315533934902080368}
   viewIdField: 0
@@ -207,23 +205,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
-  m_UseLocal: 1
---- !u!114 &-6404020589166657814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3981193673885259943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &2612749302522925429
 MonoBehaviour:
   m_ObjectHideFlags: 0

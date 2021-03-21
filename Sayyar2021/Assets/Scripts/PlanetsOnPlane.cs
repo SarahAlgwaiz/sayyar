@@ -66,14 +66,13 @@ public void disablePlane(){
    AR_Plane_Manager.enabled = false;
 }
    public void onClickExitGameButton(){
-                   Debug.Log("inside onClick");
+            Debug.Log("inside onClick");
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("HomeScene");
         }
   private void Update() {
       if(PhotonNetwork.CurrentRoom.PlayerCount == 1){
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene("HomeScene");
+            onClickExitGameButton();
       }
       PhotonView photonView;
     Vector2 touchPosition = default;
