@@ -19,53 +19,51 @@ public class CollisionManager : MonoBehaviour
             Debug.Log("after destroy");
             PhotonView otherView = other.GetComponent<PhotonView>();
              otherView.TransferOwnership(PhotonNetwork.LocalPlayer);  //take control of original object (this)
-             PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>()); //destroy other object (other photonview)
-
             switch(name){
                  case "Mercury":
-                 photonView.RPC("updatePlanetInsertion",RpcTarget.Others,0);
-                 this.GetComponent<Renderer>().material = materials[0];
+                 photonView.RPC("updatePlanetInsertion",RpcTarget.All,0);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>()); //destroy other object (other photonview)
                  Debug.Log("planet 0 done");
                  break;
                  case "Venus":
-                 photonView.RPC("updatePlanetInsertion",RpcTarget.Others,1);
-                  this.GetComponent<Renderer>().material = materials[1];
+                 photonView.RPC("updatePlanetInsertion",RpcTarget.All,1);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                  Debug.Log("planet 1 done");
                  break;
                  case "Earth":
-                 photonView.RPC("updatePlanetInsertion",RpcTarget.Others,2);
-                  this.GetComponent<Renderer>().material = materials[2];
+                 photonView.RPC("updatePlanetInsertion",RpcTarget.All,2);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                 Debug.Log("planet 2 done");
                  break;
                   case "Mars":
-                 photonView.RPC("updatePlanetInsertion",RpcTarget.Others,3);
-                  this.GetComponent<Renderer>().material = materials[3];
+                 photonView.RPC("updatePlanetInsertion",RpcTarget.All,3);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                  Debug.Log("planet 3 done");
                   break;
                   case "Jupiter":
-               photonView.RPC("updatePlanetInsertion",RpcTarget.Others,4);
-                  this.GetComponent<Renderer>().material = materials[4];
+               photonView.RPC("updatePlanetInsertion",RpcTarget.All,4);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                   Debug.Log("planet 4 done");
                   break;
                    case "Saturn":
-              photonView.RPC("updatePlanetInsertion",RpcTarget.Others,5);
-                  this.GetComponent<Renderer>().material = materials[5];
+              photonView.RPC("updatePlanetInsertion",RpcTarget.All,5);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                  Debug.Log("planet 5 done");
                    break;
                    case "Uranus":
-              photonView.RPC("updatePlanetInsertion",RpcTarget.Others,6);
-                  this.GetComponent<Renderer>().material = materials[6];
+              photonView.RPC("updatePlanetInsertion",RpcTarget.All,6);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                   Debug.Log("planet 6 done");
                    break;
                     case "Neptune":
-               photonView.RPC("updatePlanetInsertion",RpcTarget.Others,7);
-                  this.GetComponent<Renderer>().material = materials[7];
+               photonView.RPC("updatePlanetInsertion",RpcTarget.All,7);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                    Debug.Log("planet 7 done");
                     break;
@@ -112,7 +110,6 @@ public class CollisionManager : MonoBehaviour
           case 6:
           PlanetsOnPlane.isPlanetInserted[6] = true;
                   this.GetComponent<Renderer>().material = materials[6];
-
           break;
           case 7:
           PlanetsOnPlane.isPlanetInserted[7] = true;
