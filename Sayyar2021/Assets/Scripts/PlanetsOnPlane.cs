@@ -73,10 +73,6 @@ public void disablePlane(){
             SceneManager.LoadScene("HomeScene");
         }
 
-        [PunRPC]
-        public void updateSpawnedObj(GameObject spawnedObj){
-            spawnedObject = spawnedObj;
-        }
   private void Update() {
       if(PhotonNetwork.CurrentRoom.PlayerCount == 1){
             onClickExitGameButton();
@@ -89,8 +85,7 @@ public void disablePlane(){
         if(spawnedObject==null){
                     if(PhotonNetwork.IsMasterClient){
             spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name,hitPose.position,Quaternion.identity,0, null);
-            this.GetComponent<PhotonView>().RPC("updateSpawnedObj",RpcTarget.Others,spawnedObject);
-                    }
+                              }
         }
 
               disablePlane();
@@ -150,16 +145,7 @@ public void disablePlane(){
             checkPlanets();
         }
             private void checkPlanets(){        
-            //if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
-          
-            if(  spawnedObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.name == "mercury_ORIGIN" &&
-              spawnedObject.transform.GetChild(2).gameObject.GetComponent<Renderer>().material.name == "venus_ORIGIN" &&
-                spawnedObject.transform.GetChild(3).gameObject.GetComponent<Renderer>().material.name == "earth_ORIGIN" &&
-                  spawnedObject.transform.GetChild(4).gameObject.GetComponent<Renderer>().material.name == "mars_ORIGIN" &&
-                    spawnedObject.transform.GetChild(5).gameObject.GetComponent<Renderer>().material.name == "jupiter_ORIGIN" &&
-                      spawnedObject.transform.GetChild(6).gameObject.GetComponent<Renderer>().material.name == "saturn_ORIGIN" &&
-                        spawnedObject.transform.GetChild(7).gameObject.GetComponent<Renderer>().material.name == "uranus_ORIGIN"&& 
-                          spawnedObject.transform.GetChild(8).gameObject.GetComponent<Renderer>().material.name == "neptune_ORIGIN"){
+            if(isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7]){
                 status= "Won";
                 finishGame();
                           }

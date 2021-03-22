@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: -6291161026341657023}
   - component: {fileID: 5301658568089722078}
   - component: {fileID: 6385613820739764754}
-  - component: {fileID: 8243392257202594505}
   - component: {fileID: 6208889069636306226}
   m_Layer: 0
   m_Name: Saturn
@@ -186,7 +185,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 5301658568089722078}
   - {fileID: 6385613820739764754}
-  - {fileID: 8243392257202594505}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -219,18 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAvailable: 1
---- !u!114 &8243392257202594505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5754648943945272369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6208889069636306226
 MonoBehaviour:
   m_ObjectHideFlags: 0

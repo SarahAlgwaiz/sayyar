@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 6773161727923341654}
   - component: {fileID: -6197006346191652125}
   - component: {fileID: 2612749302522925429}
-  - component: {fileID: 2315533934902080368}
   - component: {fileID: -1155454986329451369}
   m_Layer: 0
   m_Name: Mars
@@ -186,7 +185,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -6197006346191652125}
   - {fileID: 2612749302522925429}
-  - {fileID: 2315533934902080368}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -219,18 +218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAvailable: 1
---- !u!114 &2315533934902080368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3981193673885259943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1155454986329451369
 MonoBehaviour:
   m_ObjectHideFlags: 0
