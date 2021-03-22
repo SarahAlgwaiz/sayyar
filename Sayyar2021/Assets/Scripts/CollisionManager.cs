@@ -6,8 +6,8 @@ using Photon.Pun;
 public class CollisionManager : MonoBehaviour
 {
      private void OnTriggerEnter(Collider other) {
-         PhotonView photonView = PhotonView.Get(this);
-
+        // PhotonView photonView = PhotonView.Get(this);
+PhotonView photonView =  other.GetComponent<PhotonView>();
        Debug.Log("collided outside");
        Debug.Log("other " + other.gameObject.name);
        Debug.Log("name " + name);

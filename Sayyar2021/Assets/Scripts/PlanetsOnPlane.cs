@@ -76,6 +76,8 @@ public void disablePlane(){
         [PunRPC]
         public void updateSpawnedObj(GameObject spawnedObj){
             spawnedObject = spawnedObj;
+                        Debug.Log("Others RPC, Spaened = "+spawnedObject);
+
         }
   private void Update() {
       if(PhotonNetwork.CurrentRoom.PlayerCount == 1){
@@ -89,7 +91,9 @@ public void disablePlane(){
         if(spawnedObject==null){
                     if(PhotonNetwork.IsMasterClient){
             spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name,hitPose.position,Quaternion.identity,0, null);
+            Debug.Log("Master client BEFORE RPC");
             this.GetComponent<PhotonView>().RPC("updateSpawnedObj",RpcTarget.Others,spawnedObject);
+             Debug.Log("Master client AFTER RPC");
                     }
         }
 
