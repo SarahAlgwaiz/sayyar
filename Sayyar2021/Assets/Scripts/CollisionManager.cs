@@ -6,27 +6,26 @@ using Photon.Pun;
 public class CollisionManager : MonoBehaviour
 {
      private void OnTriggerEnter(Collider other) {
-        // PhotonView photonView = PhotonView.Get(this);
-PhotonView photonView =  other.GetComponent<PhotonView>();
+     PhotonView photonView = this.GetComponent<PhotonView>();
        Debug.Log("collided outside");
        Debug.Log("other " + other.gameObject.name);
        Debug.Log("name " + name);
         if((other.gameObject.name + "(Clone)") == name){
-        other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
-        this.gameObject.SetActive(false);
-
+        this.GetComponent<Renderer>().material = other.GetComponent<Renderer>().material;
+          photonView.TransferOwnership(PhotonNetwork.LocalPlayer);        
             Debug.Log("collided inside");
             Debug.Log("after destroy");
             switch(name){
                  case "Mercury(Clone)":
                  photonView.RPC("updatePlanetInsertion",RpcTarget.Others,0,other);
-                this.gameObject.SetActive(false);
-                 PhotonNetwork.Destroy(photonView);
+                other.gameObject.SetActive(false);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
                  Debug.Log("planet 0 done");
                  break;
                  case "Venus(Clone)":
                  photonView.RPC("updatePlanetInsertion",RpcTarget.Others,1,other);
-                this.gameObject.SetActive(false);
+                other.gameObject.SetActive(false);
+                PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
 
                  Debug.Log("planet 1 done");
                  break;
@@ -69,13 +68,11 @@ PhotonView photonView =  other.GetComponent<PhotonView>();
         [PunRPC]
         public void updatePlanetInsertion(int planetNumber, Collider other){
         Debug.Log("inside RPC");
-        other.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
-        this.gameObject.SetActive(false);
-        PhotonNetwork.Destroy(this.gameObject.GetComponent<PhotonView>());
+        this.GetComponent<Renderer>().material = other.GetComponent<Renderer>().material;
+        other.gameObject.SetActive(false);
         switch(planetNumber){
           case 0:
           PlanetsOnPlane.isPlanetInserted[0] = true;
-          
           break;
           case 1:
           PlanetsOnPlane.isPlanetInserted[1] = true;

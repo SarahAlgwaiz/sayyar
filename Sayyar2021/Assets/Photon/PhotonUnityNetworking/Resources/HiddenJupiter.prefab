@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8936252349162820527}
   - component: {fileID: 8936252349162820526}
   - component: {fileID: 7816213557438348653}
+  - component: {fileID: -6963715592139479608}
   m_Layer: 0
   m_Name: HiddenJupiter
   m_TagString: Untagged
@@ -344,8 +345,20 @@ MonoBehaviour:
   prefixField: -1
   observableSearch: 2
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   ObservedComponents: []
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-6963715592139479608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936252349162820525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5754648943945272375}
   - component: {fileID: 5754648943945272374}
   - component: {fileID: 9136887955542560252}
+  - component: {fileID: -8978254415816067812}
   m_Layer: 0
   m_Name: HiddenSaturn
   m_TagString: Untagged
@@ -344,8 +345,20 @@ MonoBehaviour:
   prefixField: -1
   observableSearch: 2
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   ObservedComponents: []
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-8978254415816067812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754648943945272369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

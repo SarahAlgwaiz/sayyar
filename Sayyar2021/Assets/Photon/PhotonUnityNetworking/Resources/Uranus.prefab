@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 1423188666375467098}
   - component: {fileID: 8715609523318669786}
   - component: {fileID: 6900090380820153209}
-  - component: {fileID: 6026407511756690855}
   m_Layer: 0
   m_Name: Uranus
   m_TagString: Planets
@@ -228,17 +227,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aba8766e7cac444af947e79f72c83561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6026407511756690855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428949619592926398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
