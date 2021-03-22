@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1487389192617538038}
   - component: {fileID: -6621418865322153894}
   - component: {fileID: -9059083694750823894}
+  - component: {fileID: 3004825544232358946}
   m_Layer: 0
   m_Name: HiddenNeptune
   m_TagString: Untagged
@@ -346,7 +347,8 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 1
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3004825544232358946}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -362,3 +364,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e557f3aa3b6a4b75b9a9e1dab8c6401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 315e65092e2184178a7ce4e704c0c35c, type: 2}
+  - {fileID: 2100000, guid: 2806a9ae10a964e9f8d7cec1a433ff56, type: 2}
+  - {fileID: 2100000, guid: 2c886e981120746b78a2aee32372ea43, type: 2}
+  - {fileID: 2100000, guid: 82f603ea3ce124858a957682818284fe, type: 2}
+  - {fileID: 2100000, guid: 4811855b94ed0480c96076c47d2802fc, type: 2}
+  - {fileID: 2100000, guid: 3e94906cf62184ac19b31a1319ca70fd, type: 2}
+  - {fileID: 2100000, guid: 32db9b55727f64973863573dfdcad995, type: 2}
+  - {fileID: 2100000, guid: 0fe2f36afae184a60b37cbcab23d76c5, type: 2}
+--- !u!114 &3004825544232358946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487389192617538027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
