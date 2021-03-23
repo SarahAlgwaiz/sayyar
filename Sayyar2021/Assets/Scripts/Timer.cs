@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviourPunCallbacks
 {
+
     private float timeRemaining;
     public static float fullDuration;
         public DatabaseReference reference;
-
-public GameObject bar;
+        public GameObject bar;
 private void Start() {
     if(PhotonNetwork.CurrentRoom.MaxPlayers==PhotonNetwork.CurrentRoom.PlayerCount){
-
+   // if(PhotonNetwork.IsMasterClient){
+     // bar = PhotonNetwork.InstantiateRoomObject(barPrefab.name,this.gameObject.transform.position,Quaternion.identity,0,null);  
+    // }
+    // bar.gameObject.transform.SetParent(this.gameObject.transform);
+    // bar.gameObject.transform.localPosition = new Vector3(0,-127.5f,0);
     switch(PhotonNetwork.CurrentRoom.PlayerCount){
        case 2: 
         timeRemaining =10 * 60;
@@ -31,10 +35,10 @@ private void Start() {
         break;
     }
     fullDuration = timeRemaining;
+     if(PhotonNetwork.IsMasterClient)
     animateBar();
-   }
 }
-
+}
     void animateBar(){
     LeanTween.scaleY(bar,0.01f,timeRemaining).setOnComplete(finishGame);
 }

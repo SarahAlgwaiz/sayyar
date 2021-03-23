@@ -78,7 +78,7 @@ public void disablePlane(){
             onClickExitGameButton();
       }
       PhotonView photonView;
-    Vector2 touchPosition = default;
+    Vector2 touchPosition = new Vector2(0,0);
     if(AR_Plane_Manager.enabled){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
         var hitPose = s_Hits[0].pose;
