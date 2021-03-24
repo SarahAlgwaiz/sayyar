@@ -364,6 +364,7 @@ public class AuthManager : MonoBehaviour
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Email").SetValueAsync(_email); // newUser.UserId is samiller to auth.CurrentUser.UserId
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValueAsync(_username);
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Avatar").SetValueAsync("AvatarA");
+                    DBreference.Child("playerInfo").Child(newUser.UserId).Child("password").SetValueAsync(_password);
                    
                    if (signUpToggle.isOn){
                    _storeDeviceToken(newUser.UserId);
