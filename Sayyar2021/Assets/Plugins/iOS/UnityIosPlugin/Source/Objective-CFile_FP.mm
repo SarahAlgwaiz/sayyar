@@ -12,9 +12,14 @@ extern "C" {
     
 #pragma mark - Functions
     
-void _CMethod_FP() {
-       
-        [[SwiftFile_FP shared] fingerprintMethodInSwift];
+ void _storeDeviceToken(const char* UID) {
+     
+     printf(UID);
+     
+     NSString *UID2 = [[NSString alloc] initWithCString:(const char*)UID];
+
+     [[SwiftFile_FP shared] storeDeviceTokenWithUID:(UID2)];
+    
        
     }
 }

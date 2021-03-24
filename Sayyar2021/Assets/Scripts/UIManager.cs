@@ -98,13 +98,16 @@ public class UIManager : MonoBehaviour
     }
 
     //////////////All Work Below is fingerprint code 
-    [DllImport("__Internal")]
-    private static extern int _CMethod_FP();
+    // [DllImport("__Internal")]
+    // private static extern string _getDeviceToken();
 
-    public void fingerprintButton()
-    { 
-       _CMethod_FP();
-    }
+    // public void fingerprintButton()
+    // { 
+    //    string DT = _getDeviceToken();
+    //    Debug.Log("DeviceToken in UNITY !!!!!!!!");
+    //    Debug.Log(DT);
+
+    // }
 
 
 

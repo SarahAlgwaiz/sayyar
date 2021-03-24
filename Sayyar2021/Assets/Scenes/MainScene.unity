@@ -11180,7 +11180,7 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
-  DeviceToken: 
+  signUpToggle: {fileID: 0}
 --- !u!1 &960869650
 GameObject:
   m_ObjectHideFlags: 0
@@ -14857,8 +14857,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2108026239}
-        m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
+      - m_Target: {fileID: 507138977}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: fingerprintButton
         m_Mode: 1
         m_Arguments:
@@ -20898,7 +20898,7 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
-  DeviceToken: 
+  signUpToggle: {fileID: 0}
 --- !u!1 &1986273905
 GameObject:
   m_ObjectHideFlags: 0
@@ -21680,7 +21680,7 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
-  DeviceToken: 
+  signUpToggle: {fileID: 0}
 --- !u!1 &2028081006
 GameObject:
   m_ObjectHideFlags: 0
@@ -22578,7 +22578,7 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 9173695}
   E_ResetPass: {fileID: 1186663478}
   ResetErrorMsg: {fileID: 1200654219}
-  DeviceToken: 
+  signUpToggle: {fileID: 388412115}
 --- !u!4 &2108026240
 Transform:
   m_ObjectHideFlags: 0
