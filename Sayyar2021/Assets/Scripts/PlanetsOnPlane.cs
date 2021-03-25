@@ -77,7 +77,6 @@ public void disablePlane(){
       if(PhotonNetwork.CurrentRoom.PlayerCount == 1){
             onClickExitGameButton();
       }
-      PhotonView photonView;
     Vector2 touchPosition = new Vector2(0,0);
     if(AR_Plane_Manager.enabled){
     if(raycastManager.Raycast(touchPosition,s_Hits,TrackableType.PlaneWithinBounds)){
@@ -152,18 +151,20 @@ public void disablePlane(){
             }
 
   public void finishGame(){
-      //storeDataAfterGame();
+    storeDataAfterGame();
      SceneManager.LoadScene("HomeScene");
   }
 
 public async void storeDataBeforeGame(){
      FirebaseStorageAfterGame.InitializeFirebase();
-      await FirebaseStorageAfterGame.storeGameData();
+     await FirebaseStorageAfterGame.storeGameData();
 }
 
   public async void storeDataAfterGame(){
-    //await FirebaseStorageAfterGame.storeVirtualPlayroomData();
-    //await FirebaseStorageAfterGame.storeBadgeData();
+     // await FirebaseStorageAfterGame.storeGameData();
+    await FirebaseStorageAfterGame.storeVirtualPlayroomData();
+    await FirebaseStorageAfterGame.storeBadgeData();
+    await FirebaseStorageAfterGame.storeTimeAndStatus();
   }
     public void setPosition(){
         if(PhotonNetwork.IsMasterClient){

@@ -71,7 +71,7 @@ public class Synchronization : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         roomCodeText.text = PhotonNetwork.CurrentRoom.Name;
-        storeData();
+        //storeData();
         getRoomPlayers();
     }
 
@@ -141,7 +141,6 @@ public class Synchronization : MonoBehaviourPunCallbacks
         //  numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
         updatePosition();
             start.interactable = false;
-
 
     }
      public void onClickExitGameButton(){

@@ -113,6 +113,7 @@ public class CreateRoomScript : MonoBehaviourPunCallbacks
     {
         reference = reference.Child("VirtualPlayrooms").Push();
         var key = reference.Key;
+        virtualPlayroomKey=key.ToString();
         reference = reference.Root;
         await Task.Run(() => reference.Child("VirtualPlayrooms").Child(key).Child("NumOfPlayers").SetValueAsync(maxPlayersPerRoom));// Num of player may change
         await Task.Run(() => reference.Child("VirtualPlayrooms").Child(key).Child("VirtualPlayroomID").SetValueAsync(key));
