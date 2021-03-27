@@ -68,7 +68,7 @@ public class FirebaseStorageAfterGame : MonoBehaviour
     }
     public static async Task storeBadgeData()
     {
-        int randomID = generateRandomId();
+        int randomID = 3;//generateRandomId();
         var badgeID = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgeID").GetValueAsync().Result.Value);
         var path = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgePath").GetValueAsync().Result.Value);
         await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Badge").SetValueAsync(badgeID + ""));
@@ -80,7 +80,7 @@ public class FirebaseStorageAfterGame : MonoBehaviour
             var result = await Task.Run(() => reference.Child("playerInfo").Child(playerFirebaseId).Child("Badges").Child("" + badgeID).GetValueAsync().Result);
             if (result.Exists)
             {
-                int badgeCount = (int)await Task.Run(() => reference.Child("playerInfo").Child(playerFirebaseId).Child("Badges").Child("" + badgeID).Child("BadgeCount").GetValueAsync().Result.Value);
+                int badgeCount = int.Parse(await Task.Run(() => reference.Child("playerInfo").Child(playerFirebaseId).Child("Badges").Child("" + badgeID).Child("BadgeCount").GetValueAsync().Result.Value.ToString()));
                 badgeCount++;
                 await Task.Run(() => reference.Child("playerInfo").Child(playerFirebaseId).Child("Badges").Child("" + badgeID).Child("BadgeCount").SetValueAsync(badgeCount));
             }
@@ -97,12 +97,14 @@ public class FirebaseStorageAfterGame : MonoBehaviour
 
     public static async Task storeTimeAndStatus()
     {
+        Debug.Log("inside storeTimeAndStatus");
+
         reference = reference.Root;
-        if (PhotonNetwork.IsMasterClient)
-        {
-            await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Duration").SetValueAsync(Timer.fullDuration));
-            await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
-        }
+        Debug.Log("Dur is " + Timer.fullDuration);
+        await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Duration").SetValueAsync(Timer.fullDuration));
+        Debug.Log("Status  is " + PlanetsOnPlane.status);
+        await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
+
 
     }
 }
