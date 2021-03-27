@@ -69,10 +69,11 @@ public class CollisionManager : MonoBehaviour
                     break;
                     default: break;
             }
-    }
+    }else{
+            //popup  "غير صحيح، حاول مرة أخرى" Mismatching planets (INCORRECT)    
         }
 
-
+     }
         [PunRPC]
         public void updatePlanetInsertion(int planetNumber){
         Debug.Log("inside RPC");
