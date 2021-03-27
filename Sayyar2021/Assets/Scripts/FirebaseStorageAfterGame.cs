@@ -32,6 +32,7 @@ public class FirebaseStorageAfterGame : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("HostID").SetValueAsync(PhotonNetwork.NickName));
+            await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("GameID").SetValueAsync(gameKey));
 
         }
         else
