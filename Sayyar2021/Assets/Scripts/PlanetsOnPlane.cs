@@ -163,7 +163,8 @@ public async void storeDataBeforeGame(){
 
   public async void storeDataAfterGame(){
     await FirebaseStorageAfterGame.storeVirtualPlayroomData();
-    //await FirebaseStorageAfterGame.storeBadgeData();
+    if(PhotonNetwork.IsMasterClient)
+    await FirebaseStorageAfterGame.storeBadgeData();
     //await FirebaseStorageAfterGame.storeTimeAndStatus();
   }
     public void setPosition(){
