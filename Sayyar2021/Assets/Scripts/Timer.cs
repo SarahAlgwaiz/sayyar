@@ -50,8 +50,6 @@ private void Start() {
 }
 
     private async void storeData(){
-    FirebaseStorageAfterGame.InitializeFirebase();
-
     await FirebaseStorageAfterGame.storeVirtualPlayroomData();
     await FirebaseStorageAfterGame.storeBadgeData();
     await FirebaseStorageAfterGame.storeTimeAndStatus();
