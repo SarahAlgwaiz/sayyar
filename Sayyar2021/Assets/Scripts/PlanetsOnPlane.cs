@@ -157,14 +157,14 @@ public void disablePlane(){
 
 public async void storeDataBeforeGame(){
      FirebaseStorageAfterGame.InitializeFirebase();
+     if(PhotonNetwork.IsMasterClient)
      await FirebaseStorageAfterGame.storeGameData();
 }
 
   public async void storeDataAfterGame(){
-     // await FirebaseStorageAfterGame.storeGameData();
     await FirebaseStorageAfterGame.storeVirtualPlayroomData();
-    await FirebaseStorageAfterGame.storeBadgeData();
-    await FirebaseStorageAfterGame.storeTimeAndStatus();
+    //await FirebaseStorageAfterGame.storeBadgeData();
+    //await FirebaseStorageAfterGame.storeTimeAndStatus();
   }
     public void setPosition(){
         if(PhotonNetwork.IsMasterClient){

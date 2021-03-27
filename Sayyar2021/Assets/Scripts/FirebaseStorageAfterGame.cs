@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class FirebaseStorageAfterGame : MonoBehaviour
 {
 
     public static string gameKey;
+        private static string virtualPlayroomKey;
+
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -26,12 +29,25 @@ public class FirebaseStorageAfterGame : MonoBehaviour
     public static async Task storeVirtualPlayroomData()
     {
         reference = reference.Root;
+        
+ var result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
+       if(result.Exists)
+       Debug.Log("result.Exists==================");
+       var result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
+       virtualPlayroomKey=result2.ToString();
+                       Debug.Log(" the virtualPlayroomKey in storeVirtualPlayroomData is "+virtualPlayroomKey);
+
         if (PhotonNetwork.IsMasterClient){
-        Debug.Log(" the virtualPlayroomKey in storeVirtualPlayroomData is "+CreateRoomScript.virtualPlayroomKey);
-            await Task.Run(() => reference.Child("VirtualPlayrooms").Child(CreateRoomScript.virtualPlayroomKey).Child("HostID").SetValueAsync(user.UserId));
-        }else
-            await Task.Run(() => reference.Child("VirtualPlayrooms").Child(CreateRoomScript.virtualPlayroomKey).Child("KindergartnerIDs").Child(PhotonNetwork.LocalPlayer.UserId).SetValueAsync(user.UserId));
-    }
+                Debug.Log(" before storing host id in storeVirtualPlayroomData is "+PhotonNetwork.NickName);
+
+            await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("HostID").SetValueAsync(PhotonNetwork.NickName));
+
+        }else{
+                        Debug.Log(" before storing KindergartnerIDs in storeVirtualPlayroomData id from photon is  "+PhotonNetwork.NickName);
+
+            await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("KindergartnerIDs").Child(PhotonNetwork.NickName).SetValueAsync(PhotonNetwork.LocalPlayer.UserId));
+
+    }}
 
     public static async Task storeGameData()
     {
@@ -44,7 +60,7 @@ public class FirebaseStorageAfterGame : MonoBehaviour
             await Task.Run(() => reference.Child("Game").Child(gameKey).Child("GameID").SetValueAsync(gameKey));
             await Task.Run(() => reference.Child("Game").Child(gameKey).Child("GameTitle").SetValueAsync("تركيب الكواكب"));
             Debug.Log("The val of status in class FireBaseStorage is "+ PlanetsOnPlane.status.ToString());
-           // await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
+            await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
             await Task.Run(() => reference.Child("Game").Child(gameKey).Child("NumOfPlayers").SetValueAsync(PhotonNetwork.CurrentRoom.PlayerCount));
         }
     }
