@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solarObject:
     type: 2
-    xAxis: 0.5
+    xAxis: 0
     zAxis: 0.75
     yAxis: 0
     orbitPeriodSeconds: 0.24
@@ -127,7 +127,7 @@ MonoBehaviour:
     orbitPeriodYears: 0.24
     rotationPeriodDays: 176
     drawOrbit: 1
-    isMoving: 1
+    isMoving: 0
     isRotating: 1
   orbitProgress: 0
   isActive: 1
