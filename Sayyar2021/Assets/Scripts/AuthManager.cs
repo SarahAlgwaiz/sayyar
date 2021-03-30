@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using ArabicSupport;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 //___________________________________________________________________________________ beging of the class
@@ -315,6 +316,8 @@ public class AuthManager : MonoBehaviour
     //___________________________________________________________________________________Register Function
     [DllImport("__Internal")]
     private static extern void _storeDeviceToken(string userID);
+
+
     private IEnumerator Register(string _email, string _password, string _username)
     {
         InitializeFirebase();
@@ -364,10 +367,10 @@ public class AuthManager : MonoBehaviour
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Email").SetValueAsync(_email); // newUser.UserId is samiller to auth.CurrentUser.UserId
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValueAsync(_username);
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Avatar").SetValueAsync("AvatarA");
-                    DBreference.Child("playerInfo").Child(newUser.UserId).Child("password").SetValueAsync(_password);
                    
                    if (signUpToggle.isOn){
                    _storeDeviceToken(newUser.UserId);
+                   DBreference.Child("playerInfo").Child(newUser.UserId).Child("Password").SetValueAsync(_password);
                    }
                     
 
@@ -571,5 +574,34 @@ public class AuthManager : MonoBehaviour
             ResetErrorMsg.text = ArabicFixer.Fix("يرجى إدخال البريد الإلكتروني");
         }
     }
+
+     //////////////All Work Below is fingerprint code 
+    [DllImport("__Internal")]
+    private static extern void _getDeviceToken();
+
+    public async void fingerprintButton()
+    { 
+       _getDeviceToken();
+       InitializeFirebase();
+
+       var DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value);
+     
+     if(DT != "NONE"){
+      DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
+      var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
+      string userID = UID.ToString();
+      string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
+      string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
+      Debug.Log("Email is       #@#@#nn  "+_email);
+      Debug.Log("Password is       #@#@#nn  "+_password);
+      auth.SignInWithEmailAndPasswordAsync(_email, _password);
+      SceneManager.LoadScene("HomeScene");
+     }
+     else{
+         Debug.Log("NONE !!!");
+     }
+
+    }
+
 
 }

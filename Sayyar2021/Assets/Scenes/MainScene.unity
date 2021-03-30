@@ -14857,8 +14857,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 507138977}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 2108026239}
+        m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: fingerprintButton
         m_Mode: 1
         m_Arguments:
