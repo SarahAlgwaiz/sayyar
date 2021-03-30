@@ -127,7 +127,7 @@ MonoBehaviour:
     orbitPeriodYears: 0.61
     rotationPeriodDays: 242
     drawOrbit: 1
-    isMoving: 1
+    isMoving: 0
     isRotating: 1
   orbitProgress: 0
   isActive: 1

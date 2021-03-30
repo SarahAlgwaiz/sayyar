@@ -69,10 +69,12 @@ public class CollisionManager : MonoBehaviour
                     break;
                     default: break;
             }
-    }
+    }else{
+            //popup  "غير صحيح، حاول مرة أخرى" Mismatching planets (INCORRECT)    
+            other.gameObject.transform.SetPositionAndRotation(new Vector3(other.gameObject.transform.position.x+ 0.5f,other.gameObject.transform.position.y,other.gameObject.transform.position.z + 0.5f), Quaternion.identity);
         }
 
-
+     }
         [PunRPC]
         public void updatePlanetInsertion(int planetNumber){
         Debug.Log("inside RPC");

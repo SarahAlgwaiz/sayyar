@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Database;
 using Firebase.Auth;
-using System.Threading.Tasks;
 using TMPro;
 using ArabicSupport;
 
@@ -16,28 +15,11 @@ namespace com.cactusteam.Sayyar
     public class JoinRoomScript : MonoBehaviourPunCallbacks
     {
 
-        [Header("Firebase")]
-        public DependencyStatus dependencyStatus;
-        public DatabaseReference reference;
-        private FirebaseUser user;
-
         [SerializeField]
-
-        // private GameObject joinRoomView;
-        // [SerializeField]
-        // private Button roomCodeConfirmButton;
-        //[SerializeField]
-        //The above lines I don't no what is for and not used in this class @HadeelHamad please deleted if not neccessary كل الحب
-
-
-        //private TMP_InputField roomNumField; >>> the following line is alternative for Fron-End matters <3  Num1.text + Num2.text + Num3.text + Num4.text + Num5.text @HadeelHamad
-
         [Header("JoinRoomCode")]
         public InputField Num1, Num2, Num3, Num4, Num5;
         public TextMeshProUGUI ErrorMsg;
         public static int WhereIsTheFoucs;
-
-        private bool valid;
 
         public void OnClickRoomCodeConfirmButton()
         {
@@ -56,20 +38,6 @@ namespace com.cactusteam.Sayyar
                 return;
             }
             PhotonNetwork.JoinRoom(roomCode);
-            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
- {
-     dependencyStatus = task.Result;
-     if (dependencyStatus == DependencyStatus.Available)
-     {
-         //If they are avalible Initialize Firebase
-         InitializeFirebase();
-     }
-     else
-     {
-         Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
-     }
- });
-
 
         }
         public override void OnDisconnected(DisconnectCause cause)
@@ -102,40 +70,6 @@ namespace com.cactusteam.Sayyar
 
             SceneManager.LoadSceneAsync("WaitingRoomScene");
         }
-
-        async void InitializeFirebase()
-        {
-            reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
-            //valid = await isRoomCodeValid();
-            // if(valid){
-            //     SceneManager.LoadSceneAsync("WaitingRoomScene"); //has joined the room and will now go to the waiting room
-            // }
-
-        }
-
-        async Task<bool> isRoomCodeValid()
-        {
-
-            Query doesRoomCodeExist = reference.Root.Child("WaitingRooms").OrderByChild("RoomCode");
-            Query q1 = doesRoomCodeExist.EqualTo(Num1.text + Num2.text + Num3.text + Num4.text + Num5.text);
-
-            DataSnapshot result = await Task.Run(() => q1.GetValueAsync().Result);
-            if (result.Exists)
-            {
-                //PhotonNetwork.JoinRoom(Num1.text + Num2.text + Num3.text + Num4.text + Num5.text);
-                if (!PhotonNetwork.InRoom)
-                { // more validation cases (full or code not valid)
-                    return false;
-                }
-                // DatabaseReference parent = q1.Reference.Parent.Child("KindergartnersID").Child(user.UserId);
-                // await Task.Run(() => parent.SetValueAsync(user.UserId));
-                return true;
-            }
-            return false;
-
-        }
-
-
 
         ///These methods from @shhdSU for Front-End matters
         public void GoToNext()
