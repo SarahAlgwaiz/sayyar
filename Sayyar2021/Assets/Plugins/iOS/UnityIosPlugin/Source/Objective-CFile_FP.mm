@@ -14,21 +14,13 @@ extern "C" {
     
  void _storeDeviceToken(const char* UID) {
      
-     printf("%s", UID);
-
+     printf(UID);
+     
      NSString *UID2 = [[NSString alloc] initWithCString:(const char*)UID];
 
      [[SwiftFile_FP shared] storeDeviceTokenWithUID:(UID2)];
-
-
-    }
-
-void _getDeviceToken() {
     
-    [[SwiftFile_FP shared] getDeviceToken];
-      
-   }
-
-
+       
+    }
 }
 
