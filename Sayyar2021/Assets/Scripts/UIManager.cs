@@ -97,17 +97,7 @@ public class UIManager : MonoBehaviour
         FrogetPasswordPanel.SetActive(false);
     }
 
-    //////////////All Work Below is fingerprint code 
-    // [DllImport("__Internal")]
-    // private static extern string _getDeviceToken();
 
-    // public void fingerprintButton()
-    // { 
-    //    string DT = _getDeviceToken();
-    //    Debug.Log("DeviceToken in UNITY !!!!!!!!");
-    //    Debug.Log(DT);
-
-    // }
 
 
 

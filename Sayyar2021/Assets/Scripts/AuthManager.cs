@@ -11,6 +11,8 @@ using TMPro;
 using ArabicSupport;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+
 
 //___________________________________________________________________________________ beging of the class
 
@@ -570,6 +572,34 @@ public class AuthManager : MonoBehaviour
         {
             ResetErrorMsg.text = ArabicFixer.Fix("يرجى إدخال البريد الإلكتروني");
         }
+    }
+
+    //////////////All Work Below is fingerprint code 
+    [DllImport("__Internal")]
+    private static extern void _getDeviceToken();
+
+    public async void fingerprintButton()
+    { 
+       _getDeviceToken();
+       InitializeFirebase();
+
+       string DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+     
+     if(DT != "NONE"){
+      DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
+      var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
+      string userID = UID.ToString();
+      string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
+      string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
+      Debug.Log("Email is       #@#@#nn  "+_email);
+      Debug.Log("Password is       #@#@#nn  "+_password);
+      auth.SignInWithEmailAndPasswordAsync(_email, _password);
+      SceneManager.LoadScene("HomeScene");
+     }
+     else{
+         Debug.Log("NONE !!!");
+     }
+
     }
 
 }

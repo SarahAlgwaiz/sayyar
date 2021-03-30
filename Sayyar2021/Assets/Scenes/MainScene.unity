@@ -2283,7 +2283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed061daed1864cee90e81ee5c2c4f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependencyStatus: 0
   Num1: {fileID: 224152705}
   Num2: {fileID: 1634738167}
   Num3: {fileID: 1026380860}
@@ -14857,8 +14856,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 507138977}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 2108026239}
+        m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: fingerprintButton
         m_Mode: 1
         m_Arguments:
