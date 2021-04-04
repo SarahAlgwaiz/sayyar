@@ -109,14 +109,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3885845253069203268}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b7532b501d18425cac552e89b0439f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   solarObject:
     type: 2
-    xAxis: 0
+    xAxis: 0.5
     zAxis: 0.75
     yAxis: 0
     orbitPeriodSeconds: 0.24
@@ -126,8 +126,8 @@ MonoBehaviour:
     realWorldSimulation: 0
     orbitPeriodYears: 0.24
     rotationPeriodDays: 176
-    drawOrbit: 1
-    isMoving: 0
+    drawOrbit: 0
+    isMoving: 1
     isRotating: 1
   orbitProgress: 0
   isActive: 1

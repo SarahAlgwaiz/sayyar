@@ -73,15 +73,26 @@ public class PlanetsOnPlane : MonoBehaviour
     public void onClickExitGameButton()
     {
         Debug.Log("inside onClick");
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene("HomeScene");
     }
 
     private void Update()
     {
+        Debug.Log(PhotonNetwork.InRoom);
+     if (PhotonNetwork.CurrentRoom == null)
+        {
+        PhotonNetwork.AutomaticallySyncScene = false;
+            Debug.Log("wwwwww");
+          PhotonNetwork.Disconnect();
+       SceneManager.LoadScene("HomeScene");
+            }
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
-            onClickExitGameButton();
+         PhotonNetwork.AutomaticallySyncScene = false;
+         PhotonNetwork.Disconnect();
+        SceneManager.LoadScene("HomeScene");
+            
         }
         Vector2 touchPosition = new Vector2(0, 0);
         if (AR_Plane_Manager.enabled)

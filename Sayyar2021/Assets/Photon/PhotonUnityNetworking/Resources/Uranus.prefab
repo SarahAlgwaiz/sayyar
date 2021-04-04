@@ -109,7 +109,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6428949619592926398}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b7532b501d18425cac552e89b0439f7, type: 3}
   m_Name: 
@@ -126,8 +126,8 @@ MonoBehaviour:
     realWorldSimulation: 0
     orbitPeriodYears: 84
     rotationPeriodDays: 0.71
-    drawOrbit: 1
-    isMoving: 0
+    drawOrbit: 0
+    isMoving: 1
     isRotating: 1
   orbitProgress: 0
   isActive: 1

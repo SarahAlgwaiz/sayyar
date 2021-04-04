@@ -126,8 +126,8 @@ MonoBehaviour:
     realWorldSimulation: 0
     orbitPeriodYears: 0.61
     rotationPeriodDays: 242
-    drawOrbit: 1
-    isMoving: 0
+    drawOrbit: 0
+    isMoving: 1
     isRotating: 1
   orbitProgress: 0
   isActive: 1
