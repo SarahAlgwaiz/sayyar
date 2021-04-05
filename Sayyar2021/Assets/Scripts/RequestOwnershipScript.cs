@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.EventSystems;
+using ArabicSupport;
+
 
 
 public class RequestOwnershipScript : MonoBehaviourPun, IPunOwnershipCallbacks
@@ -31,7 +33,12 @@ public class RequestOwnershipScript : MonoBehaviourPun, IPunOwnershipCallbacks
             targetView.TransferOwnership(requestingPlayer);
         }  
         if(!targetView.IsMine){
-            Debug.Log("NOT MINE"); //replace code here
+            
+         Toast.Instance.Show(ArabicFixer.Fix("الكوكب مع زميلك حاليًا"),2f,Toast.ToastType.Warning);
+          AudioManager.playSound("holdedPlanet");
+
+
+
         }
 
     }

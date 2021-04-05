@@ -59,18 +59,19 @@ public class FirebaseStorageAfterGame : MonoBehaviour
 
 
 
-    private static int generateRandomId()
-    {
-        reference = reference.Root;
-        int randomID = Random.Range(1, 10);
-        return (randomID);
+    // private static int generateRandomId()
+    // {
+    //     reference = reference.Root;
+    //     int randomID = Random.Range(1, 10);
+    //     return (randomID);
 
-    }
-    public static async Task storeBadgeData()
+    // }
+    public static async Task storeBadgeData(int ID)
     {
-        int randomID = generateRandomId();
+        int randomID = ID;
+        reference = reference.Root;
         var badgeID = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgeID").GetValueAsync().Result.Value);
-        var path = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgePath").GetValueAsync().Result.Value);
+        //var path = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgePath").GetValueAsync().Result.Value);
         await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Badge").SetValueAsync(badgeID + ""));
         //store the same badge for the all 
         foreach (KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)

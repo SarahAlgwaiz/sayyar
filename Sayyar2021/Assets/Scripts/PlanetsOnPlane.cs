@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,21 @@ using System.Threading.Tasks;
 public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 {
 
+    [Header("planets")]
+    public Sprite SUN;
+    public Sprite MERCURY;
+    public Sprite VENUS;
+    public Sprite EARTH;
+    public Sprite MARS;
+    public Sprite JUPITER;
+    public Sprite SATURN;
+    public Sprite URANUS;
+    public Sprite NEPTUNE;
+
+    Image renderer;
+
+    public GameObject planet;
+
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public DatabaseReference reference;
@@ -25,6 +41,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 [Header("PopUps")]
     public GameObject noOnepopUp;
     public GameObject ExitButtonpopUp;
+    public GameObject WinnerBoard;
 
     [SerializeField]
     private ARSessionOrigin session;
@@ -100,8 +117,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
             }
         else if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
-         PhotonNetwork.Disconnect();
+         //PhotonNetwork.Disconnect();
          noOnepopUp.SetActive(true);
+         AudioManager.playSound("noOne");
             
         }
         Vector2 touchPosition = new Vector2(0, 0);
@@ -185,14 +203,54 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         if (isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7])
         {
             status = "Won";
-            finishGame();
+            int randomID = Random.Range(1, 10);
+            renderer = planet.GetComponent<Image>();
+
+            switch (randomID)
+            {
+                case 1:
+                renderer.sprite = SUN;
+                break;
+                case 2:
+                renderer.sprite = MERCURY;
+                break;
+                case 3:
+                renderer.sprite = VENUS;
+                break;
+                case 4:
+                renderer.sprite = EARTH;
+                break;
+                case 5:
+                renderer.sprite = MARS;
+                break;
+                case 6:
+                renderer.sprite = JUPITER;
+                break;
+                case 7:
+                renderer.sprite = SATURN;
+                break;
+                case 8:
+                renderer.sprite = URANUS;
+                break;
+                case 9:
+                renderer.sprite = NEPTUNE;
+                break;
+                
+            }
+        WinnerBoard.SetActive(true);
+        AudioManager.playSound("winner");
+            finishGame(randomID);
         }
     }
 
-    public void finishGame()
+    public void Okofwinnerboard(){
+SceneManager.LoadScene("HomeScene");
+    }
+
+    public void finishGame(int ID)
     {
-        storeDataAfterGame();
-        SceneManager.LoadScene("HomeScene");
+        storeDataAfterGame(ID);
+        
     }
 
     public async void storeDataBeforeGame()
@@ -202,12 +260,12 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
             await FirebaseStorageAfterGame.storeGameData();
     }
 
-    public async void storeDataAfterGame()
+    public async void storeDataAfterGame(int ID)
     {
         await FirebaseStorageAfterGame.storeVirtualPlayroomData();
         if (PhotonNetwork.IsMasterClient)
         {
-            await FirebaseStorageAfterGame.storeBadgeData();
+            await FirebaseStorageAfterGame.storeBadgeData(ID);
             await FirebaseStorageAfterGame.storeTimeAndStatus();
         }
 

@@ -53,6 +53,7 @@ public class Timer : MonoBehaviourPunCallbacks
         storeData();
         Debug.Log("Time has run out!");//popup =============================
         popUp.SetActive(true);
+        AudioManager.playSound("endTime");
         
     }
 
