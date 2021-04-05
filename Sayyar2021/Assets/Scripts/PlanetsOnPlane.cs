@@ -12,7 +12,7 @@ using Firebase.Database;
 using Firebase;
 using System.Threading.Tasks;
 [RequireComponent(typeof(ARRaycastManager))]
-public class PlanetsOnPlane : MonoBehaviour
+public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 {
 
     [Header("Firebase")]
@@ -62,8 +62,6 @@ public class PlanetsOnPlane : MonoBehaviour
             isPlanetInserted[i] = false;
         }
     }
-
-
     public void disablePlane()
     {
         Debug.Log("inside disabled");
@@ -74,24 +72,23 @@ public class PlanetsOnPlane : MonoBehaviour
     {
         Debug.Log("inside onClick");
         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("HomeScene");
-    }
-
-    private void Update()
+    } 
+    
+    public override void OnDisconnected(DisconnectCause cause)
+        {
+            SceneManager.LoadScene("HomeScene");
+        }
+     private void Update()
     {
         Debug.Log(PhotonNetwork.InRoom);
      if (PhotonNetwork.CurrentRoom == null)
         {
-        PhotonNetwork.AutomaticallySyncScene = false;
             Debug.Log("wwwwww");
           PhotonNetwork.Disconnect();
-       SceneManager.LoadScene("HomeScene");
             }
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
-         PhotonNetwork.AutomaticallySyncScene = false;
          PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("HomeScene");
             
         }
         Vector2 touchPosition = new Vector2(0, 0);

@@ -69,6 +69,12 @@ namespace com.cactusteam.Sayyar
         {
             PhotonNetwork.AutomaticallySyncScene = true;
         }
+
+        public override void OnLeftRoom()
+        {
+            base.OnLeftRoom();
+            Connect();
+        }
         void Start()
         {
             // createButton.interactable = false;
@@ -77,7 +83,10 @@ namespace com.cactusteam.Sayyar
             if(PhotonNetwork.IsConnectedAndReady){
               activateButtons();
             }
-            else 
+            else if(PhotonNetwork.InRoom){
+                PhotonNetwork.LeaveRoom();
+            }
+            else
             Connect();
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
        {
