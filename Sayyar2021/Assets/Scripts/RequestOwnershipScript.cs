@@ -30,12 +30,17 @@ public class RequestOwnershipScript : MonoBehaviourPun, IPunOwnershipCallbacks
             Debug.Log("Requesting granted");
             targetView.TransferOwnership(requestingPlayer);
         }  
+        if(!targetView.IsMine){
+            Debug.Log("NOT MINE"); //replace code here
+        }
+
     }
 
         public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner){
                 //implement avatar/name change in here and on ownership change
                 //whenever the owner changes for the targetView.
     }
+
         public void RequestOwnership(){
             Debug.Log("inside request ownership");
             this.gameObject.GetComponent<PhotonView>().RequestOwnership();
@@ -43,7 +48,6 @@ public class RequestOwnershipScript : MonoBehaviourPun, IPunOwnershipCallbacks
 
      private void OnMouseDown() {
        RequestOwnership();
-
      }
     public void OnPointerDown(PointerEventData eventData)
     {
