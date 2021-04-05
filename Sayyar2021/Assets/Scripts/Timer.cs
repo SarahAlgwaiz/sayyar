@@ -13,6 +13,7 @@ public class Timer : MonoBehaviourPunCallbacks
     public static float gameExactDuration = 0;
     public DatabaseReference reference;
     public GameObject bar;
+    public GameObject popUp;
     private void Start()
     {
         if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount)
@@ -51,7 +52,8 @@ public class Timer : MonoBehaviourPunCallbacks
         PlanetsOnPlane.status = "Lost";
         storeData();
         Debug.Log("Time has run out!");//popup =============================
-        SceneManager.LoadScene("HomeScene");
+        popUp.SetActive(true);
+        
     }
 
     private async void storeData()
@@ -65,6 +67,12 @@ public class Timer : MonoBehaviourPunCallbacks
     void OutputTime()
     {
         gameExactDuration++;
+    }
+
+    public void OkButton(){
+
+        SceneManager.LoadScene("HomeScene");
+
     }
 
 

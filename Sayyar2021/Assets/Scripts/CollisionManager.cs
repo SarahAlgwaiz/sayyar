@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using ArabicSupport;
+
 
 public class CollisionManager : MonoBehaviour
 {
 
      [SerializeField]
+
      public Material[] materials;
      private void OnTriggerEnter(Collider other) {
      PhotonView photonView = this.GetComponent<PhotonView>();
@@ -18,6 +21,7 @@ public class CollisionManager : MonoBehaviour
             Debug.Log("collided inside");
             Debug.Log("after destroy");
             PhotonView otherView = other.GetComponent<PhotonView>();
+            Toast.Instance.Show(ArabicFixer.Fix("أحسنت"),2f,Toast.ToastType.Check);//Toast
              otherView.TransferOwnership(PhotonNetwork.LocalPlayer);  //take control of original object (this)
             switch(name){
                  case "Mercury":
@@ -70,7 +74,9 @@ public class CollisionManager : MonoBehaviour
                     default: break;
             }
     }else{
-            //popup  "غير صحيح، حاول مرة أخرى" Mismatching planets (INCORRECT)    
+            //popup  "غير صحيح، حاول مرة أخرى" Mismatching planets (INCORRECT)  
+            Toast.Instance.Show(ArabicFixer.Fix("حاول مرة أخرى"),2f,Toast.ToastType.Warning);
+            //AudioManager.playSound("ahsant");
             other.gameObject.transform.SetPositionAndRotation(new Vector3(other.gameObject.transform.position.x+ 0.5f,other.gameObject.transform.position.y,other.gameObject.transform.position.z + 0.5f), Quaternion.identity);
         }
 
@@ -122,4 +128,6 @@ public class CollisionManager : MonoBehaviour
           break;
         }
         }
+
+       
 }

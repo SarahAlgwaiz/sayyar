@@ -22,6 +22,10 @@ public class PlanetsOnPlane : MonoBehaviour
     private ARRaycastManager raycastManager;
     private GameObject spawnedObject;
 
+[Header("PopUps")]
+    public GameObject noOnepopUp;
+    public GameObject ExitButtonpopUp;
+
     [SerializeField]
     private ARSessionOrigin session;
     private ARPlaneManager AR_Plane_Manager;
@@ -72,9 +76,19 @@ public class PlanetsOnPlane : MonoBehaviour
     }
     public void onClickExitGameButton()
     {
-        Debug.Log("inside onClick");
+        Debug.Log("inside onClick"); //PPPPPP{{{{{{{{PPPPPPOOOOOOOOOOOOOOOPOOOO}}}}}}}}
+        ExitButtonpopUp.SetActive(true);
+    }
+
+    public void BackButton(){
+        ExitButtonpopUp.SetActive(false);
+    }
+
+    public void EndGameButtons(){
+
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("HomeScene");
+
     }
 
     private void Update()
@@ -87,11 +101,10 @@ public class PlanetsOnPlane : MonoBehaviour
           PhotonNetwork.Disconnect();
        SceneManager.LoadScene("HomeScene");
             }
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1) 
         {
          PhotonNetwork.AutomaticallySyncScene = false;
-         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("HomeScene");
+         noOnepopUp.SetActive(true);
             
         }
         Vector2 touchPosition = new Vector2(0, 0);
