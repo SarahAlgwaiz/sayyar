@@ -229,7 +229,7 @@ RectTransform:
   m_LocalScale: {x: 0.8730893, y: 0.8730893, z: 0.8730893}
   m_Children: []
   m_Father: {fileID: 388664640}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -661,20 +661,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8128367ec334b5fbffe9ba792c30ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SUN: {fileID: 0}
-  MERCURY: {fileID: 0}
-  VENUS: {fileID: 0}
-  EARTH: {fileID: 0}
-  MARS: {fileID: 0}
-  JUPITER: {fileID: 0}
-  SATURN: {fileID: 0}
-  URANUS: {fileID: 0}
-  NEPTUNE: {fileID: 0}
-  renderer: {fileID: 0}
-  planet: {fileID: 0}
+  SUN: {fileID: 21300000, guid: 2f6815dc8bf134e7791b19eaa755cec4, type: 3}
+  MERCURY: {fileID: 21300000, guid: c367d3453e55f4822a34476111de24cb, type: 3}
+  VENUS: {fileID: 21300000, guid: 140db9a5218004ca190b7a54b4832fc7, type: 3}
+  EARTH: {fileID: 21300000, guid: 3cb838fdee4c34fd5b6be7872b07f1e0, type: 3}
+  MARS: {fileID: 21300000, guid: 42c0386084fca4e268493fe7026b0cb6, type: 3}
+  JUPITER: {fileID: 21300000, guid: 13277143e0e504ccb830a22482fd4fae, type: 3}
+  SATURN: {fileID: 21300000, guid: fb26567aad8074b16b11ea69326b3703, type: 3}
+  URANUS: {fileID: 21300000, guid: b9f95d793e465476a92041d15a799601, type: 3}
+  NEPTUNE: {fileID: 21300000, guid: 98866af54510545bfbc9b4ce794aeb15, type: 3}
+  planet: {fileID: 451717041}
   dependencyStatus: 0
   noOnepopUp: {fileID: 554125283}
   ExitButtonpopUp: {fileID: 142309532}
+  WinnerBoard: {fileID: 0}
   session: {fileID: 269047589}
   placablePrefab: {fileID: 542570577421383826, guid: b1088a7bdbbe34ca793a3b9f624dfa4f, type: 3}
   planets:
@@ -755,7 +755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &291500291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -772,7 +772,7 @@ RectTransform:
   - {fileID: 615291797}
   - {fileID: 451717042}
   m_Father: {fileID: 388664640}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -812,9 +812,9 @@ RectTransform:
   - {fileID: 769976841}
   - {fileID: 554125284}
   - {fileID: 142309533}
+  - {fileID: 291500291}
   - {fileID: 1742704989}
   - {fileID: 82705931}
-  - {fileID: 291500291}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1627,7 +1627,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 269047591}
         m_TargetAssemblyTypeName: PlanetsOnPlane, Assembly-CSharp
-        m_MethodName: EndGameButtons
+        m_MethodName: Okofwinnerboard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2502,7 +2502,7 @@ RectTransform:
   m_Children:
   - {fileID: 918908473}
   m_Father: {fileID: 388664640}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
