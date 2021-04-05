@@ -34,7 +34,6 @@ public class OrbitMotion : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Movement());
         StartCoroutine(Rotation());
 
         rotationProgress = 0;
