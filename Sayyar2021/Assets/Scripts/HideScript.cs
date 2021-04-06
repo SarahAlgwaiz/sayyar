@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class HideScript : MonoBehaviour, IPunObservable
 {
    public bool isAvailable = true;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo messageInfo){
        if(stream.IsWriting){
 
@@ -18,6 +19,7 @@ public class HideScript : MonoBehaviour, IPunObservable
     isAvailable = (bool)stream.ReceiveNext();
 }
     }
+
     // Update is called once per frame
     public void Update()
     {
@@ -48,5 +50,12 @@ public class HideScript : MonoBehaviour, IPunObservable
         }
         }
         Debug.Log("Available: " + isAvailable);
+
+        if(!isAvailable && !this.gameObject.GetComponent<PhotonView>().IsMine && this.gameObject.GetComponent<PlacementObject>().Selected)){
+
+          Toast.Instance.Show(ArabicFixer.Fix("الكوكب مع زميلك حاليًا"),2f,Toast.ToastType.Warning);
+          AudioManager.playSound("holdedPlanet");
+
+        }
     }
 }
