@@ -115,7 +115,6 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         {
             SceneManager.LoadScene("HomeScene");
         }
-
      private void Update()
     {
         Debug.Log(PhotonNetwork.InRoom);
@@ -123,7 +122,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         {
           PhotonNetwork.Disconnect();
             }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1 && status == "Ongoing")
+        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
          //PhotonNetwork.Disconnect();
          calls++;
@@ -221,9 +220,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         }
     }
 
-    // public void Okofwinnerboard(){
-    // SceneManager.LoadScene("HomeScene");
-    // }
+    public void Okofwinnerboard(){
+    SceneManager.LoadScene("HomeScene");
+    }
 
     public void finishGame()
     {

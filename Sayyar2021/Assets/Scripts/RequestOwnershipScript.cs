@@ -32,13 +32,14 @@ public class RequestOwnershipScript : MonoBehaviourPun, IPunOwnershipCallbacks
             Debug.Log("Requesting granted");
             targetView.TransferOwnership(requestingPlayer);
         }  
-        // if(!targetView.IsMine && targetView.Selected){
+        if(!targetView.IsMine){
             
-         
+         Toast.Instance.Show(ArabicFixer.Fix("الكوكب مع زميلك حاليًا"),2f,Toast.ToastType.Warning);
+          AudioManager.playSound("holdedPlanet");
 
 
 
-        // }
+        }
 
     }
 
