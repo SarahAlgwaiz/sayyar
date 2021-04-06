@@ -69,6 +69,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     private Vector3 solarSystemSize;
 
     public static bool[] isPlanetInserted;
+    public bool won = false;
 
     public static GameObject[] planetsObj;
     static bool isSelectedMine;
@@ -204,14 +205,17 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 // }
             }
         }
+        if(!won)
         checkPlanets();
     }
     private void checkPlanets()
     {
+
         if (isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7])
         {
-            
+
             status = "Won";
+            won = true;
             finishGame();
         }
     }
@@ -239,7 +243,11 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             await FirebaseStorageAfterGame.storeBadgeData();
+                    Debug.Log("storeBadgeData");
+
             await FirebaseStorageAfterGame.storeTimeAndStatus();
+                                Debug.Log("storeTimeAndStatus");
+
         }
         Debug.Log("Before");
             calls2++;
@@ -256,9 +264,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         {
             for (int i = 0; i < planets.Length; i++)
             {
-                float randomX = Random.Range(-1.5f, 1.5f);
-                float randomY = Random.Range(-1.5f, 1.5f);
-                float randomZ = Random.Range(-1.5f, 1.5f);
+                float randomX = Random.Range(-2,2);
+                float randomY = Random.Range(-2,2);
+                float randomZ = Random.Range(-2,2);
                 Vector3 randomPosition = new Vector3(randomX, 0, randomZ);
                 PhotonNetwork.Instantiate(planets[i].name, randomPosition, Quaternion.identity, 0, null);
 

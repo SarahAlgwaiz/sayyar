@@ -35,14 +35,16 @@ public class FirebaseStorageAfterGame : MonoBehaviour
         var result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
         var result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
         virtualPlayroomKey = result2.ToString();
+        Debug.Log("virtualPlayroomKey  "+ virtualPlayroomKey);
         if (PhotonNetwork.IsMasterClient)
-        {
+        {Debug.Log("INSIDE storeVirtualPlayroomData MASTER");
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("HostID").SetValueAsync(PhotonNetwork.NickName));
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("GameID").SetValueAsync(gameKey));
 
         }
         else
-        {
+        {        Debug.Log("INSIDE storeVirtualPlayroomData Participant");
+
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("KindergartnerIDs").Child(PhotonNetwork.LocalPlayer.UserId).SetValueAsync(PhotonNetwork.NickName));
 
         }
