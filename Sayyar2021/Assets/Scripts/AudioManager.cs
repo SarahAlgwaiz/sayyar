@@ -20,12 +20,6 @@ public class AudioManager : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public static void playSound(string sound){
 
         switch(sound){
