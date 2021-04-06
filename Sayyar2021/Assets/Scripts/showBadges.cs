@@ -181,8 +181,6 @@ getOwnedBadges();
             }
         }
 
-
-
         ///URANUS_BAD 
         DataSnapshot BadgeID8 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("URANUS_BAD").GetValueAsync().Result);
         if (BadgeID8.Exists)
@@ -195,7 +193,6 @@ getOwnedBadges();
                 uransBG.SetActive(true);
             }
         }
-
 
         ///NEPTUNE_BAD 
         DataSnapshot BadgeID9 = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("NEPTUNE_BAD").GetValueAsync().Result);

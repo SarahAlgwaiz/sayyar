@@ -670,11 +670,11 @@ MonoBehaviour:
   SATURN: {fileID: 21300000, guid: fb26567aad8074b16b11ea69326b3703, type: 3}
   URANUS: {fileID: 21300000, guid: b9f95d793e465476a92041d15a799601, type: 3}
   NEPTUNE: {fileID: 21300000, guid: 98866af54510545bfbc9b4ce794aeb15, type: 3}
+  WinnerBoard: {fileID: 291500290}
   planet: {fileID: 451717041}
   dependencyStatus: 0
   noOnepopUp: {fileID: 554125283}
   ExitButtonpopUp: {fileID: 142309532}
-  WinnerBoard: {fileID: 0}
   session: {fileID: 269047589}
   placablePrefab: {fileID: 542570577421383826, guid: b1088a7bdbbe34ca793a3b9f624dfa4f, type: 3}
   planets:

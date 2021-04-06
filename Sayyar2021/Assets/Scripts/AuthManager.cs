@@ -580,7 +580,7 @@ public class AuthManager : MonoBehaviour
 
     public async void fingerprintButton()
     { 
-       _getDeviceToken();
+      await Task.Run(() =>  _getDeviceToken());
        InitializeFirebase();
 
        string DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
