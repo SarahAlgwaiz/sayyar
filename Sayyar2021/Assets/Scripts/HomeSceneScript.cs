@@ -11,11 +11,19 @@ using Firebase.Database;
 using Firebase.Auth;
 using System.Threading.Tasks;
 using TMPro;
+using ArabicSupport;
+
 namespace com.cactusteam.Sayyar
 {
 
     public class HomeSceneScript : MonoBehaviourPunCallbacks
     {
+        [Header("LoadingScreen")]
+        public Sprite[] animatedImgs;
+        public Image animaterImg;
+        bool inLoading = true;
+        public TMP_Text LoadingSentence;
+
 
         [Header("Firebase")]
         public DependencyStatus dependencyStatus;
@@ -23,10 +31,6 @@ namespace com.cactusteam.Sayyar
         private FirebaseUser user;
         public FirebaseAuth auth;
 
-        [SerializeField]
-        private Button joinButton;
-        [SerializeField]
-        private Button createButton;
         // [SerializeField]
         private GameObject connectingText;
 
@@ -46,16 +50,13 @@ namespace com.cactusteam.Sayyar
             SceneManager.LoadScene("CreateGameScene", LoadSceneMode.Single);
         }
 
-        public void activateButtons(){
-            createButton.interactable = true;
-            joinButton.interactable = true;
-        }
         public override void OnConnectedToMaster()
         {
 
             Debug.Log("Photon Nickname " + PhotonNetwork.NickName);
             Debug.Log("connected to master");
-            activateButtons();
+            inLoading = false;
+            SceneManager.LoadScene("HomeScene");
             // connectingText.SetActive(false);
             // playerNameText.text = nameFromFirebase;
         }
@@ -70,6 +71,19 @@ namespace com.cactusteam.Sayyar
             PhotonNetwork.AutomaticallySyncScene = true;
         }
 
+        void Update (){
+            // if(PhotonNetwork.IsConnectedAndReady){
+            //   inLoading = false;
+            // }
+            int call = 0 ;
+            if(inLoading){
+            call++; 
+            animaterImg.sprite = animatedImgs[(int)(Time.time*10)%animatedImgs.Length];
+            if(call == 1)
+            {LoadingSentence.text = ArabicFixer.Fix("هيّا بنا إلى عالم الفضاء");}
+            }
+        }
+
         public override void OnLeftRoom()
         {
             base.OnLeftRoom();
@@ -81,7 +95,7 @@ namespace com.cactusteam.Sayyar
             // joinButton.interactable = false;
             //connectingText.SetActive(true);
             if(PhotonNetwork.IsConnectedAndReady){
-              activateButtons();
+              inLoading = false;
             }
             else if(PhotonNetwork.InRoom){
                 PhotonNetwork.LeaveRoom();

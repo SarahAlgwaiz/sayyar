@@ -8,10 +8,11 @@ using Firebase.Database;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using TMPro;
-using ArabicSupport;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using ArabicSupport;
+
 
 
 //___________________________________________________________________________________ beging of the class
@@ -302,7 +303,7 @@ public class AuthManager : MonoBehaviour
 
                     //  yield return new WaitForSeconds(2);
         
-                SceneManager.LoadScene("HomeScene");
+                SceneManager.LoadScene("LoadingScreen");
 
 
                     // Home_UIManager.instance.HomeScreen();
@@ -594,7 +595,7 @@ public class AuthManager : MonoBehaviour
       Debug.Log("Email is       #@#@#nn  "+_email);
       Debug.Log("Password is       #@#@#nn  "+_password);
       auth.SignInWithEmailAndPasswordAsync(_email, _password);
-      SceneManager.LoadScene("HomeScene");
+      SceneManager.LoadScene("LoadingScreen");
      }
      else{
          Debug.Log("NONE !!!");

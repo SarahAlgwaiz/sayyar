@@ -5026,7 +5026,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 705039233}
   m_OnClick:
     m_PersistentCalls:
@@ -13241,6 +13241,7 @@ MonoBehaviour:
   UpdatedMsg: {fileID: 1959299472}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
+  signUpToggle: {fileID: 0}
 --- !u!4 &1684663118
 Transform:
   m_ObjectHideFlags: 0
@@ -14315,6 +14316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a4925d1b3f8485f9d13121b56dd79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatedImgs: []
+  animaterImg: {fileID: 0}
   dependencyStatus: 0
   joinButton: {fileID: 2105410154}
   createButton: {fileID: 705039232}
@@ -15175,7 +15178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed061daed1864cee90e81ee5c2c4f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependencyStatus: 0
   Num1: {fileID: 564503256}
   Num2: {fileID: 1921234109}
   Num3: {fileID: 631390663}
@@ -15827,7 +15829,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 2105410155}
   m_OnClick:
     m_PersistentCalls:
