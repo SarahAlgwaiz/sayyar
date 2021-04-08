@@ -264,9 +264,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         {
             for (int i = 0; i < planets.Length; i++)
             {
-                float randomX = Random.Range(-2,2);
-                float randomY = Random.Range(-2,2);
-                float randomZ = Random.Range(-2,2);
+                float randomX = Random.Range(-1.5f, 1.5f);
+                float randomY = Random.Range(-1.5f, 1.5f);
+                float randomZ = Random.Range(-1.5f, 1.5f);
                 Vector3 randomPosition = new Vector3(randomX, 0, randomZ);
                 PhotonNetwork.Instantiate(planets[i].name, randomPosition, Quaternion.identity, 0, null);
 
