@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,20 +17,26 @@ using System.Threading.Tasks;
 public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 {
 
+    int calls = 0 ;
+    int calls2 = 0 ;
+
     [Header("planets")]
-    public Sprite SUN;
-    public Sprite MERCURY;
-    public Sprite VENUS;
-    public Sprite EARTH;
-    public Sprite MARS;
-    public Sprite JUPITER;
-    public Sprite SATURN;
-    public Sprite URANUS;
-    public Sprite NEPTUNE;
+    public  Sprite SUN;
+    public  Sprite MERCURY;
+    public  Sprite VENUS;
+    public  Sprite EARTH;
+    public  Sprite MARS;
+    public  Sprite JUPITER;
+    public  Sprite SATURN;
+    public  Sprite URANUS;
+    public  Sprite NEPTUNE;
+    public  GameObject WinnerBoard;
 
-    Image renderer;
 
-    public GameObject planet;
+     Image renderer;
+
+    public  GameObject planet;
+   
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -41,7 +48,6 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 [Header("PopUps")]
     public GameObject noOnepopUp;
     public GameObject ExitButtonpopUp;
-    public GameObject WinnerBoard;
 
     [SerializeField]
     private ARSessionOrigin session;
@@ -63,6 +69,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     private Vector3 solarSystemSize;
 
     public static bool[] isPlanetInserted;
+    public bool won = false;
 
     public static GameObject[] planetsObj;
     static bool isSelectedMine;
@@ -115,11 +122,13 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         {
           PhotonNetwork.Disconnect();
             }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1 && status == "Ongoing" )
         {
          //PhotonNetwork.Disconnect();
-         noOnepopUp.SetActive(true);
-         AudioManager.playSound("noOne");
+         calls++;
+         if(calls == 1)
+         {noOnepopUp.SetActive(true);
+         AudioManager.playSound("noOne");}
             
         }
         Vector2 touchPosition = new Vector2(0, 0);
@@ -196,60 +205,28 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 // }
             }
         }
+        if(!won)
         checkPlanets();
     }
     private void checkPlanets()
     {
+
         if (isPlanetInserted[0] && isPlanetInserted[1] && isPlanetInserted[2] && isPlanetInserted[3] && isPlanetInserted[4] && isPlanetInserted[5] && isPlanetInserted[6] && isPlanetInserted[7])
         {
-            status = "Won";
-            int randomID = Random.Range(1, 10);
-            renderer = planet.GetComponent<Image>();
 
-            switch (randomID)
-            {
-                case 1:
-                renderer.sprite = SUN;
-                break;
-                case 2:
-                renderer.sprite = MERCURY;
-                break;
-                case 3:
-                renderer.sprite = VENUS;
-                break;
-                case 4:
-                renderer.sprite = EARTH;
-                break;
-                case 5:
-                renderer.sprite = MARS;
-                break;
-                case 6:
-                renderer.sprite = JUPITER;
-                break;
-                case 7:
-                renderer.sprite = SATURN;
-                break;
-                case 8:
-                renderer.sprite = URANUS;
-                break;
-                case 9:
-                renderer.sprite = NEPTUNE;
-                break;
-                
-            }
-        WinnerBoard.SetActive(true);
-        AudioManager.playSound("winner");
-            finishGame(randomID);
+            status = "Won";
+            won = true;
+            finishGame();
         }
     }
 
     public void Okofwinnerboard(){
-SceneManager.LoadScene("HomeScene");
+    SceneManager.LoadScene("HomeScene");
     }
 
-    public void finishGame(int ID)
+    public void finishGame()
     {
-        storeDataAfterGame(ID);
+        storeDataAfterGame();
         
     }
 
@@ -260,13 +237,24 @@ SceneManager.LoadScene("HomeScene");
             await FirebaseStorageAfterGame.storeGameData();
     }
 
-    public async void storeDataAfterGame(int ID)
+    public async void storeDataAfterGame()
     {
         await FirebaseStorageAfterGame.storeVirtualPlayroomData();
         if (PhotonNetwork.IsMasterClient)
         {
-            await FirebaseStorageAfterGame.storeBadgeData(ID);
+            await FirebaseStorageAfterGame.storeBadgeData();
+                    Debug.Log("storeBadgeData");
+
             await FirebaseStorageAfterGame.storeTimeAndStatus();
+                                Debug.Log("storeTimeAndStatus");
+
+        }
+        Debug.Log("Before");
+            calls2++;
+        if (calls2 == 1)
+        {
+        showBoard();
+        Debug.Log("After");
         }
 
     }
@@ -284,6 +272,63 @@ SceneManager.LoadScene("HomeScene");
 
             }
         }
+    }
+
+ public void InitializeFirebase()
+    {
+        reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
+    }
+    public async void showBoard(){
+        Debug.Log("Inside showBoard");
+        InitializeFirebase();
+        reference = reference.Root;
+
+        var result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
+        var result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
+        string VID = result2.ToString();
+        Debug.Log("VID     " + VID);
+        var result3 = await Task.Run(() => reference.Child("VirtualPlayrooms").Child(VID).Child("GameID").GetValueAsync().Result.Value);
+        string GID = result3.ToString();
+        Debug.Log("GID       " + GID);
+        var result4 = await Task.Run(() => reference.Child("Game").Child(GID).Child("Badge").GetValueAsync().Result.Value);
+        string badgeID = result4.ToString();
+
+            renderer = planet.GetComponent<Image>();
+            switch (badgeID)
+            {
+                case "SUN_BAD":
+                renderer.sprite = SUN;
+                break;
+                case "MERCURY_BAD":
+                renderer.sprite = MERCURY;
+                break;
+                case "VENUS_BAD":
+                renderer.sprite = VENUS;
+                break;
+                case "EARTH_BAD":
+                renderer.sprite = EARTH;
+                break;
+                case "MARS_BAD":
+                renderer.sprite = MARS;
+                break;
+                case "JUPITER_BAD":
+                renderer.sprite = JUPITER;
+                break;
+                case "SATURN_BAD":
+                renderer.sprite = SATURN;
+                break;
+                case "URANUS_BAD":
+                renderer.sprite = URANUS;
+                break;
+                case "NEPTUNE_BAD":
+                renderer.sprite = NEPTUNE;
+                break;
+                
+            }
+        WinnerBoard.SetActive(true);
+        AudioManager.playSound("winner");
+            
+
     }
 }
 

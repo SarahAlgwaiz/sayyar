@@ -7,8 +7,14 @@ using Firebase.Auth;
 using System.Threading.Tasks;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+
 public class FirebaseStorageAfterGame : MonoBehaviour
 {
+
+    
+
+
     public static string gameKey;
     private static string virtualPlayroomKey;
 
@@ -29,14 +35,16 @@ public class FirebaseStorageAfterGame : MonoBehaviour
         var result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
         var result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
         virtualPlayroomKey = result2.ToString();
+        Debug.Log("virtualPlayroomKey  "+ virtualPlayroomKey);
         if (PhotonNetwork.IsMasterClient)
-        {
+        {Debug.Log("INSIDE storeVirtualPlayroomData MASTER");
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("HostID").SetValueAsync(PhotonNetwork.NickName));
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("GameID").SetValueAsync(gameKey));
 
         }
         else
-        {
+        {        Debug.Log("INSIDE storeVirtualPlayroomData Participant");
+
             await Task.Run(() => reference.Child("VirtualPlayrooms").Child(virtualPlayroomKey).Child("KindergartnerIDs").Child(PhotonNetwork.LocalPlayer.UserId).SetValueAsync(PhotonNetwork.NickName));
 
         }
@@ -59,17 +67,16 @@ public class FirebaseStorageAfterGame : MonoBehaviour
 
 
 
-    // private static int generateRandomId()
-    // {
-    //     reference = reference.Root;
-    //     int randomID = Random.Range(1, 10);
-    //     return (randomID);
-
-    // }
-    public static async Task storeBadgeData(int ID)
+    private static int generateRandomId()
     {
-        int randomID = ID;
         reference = reference.Root;
+        int randomID = Random.Range(1, 10);
+        return (randomID);
+
+    }
+    public static async Task storeBadgeData()
+    {
+        int randomID = generateRandomId();
         var badgeID = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgeID").GetValueAsync().Result.Value);
         //var path = await Task.Run(() => reference.Child("Badges").Child("" + randomID).Child("BadgePath").GetValueAsync().Result.Value);
         await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Badge").SetValueAsync(badgeID + ""));
@@ -92,7 +99,11 @@ public class FirebaseStorageAfterGame : MonoBehaviour
             }
         }
 
+
     }
+
+
+    
 
 
 
@@ -101,5 +112,7 @@ public class FirebaseStorageAfterGame : MonoBehaviour
         reference = reference.Root;
         await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Duration").SetValueAsync(Timer.gameExactDuration));
         await Task.Run(() => reference.Child("Game").Child(gameKey).Child("Status").SetValueAsync(PlanetsOnPlane.status));
+        
+
     }
 }

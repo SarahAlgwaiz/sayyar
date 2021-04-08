@@ -48,5 +48,14 @@ public class HideScript : MonoBehaviour, IPunObservable
         }
         }
         Debug.Log("Available: " + isAvailable);
+
+        if(!isAvailable && this.gameObject.GetComponent<PlacementObject>().Selected && !this.gameObject.GetComponent<PhotonView>().IsMine){
+
+         Toast.Instance.Show(ArabicFixer.Fix("الكوكب مع زميلك حاليًا"),2f,Toast.ToastType.Warning);
+          AudioManager.playSound("holdedPlanet");
+        
     }
+    }
+
+    
 }
