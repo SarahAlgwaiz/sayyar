@@ -102,6 +102,8 @@ public class MyPlayer : MonoBehaviour
 
         }
 
+        PlayerAvatar.SetActive(true);
+
         var playerNameDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Username").GetValueAsync().Result.Value);
         var toString = playerNameDB + "";
         PlayerName.text = toString;
