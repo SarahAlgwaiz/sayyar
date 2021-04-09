@@ -581,15 +581,20 @@ public class AuthManager : MonoBehaviour
 
     public async void fingerprintButton()
     { 
-      await Task.Run(() =>  _getDeviceToken());
-       InitializeFirebase();
+    await Task.Run(() =>  _getDeviceToken());
+    await Task.Run(() => InitializeFirebase());
+    string DT = "NONE";
 
-       string DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+     while (DT == "NONE")
+     {
+         DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+         Debug.Log("IN WHILE");
+         }
      
      if(DT != "NONE"){
       DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
       var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
-      string userID = UID.ToString();
+      string userID = await Task.Run(() => UID.ToString());
       string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
       string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
       Debug.Log("Email is       #@#@#nn  "+_email);
