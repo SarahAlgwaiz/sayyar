@@ -34,7 +34,7 @@ public class DisplayedAvaterInHome : MonoBehaviour
     }
 
 
-private void Awake() {
+private void Start() {
       
         StartCoroutine(DisplayDB());
     }

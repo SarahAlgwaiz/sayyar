@@ -58,17 +58,17 @@ public class showBadges : MonoBehaviour
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
-getOwnedBadges();
+
 
     }
     // Start is called before the first frame update
 
-    // void Start()
-    // {
+    void Start()
+    {
         
-
+getOwnedBadges();
         
-    // }
+    }
 
 
 
@@ -83,8 +83,6 @@ getOwnedBadges();
 
     public async void getOwnedBadges()
     {
-
-
         ///EARTH 
         Debug.Log("Iam in getOwned ");
         DataSnapshot BadgeID = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Badges").Child("EARTH_BAD").GetValueAsync().Result);

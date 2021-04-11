@@ -76,6 +76,9 @@ public class MyPlayer : MonoBehaviour
         var userID = newPlayer.NickName;
 
         var playerAvatarDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Avatar").GetValueAsync().Result.Value);
+        while(playerAvatarDB == null){
+            playerAvatarDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Avatar").GetValueAsync().Result.Value);
+        }
         renderer = PlayerAvatar.GetComponent<Image>();
         Debug.Log("avatar from DB " + playerAvatarDB);
         switch (playerAvatarDB + "")
@@ -105,6 +108,9 @@ public class MyPlayer : MonoBehaviour
         PlayerAvatar.SetActive(true);
 
         var playerNameDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Username").GetValueAsync().Result.Value);
+        while(playerNameDB == null){
+            playerNameDB = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Username").GetValueAsync().Result.Value);
+        }
         var toString = playerNameDB + "";
         PlayerName.text = toString;
 
