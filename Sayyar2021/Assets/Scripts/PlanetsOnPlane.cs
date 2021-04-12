@@ -289,13 +289,25 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         reference = reference.Root;
 
         var result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
+        while(result == null){
+         result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
+        }
         var result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
+        while(result2 == null){
+        result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
+        }
         string VID = result2.ToString();
         Debug.Log("VID     " + VID);
         var result3 = await Task.Run(() => reference.Child("VirtualPlayrooms").Child(VID).Child("GameID").GetValueAsync().Result.Value);
+        while(result3 == null){
+        result3 = await Task.Run(() => reference.Child("VirtualPlayrooms").Child(VID).Child("GameID").GetValueAsync().Result.Value);
+        }
         string GID = result3.ToString();
         Debug.Log("GID       " + GID);
         var result4 = await Task.Run(() => reference.Child("Game").Child(GID).Child("Badge").GetValueAsync().Result.Value);
+        while(result4 == null){
+        result4 = await Task.Run(() => reference.Child("Game").Child(GID).Child("Badge").GetValueAsync().Result.Value);
+        }
         string badgeID = result4.ToString();
 
             renderer = planet.GetComponent<Image>();
