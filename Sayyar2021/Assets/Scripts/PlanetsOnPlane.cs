@@ -63,6 +63,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     private Camera ARCamera;
 
     private PlacementObject selectedObject;
+    
+    [SerializeField]
+    private PhotonView photonView;
 
     [SerializeField]
     private ARPlane plane;
@@ -253,7 +256,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
             calls2++;
         if (calls2 == 1)
         {
-        showBoard();
+        photonView.RPC("showBoard",RpcTarget.All,1);
         Debug.Log("After");
         }
 
@@ -278,7 +281,8 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     {
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
     }
-    public async void showBoard(){
+    [PunRPC]
+    public async void showBoard(int a){
         Debug.Log("Inside showBoard");
         InitializeFirebase();
         reference = reference.Root;
@@ -327,8 +331,6 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
             }
         WinnerBoard.SetActive(true);
         AudioManager.playSound("winner");
-            
-
     }
 }
 
