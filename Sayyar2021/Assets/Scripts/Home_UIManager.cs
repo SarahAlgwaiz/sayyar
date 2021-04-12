@@ -5,6 +5,17 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using ArabicSupport;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
+using ArabicSupport;
+using TMPro;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+
+
+
+
 
 public class Home_UIManager : MonoBehaviour
 {
@@ -18,8 +29,40 @@ public class Home_UIManager : MonoBehaviour
     public GameObject JoinRoomPanel;
     public InputField Num1;
     public GameObject CreateRoomPanel;
+
+    public FirebaseAuth auth;
+    public DatabaseReference DBreference;
+    public TextMeshProUGUI userName;
+
   //Variable to prepare Badges After login
    // public GameObject holdedScript;
+
+    private void InitializeFirebase()
+    {
+        Debug.Log("Setting up Firebase Auth");
+        //Set the authentication instance object
+        auth = FirebaseAuth.DefaultInstance;
+        DBreference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
+
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _storeDeviceToken(string userID);
+
+    async void CheckFP(){
+
+      var isON = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").GetValueAsync().Result.Value);
+      string isOn = await Task.Run(() => isON.ToString()); 
+
+      if(isOn == "1" ){
+
+            _storeDeviceToken(auth.CurrentUser.UserId);
+            DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("1");
+
+      }
+    }
+
+
     private void Awake()
     {
         
@@ -35,6 +78,7 @@ public class Home_UIManager : MonoBehaviour
     }
 
     void start(){
+        CheckFP();
         //holdedScript.SetActive(true);
     }
 //  public void HomeScreen() //Back button  
@@ -49,8 +93,8 @@ public class Home_UIManager : MonoBehaviour
     public void MenuScreen() //Back button  
     {
 
-        menuScreen.SetActive(true);
-       
+        getUserName();
+        menuScreen.SetActive(true);  
         //homeScreen.SetActive(false);
         Panel_ShowProfile.SetActive(false);
         Panel_EditProfile.SetActive(false);
@@ -110,5 +154,11 @@ public void openPanel_ShowProfile()
     public void CloseCreateRoomPanelButton()
     {
         CreateRoomPanel.SetActive(false);
+    }
+
+    public async void getUserName(){ 
+        InitializeFirebase();
+        var Name = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").GetValueAsync().Result.Value) as string;
+        userName.text = ArabicFixer.Fix("رائد الفضاء: ") + ArabicFixer.Fix(Name);
     }
 }

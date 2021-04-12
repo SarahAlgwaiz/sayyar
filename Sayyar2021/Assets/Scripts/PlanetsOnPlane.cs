@@ -13,6 +13,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase;
 using System.Threading.Tasks;
+
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 {

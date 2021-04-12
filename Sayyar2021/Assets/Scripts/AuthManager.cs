@@ -12,12 +12,14 @@ using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using ArabicSupport;
+using Photon.Pun;
+using Photon.Realtime;
 
 
 
 //___________________________________________________________________________________ beging of the class
 
-public class AuthManager : MonoBehaviour
+public class AuthManager : MonoBehaviourPunCallbacks
 {
     //___________________________________________________________________________________variables
     [SerializeField]
@@ -65,6 +67,10 @@ public class AuthManager : MonoBehaviour
 
     [Header("fingerPrint")]
     public Toggle signUpToggle;
+    public GameObject fingerprintMsg;
+    public TextMeshProUGUI FPMsg;
+
+
 
   
 
@@ -151,8 +157,9 @@ public class AuthManager : MonoBehaviour
     public void SignOutButton()
     {
         auth.SignOut();
-        //UIManager.instance.MainScreen(); //  move to MainScreen after SignOut
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene("MainScene");
+        
        
     }
 
@@ -302,6 +309,7 @@ public class AuthManager : MonoBehaviour
                     Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
 
                     //  yield return new WaitForSeconds(2);
+                   
         
                 SceneManager.LoadScene("LoadingScreen");
 
@@ -318,6 +326,7 @@ public class AuthManager : MonoBehaviour
     //___________________________________________________________________________________Register Function
     [DllImport("__Internal")]
     private static extern void _storeDeviceToken(string userID);
+
     private IEnumerator Register(string _email, string _password, string _username)
     {
         InitializeFirebase();
@@ -371,6 +380,9 @@ public class AuthManager : MonoBehaviour
                    
                    if (signUpToggle.isOn){
                    _storeDeviceToken(newUser.UserId);
+                   DBreference.Child("playerInfo").Child(newUser.UserId).Child("isFPallowed").SetValueAsync("1");
+                   }else{
+                   DBreference.Child("playerInfo").Child(newUser.UserId).Child("isFPallowed").SetValueAsync("0");
                    }
                     
 
@@ -591,8 +603,10 @@ public class AuthManager : MonoBehaviour
          Debug.Log("IN WHILE");
          }
      
-     if(DT != "NONE"){
       DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
+      DataSnapshot isExist = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).GetValueAsync().Result);
+      if(isExist.Exists)
+      {
       var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
       string userID = await Task.Run(() => UID.ToString());
       string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
@@ -601,11 +615,36 @@ public class AuthManager : MonoBehaviour
       Debug.Log("Password is       #@#@#nn  "+_password);
       auth.SignInWithEmailAndPasswordAsync(_email, _password);
       SceneManager.LoadScene("LoadingScreen");
-     }
-     else{
-         Debug.Log("NONE !!!");
-     }
+      }
+      else{
+          FPMsg.text = ArabicFixer.Fix("لم تقم مسبقًا بالسماح لتطبيق سيّار باستخدام بصمتك");
+          fingerprintMsg.SetActive(true);
+      }
+     
 
+    }
+
+    public async void isFPToggleChange(bool isOn){ 
+await Task.Run(() => InitializeFirebase());
+        if(isOn){
+            _storeDeviceToken(auth.CurrentUser.UserId);
+            DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("1");
+        }else{
+            DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("0");
+             await Task.Run(() =>  _getDeviceToken());
+             string DT = "NONE";
+     while (DT == "NONE")
+     {
+         DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+         Debug.Log("IN WHILE");
+         }
+         DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
+         Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).SetValueAsync(null));
+        }
+    }
+
+    public void ClosefingerprintMsg(){ 
+        fingerprintMsg.SetActive(false);
     }
 
 }
