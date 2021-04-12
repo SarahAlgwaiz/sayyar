@@ -14,6 +14,8 @@ public class Timer : MonoBehaviourPunCallbacks
     public DatabaseReference reference;
     public GameObject bar;
     public GameObject popUp;
+    public PhotonView photonView;
+
     private void Start()
     {
         if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount)
@@ -52,11 +54,14 @@ public class Timer : MonoBehaviourPunCallbacks
         PlanetsOnPlane.status = "Lost";
         storeData();
         Debug.Log("Time has run out!");//popup =============================
-        popUp.SetActive(true);
-        AudioManager.playSound("endTime");
-        
+        photonView.RPC("showPopup",RpcTarget.All,1);
     }
 
+    [PunRPC]
+    public void showPopup(int a){
+        popUp.SetActive(true);
+        AudioManager.playSound("endTime");
+    }
     private async void storeData()
     {
         await FirebaseStorageAfterGame.storeVirtualPlayroomData();

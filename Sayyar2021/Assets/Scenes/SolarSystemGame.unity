@@ -687,7 +687,9 @@ MonoBehaviour:
   - {fileID: 6428949619592926398, guid: 32d52a2b496884a1399a40d1a56ca156, type: 3}
   - {fileID: 1487389192617538027, guid: e9bc39d91c6c44d13a367e5468bc13cb, type: 3}
   ARCamera: {fileID: 523229033}
+  photonView: {fileID: 269047594}
   plane: {fileID: 1562845046716497409, guid: c656ed551d0964d2a93d4f31310a5838, type: 3}
+  won: 0
 --- !u!114 &269047592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,12 +734,12 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
+  observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
   ObservedComponents:
   - {fileID: 269047593}
-  sceneViewId: 1
+  viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &291500290
@@ -1373,6 +1375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bar: {fileID: 0}
   popUp: {fileID: 0}
+  photonView: {fileID: 0}
 --- !u!1 &554125283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2561,6 +2564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bar: {fileID: 918908474}
   popUp: {fileID: 769976840}
+  photonView: {fileID: 1742704993}
 --- !u!114 &1742704993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2576,11 +2580,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
+  observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 2
+  viewIdField: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &1743331279

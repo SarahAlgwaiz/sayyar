@@ -16,13 +16,15 @@ public class CollisionManager : MonoBehaviour
        Debug.Log("collided outside");
        Debug.Log("other " + other.gameObject.name);
        Debug.Log("name " + name);
+        PhotonView otherView = other.GetComponent<PhotonView>();
         if(other.gameObject.name == (name + "(Clone)")){
           photonView.TransferOwnership(PhotonNetwork.LocalPlayer);        //take control of hidden object (this)
             Debug.Log("collided inside");
             Debug.Log("after destroy");
-            PhotonView otherView = other.GetComponent<PhotonView>();
+            if(otherView.IsMine){
            Toast.Instance.Show(ArabicFixer.Fix("أحسنت"),2f,Toast.ToastType.Check);//Toast
            AudioManager.playSound("ahsant");
+            }
              otherView.TransferOwnership(PhotonNetwork.LocalPlayer);  //take control of original object (this)
             switch(name){
                  case "Mercury":
@@ -63,7 +65,6 @@ public class CollisionManager : MonoBehaviour
                    case "Uranus":
               photonView.RPC("updatePlanetInsertion",RpcTarget.All,6);
                 PhotonNetwork.Destroy(other.gameObject.GetComponent<PhotonView>());
-
                   Debug.Log("planet 6 done");
                    break;
                     case "Neptune":
@@ -75,9 +76,11 @@ public class CollisionManager : MonoBehaviour
                     default: break;
             }
     }else{
+         if(otherView.IsMine){
             //popup  "غير صحيح، حاول مرة أخرى" Mismatching planets (INCORRECT)  
            Toast.Instance.Show(ArabicFixer.Fix("حاول مرة أخرى"),2f,Toast.ToastType.Warning);
            AudioManager.playSound("tryAgain");
+                        }
             other.gameObject.transform.SetPositionAndRotation(new Vector3(other.gameObject.transform.position.x+ 0.5f,other.gameObject.transform.position.y,other.gameObject.transform.position.z + 0.5f), Quaternion.identity);
         }
 
