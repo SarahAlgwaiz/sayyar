@@ -167,9 +167,16 @@ import LocalAuthentication;
             }
         }
     }
-    func devicetoken(){
+    @objc public func devicetoken(){
         let ref: DatabaseReference! = Database.database().reference()
         ref.child("tmpDT").setValue(["DT": UIDevice.current.identifierForVendor!.uuidString])
+    }
+    
+    @objc public func writeDeviceToken(UID:String) {
+        var deviceToken:String? = ""
+        deviceToken = UIDevice.current.identifierForVendor?.uuidString
+        var ref: DatabaseReference! = Database.database().reference()
+        ref.child("FingerpintInfo").child(deviceToken!).setValue(["UID": UID])
     }
 
     }

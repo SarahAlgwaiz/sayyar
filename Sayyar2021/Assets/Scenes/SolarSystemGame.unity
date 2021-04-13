@@ -734,12 +734,12 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
+  observableSearch: 2
   ObservedComponents:
   - {fileID: 269047593}
-  viewIdField: 1
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &291500290
@@ -1901,11 +1901,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1080202672213174126, guid: 38826cc5f75104353a2c824ecec05d3d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 73.2559
+      value: 78.9427
       objectReference: {fileID: 0}
     - target: {fileID: 1080202672213174126, guid: 38826cc5f75104353a2c824ecec05d3d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 257.2448
+      value: 256.0606
       objectReference: {fileID: 0}
     - target: {fileID: 1080202672213174126, guid: 38826cc5f75104353a2c824ecec05d3d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1937,7 +1937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1080202672213174126, guid: 38826cc5f75104353a2c824ecec05d3d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -85.471436
+      value: -86.04016
       objectReference: {fileID: 0}
     - target: {fileID: 1080202672213174126, guid: 38826cc5f75104353a2c824ecec05d3d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2532,7 +2532,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fd36fa58237974ff3aa5174fbdb808e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4dac240229d2344f7b960933d05c4c44, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2580,11 +2580,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
+  observableSearch: 2
   ObservedComponents: []
-  viewIdField: 2
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &1743331279

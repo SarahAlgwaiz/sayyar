@@ -70,10 +70,14 @@ public class AuthManager : MonoBehaviourPunCallbacks
     public GameObject fingerprintMsg;
     public TextMeshProUGUI FPMsg;
 
-
-
-  
-
+    [DllImport("__Internal")]
+    private static extern void _storeDeviceToken(string userID);
+    [DllImport("__Internal")]
+    private static extern void _getDeviceToken();
+    [DllImport("__Internal")]
+    private static extern void _writeDeviceToken(string userID);
+    [DllImport("__Internal")]
+    private static extern void ReadDeviceToken();
 
     //___________________________________________________________________________________Awake Function
     void Awake()
@@ -324,8 +328,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     }
 
     //___________________________________________________________________________________Register Function
-    [DllImport("__Internal")]
-    private static extern void _storeDeviceToken(string userID);
+    
 
     private IEnumerator Register(string _email, string _password, string _username)
     {
@@ -561,6 +564,8 @@ public class AuthManager : MonoBehaviourPunCallbacks
     // }
 
     //___________________________________________________________________________________ResetPass Function
+    
+
     private IEnumerator ResetPass()
     {
         string emailAddress = E_ResetPass.text;
@@ -588,12 +593,11 @@ public class AuthManager : MonoBehaviourPunCallbacks
     }
 
     //////////////All Work Below is fingerprint code 
-    [DllImport("__Internal")]
-    private static extern void _getDeviceToken();
+    
 
     public async void fingerprintButton()
     { 
-    await Task.Run(() =>  _getDeviceToken());
+    await Task.Run(() =>  ReadDeviceToken());
     await Task.Run(() => InitializeFirebase());
     string DT = "NONE";
 
@@ -607,6 +611,16 @@ public class AuthManager : MonoBehaviourPunCallbacks
       DataSnapshot isExist = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).GetValueAsync().Result);
       if(isExist.Exists)
       {
+          DT = "NONE";
+          await Task.Run(() =>  _getDeviceToken());
+
+           while (DT == "NONE")
+     {
+         DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+         Debug.Log("IN WHILE");
+         }
+     
+      DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
       var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
       string userID = await Task.Run(() => UID.ToString());
       string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
@@ -625,13 +639,14 @@ public class AuthManager : MonoBehaviourPunCallbacks
     }
 
     public async void isFPToggleChange(bool isOn){ 
-await Task.Run(() => InitializeFirebase());
+     await Task.Run(() => InitializeFirebase());
+
         if(isOn){
-            _storeDeviceToken(auth.CurrentUser.UserId);
+            _writeDeviceToken(auth.CurrentUser.UserId);
             DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("1");
         }else{
             DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("0");
-             await Task.Run(() =>  _getDeviceToken());
+             await Task.Run(() =>  ReadDeviceToken());
              string DT = "NONE";
      while (DT == "NONE")
      {

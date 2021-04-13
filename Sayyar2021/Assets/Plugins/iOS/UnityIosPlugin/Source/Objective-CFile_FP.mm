@@ -29,6 +29,16 @@ void _getDeviceToken() {
       
    }
 
+void ReadDeviceToken(){
+    [[SwiftFile_FP shared] devicetoken];
+}
+
+void _writeDeviceToken(const char* UID){
+    NSString *UID2 = [[NSString alloc] initWithCString:(const char*)UID];
+    [[SwiftFile_FP shared] writeDeviceTokenWithUID:(UID2)];
+}
+
+
 
 }
 
