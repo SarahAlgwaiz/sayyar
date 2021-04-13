@@ -83,7 +83,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     void Awake()
     {
 
-        
+
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -142,7 +142,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     //___________________________________________________________________________________LoginButton Function
     public void LoginButton()
     {
-        
+
         //Call the login coroutine passing the email and password
         ErrorMsgL.text = "";
         StartCoroutine(Login(lemail.text, lpassword.text));
@@ -163,8 +163,8 @@ public class AuthManager : MonoBehaviourPunCallbacks
         auth.SignOut();
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("MainScene");
-        
-       
+
+
     }
 
     //___________________________________________________________________________________SaveDataButton Function
@@ -178,7 +178,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(UpdateUsername(ArabicFixer.Fix(E_username.text)));
             StartCoroutine(UpdateEmail(E_email.text));
-           // StartCoroutine(UpdatePassword(E_password.text, E_ConfirmPass.text));
+            // StartCoroutine(UpdatePassword(E_password.text, E_ConfirmPass.text));
             ClearEditFeilds();
             Home_UIManager.instance.ClosePanel_EditProfile();
         }
@@ -189,7 +189,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     {
         StartCoroutine(MyProfile());
     }
-     //___________________________________________________________________________________MyProfileButton Function
+    //___________________________________________________________________________________MyProfileButton Function
     public void EditProfileButton()
     {
         StartCoroutine(EditProfile());
@@ -226,7 +226,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         }
     }
 
-     public IEnumerator EditProfile()
+    public IEnumerator EditProfile()
     {
         Debug.Log("inside profile button and the id is :" + auth.CurrentUser.UserId);
 
@@ -306,29 +306,29 @@ public class AuthManager : MonoBehaviourPunCallbacks
                 // }
                 // else
                 // {
-                    //User is now logged in
-                    
-                    //Now get the result
-                    User = LoginTask.Result;
-                    Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
+                //User is now logged in
 
-                    //  yield return new WaitForSeconds(2);
-                   
-        
+                //Now get the result
+                User = LoginTask.Result;
+                Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
+
+                //  yield return new WaitForSeconds(2);
+
+
                 SceneManager.LoadScene("LoadingScreen");
 
 
-                    // Home_UIManager.instance.HomeScreen();
+                // Home_UIManager.instance.HomeScreen();
 
-                    ClearLoginFeilds();
-                    ClearRegisterFeilds();
+                ClearLoginFeilds();
+                ClearRegisterFeilds();
                 // }
             }
         }
     }
 
     //___________________________________________________________________________________Register Function
-    
+
 
     private IEnumerator Register(string _email, string _password, string _username)
     {
@@ -370,7 +370,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
                 //Call the Firebase auth signin function passing the email and password
                 var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password).ContinueWith(task =>
                 {
-                   // auth.CurrentUser.SendEmailVerificationAsync();
+                    // auth.CurrentUser.SendEmailVerificationAsync();
                     // Firebase user has been created.
                     Firebase.Auth.FirebaseUser newUser = task.Result;
                     Debug.LogFormat("Firebase user created successfully: {0} ({1})",
@@ -380,14 +380,17 @@ public class AuthManager : MonoBehaviourPunCallbacks
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValueAsync(_username);
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Avatar").SetValueAsync("AvatarA");
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("password").SetValueAsync(_password);
-                   
-                   if (signUpToggle.isOn){
-                   _storeDeviceToken(newUser.UserId);
-                   DBreference.Child("playerInfo").Child(newUser.UserId).Child("isFPallowed").SetValueAsync("1");
-                   }else{
-                   DBreference.Child("playerInfo").Child(newUser.UserId).Child("isFPallowed").SetValueAsync("0");
-                   }
-                    
+
+                    if (signUpToggle.isOn)
+                    {
+                        _storeDeviceToken(newUser.UserId);
+                        DBreference.Child("playerInfo").Child(newUser.UserId).Child("isFPallowed").SetValueAsync("1");
+                    }
+                    else
+                    {
+                        DBreference.Child("playerInfo").Child(newUser.UserId).Child("isFPallowed").SetValueAsync("0");
+                    }
+
 
 
                 });
@@ -437,9 +440,10 @@ public class AuthManager : MonoBehaviourPunCallbacks
 
             }
             if (ErrorMsgR.text.Equals(""))
-              ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ");
+            {
+                ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ");
                 UIManager.instance.LoginScreen();
-
+            }
         }
 
     }
@@ -500,7 +504,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
             {
                 var DBTask = DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Email").SetValueAsync(UpdatedEmail);
                 Debug.Log("Database Email is now updated");
-              //  UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
+                //  UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
 
             }
 
@@ -543,7 +547,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
                 else
                 {
                     Debug.Log("the passwords are the same and updated successfully.");
-                   // UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
+                    // UpdatedMsg.text = ArabicFixer.Fix("تم التعديل بنجاح");
                 }
             }
 
@@ -557,14 +561,14 @@ public class AuthManager : MonoBehaviourPunCallbacks
 
 
     //___________________________________________________________________________________Toggle_Change Function
-    
+
     // public void Toggle_Change(bool vlaue)
     // {
     //    _getDeviceToken();
     // }
 
     //___________________________________________________________________________________ResetPass Function
-    
+
 
     private IEnumerator ResetPass()
     {
@@ -593,72 +597,78 @@ public class AuthManager : MonoBehaviourPunCallbacks
     }
 
     //////////////All Work Below is fingerprint code 
-    
+
 
     public async void fingerprintButton()
-    { 
-    await Task.Run(() =>  ReadDeviceToken());
-    await Task.Run(() => InitializeFirebase());
-    string DT = "NONE";
+    {
+        await Task.Run(() => ReadDeviceToken());
+        await Task.Run(() => InitializeFirebase());
+        string DT = "NONE";
 
-     while (DT == "NONE")
-     {
-         DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
-         Debug.Log("IN WHILE");
-         }
-     
-      DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
-      DataSnapshot isExist = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).GetValueAsync().Result);
-      if(isExist.Exists)
-      {
-          DT = "NONE";
-          await Task.Run(() =>  _getDeviceToken());
+        while (DT == "NONE")
+        {
+            DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+            Debug.Log("IN WHILE");
+        }
 
-           while (DT == "NONE")
-     {
-         DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
-         Debug.Log("IN WHILE");
-         }
-     
-      DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
-      var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
-      string userID = await Task.Run(() => UID.ToString());
-      string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
-      string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
-      Debug.Log("Email is       #@#@#nn  "+_email);
-      Debug.Log("Password is       #@#@#nn  "+_password);
-      auth.SignInWithEmailAndPasswordAsync(_email, _password);
-      SceneManager.LoadScene("LoadingScreen");
-      }
-      else{
-          FPMsg.text = ArabicFixer.Fix("لم تقم مسبقًا بالسماح لتطبيق سيّار باستخدام بصمتك");
-          fingerprintMsg.SetActive(true);
-      }
-     
+        DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE");
+        DataSnapshot isExist = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).GetValueAsync().Result);
+        if (isExist.Exists)
+        {
+            DT = "NONE";
+            await Task.Run(() => _getDeviceToken());
+
+            while (DT == "NONE")
+            {
+                DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+                Debug.Log("IN WHILE");
+            }
+
+            DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE");
+            var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
+            string userID = await Task.Run(() => UID.ToString());
+            string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
+            string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
+            Debug.Log("Email is       #@#@#nn  " + _email);
+            Debug.Log("Password is       #@#@#nn  " + _password);
+            auth.SignInWithEmailAndPasswordAsync(_email, _password);
+            SceneManager.LoadScene("LoadingScreen");
+        }
+        else
+        {
+            FPMsg.text = ArabicFixer.Fix("لم تقم مسبقًا بالسماح لتطبيق سيّار باستخدام بصمتك");
+            fingerprintMsg.SetActive(true);
+        }
+
 
     }
 
-    public async void isFPToggleChange(bool isOn){ 
-     await Task.Run(() => InitializeFirebase());
+    public async void isFPToggleChange(bool isOn)
+    {
+        await Task.Run(() => InitializeFirebase());
 
-        if(isOn){
+        if (isOn)
+        {
             _writeDeviceToken(auth.CurrentUser.UserId);
             DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("1");
-        }else{
+        }
+        else
+        {
             DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("0");
-             await Task.Run(() =>  ReadDeviceToken());
-             string DT = "NONE";
-     while (DT == "NONE")
-     {
-         DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
-         Debug.Log("IN WHILE");
-         }
-         DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE"); 
-         Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).SetValueAsync(null));
+            await Task.Run(() => ReadDeviceToken());
+            string DT = "NONE";
+            while (DT == "NONE")
+            {
+                DT = await Task.Run(() => DBreference.Child("tmpDT").Child("DT").GetValueAsync().Result.Value) as string;
+                Debug.Log("IN WHILE");
+            }
+            DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE");
+            Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).SetValueAsync(null));
         }
     }
 
-    public void ClosefingerprintMsg(){ 
+    public void ClosefingerprintMsg()
+    {
         fingerprintMsg.SetActive(false);
     }
 
