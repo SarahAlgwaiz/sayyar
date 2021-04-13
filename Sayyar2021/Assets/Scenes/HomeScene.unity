@@ -8666,7 +8666,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: New Text
-  m_isRightToLeft: 1
+  m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 446a120dd32bc4a308b3b6de69955c43, type: 2}
   m_sharedMaterial: {fileID: -7711748062770209483, guid: 446a120dd32bc4a308b3b6de69955c43, type: 2}
   m_fontSharedMaterials: []

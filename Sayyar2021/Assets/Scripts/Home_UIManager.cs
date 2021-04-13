@@ -163,6 +163,6 @@ public class Home_UIManager : MonoBehaviour
     {
         InitializeFirebase();
         var Name = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").GetValueAsync().Result.Value) as string;
-        userName.text = "رائد الفضاء: " + Name;
+        userName.text = Name + ArabicFixer.Fix("رائد الفضاء: ");
     }
 }
