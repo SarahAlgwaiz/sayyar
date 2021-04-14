@@ -80,16 +80,6 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 
     public static string status;
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-    
-        void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-            {
-                if(stream.IsWriting){
-                    stream.SendNext(session.transform.position);
-                }
-                else{
-                    session.transform.SetPositionAndRotation((Vector3) stream.ReceiveNext(),session.transform.rotation);
-                }
-        }
         private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -149,10 +139,10 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
             }
 
         }
-        Vector2 touchPosition = new Vector2(0, 0);
+       Vector2 touchPosition = new Vector2(0,0);
         if (AR_Plane_Manager.enabled)
         {
-            if (raycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinBounds))
+            if (raycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinInfinity))
             {
                 var hitPose = s_Hits[0].pose;
                 if (spawnedObject == null)
