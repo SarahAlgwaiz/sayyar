@@ -598,8 +598,6 @@ GameObject:
   - component: {fileID: 269047592}
   - component: {fileID: 269047591}
   - component: {fileID: 269047588}
-  - component: {fileID: 269047594}
-  - component: {fileID: 269047593}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -687,7 +685,7 @@ MonoBehaviour:
   - {fileID: 6428949619592926398, guid: 32d52a2b496884a1399a40d1a56ca156, type: 3}
   - {fileID: 1487389192617538027, guid: e9bc39d91c6c44d13a367e5468bc13cb, type: 3}
   ARCamera: {fileID: 523229033}
-  photonView: {fileID: 269047594}
+  photonView: {fileID: 0}
   plane: {fileID: 1562845046716497409, guid: c656ed551d0964d2a93d4f31310a5838, type: 3}
   won: 0
 --- !u!114 &269047592
@@ -703,45 +701,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 542570577421383826, guid: b1088a7bdbbe34ca793a3b9f624dfa4f, type: 3}
---- !u!114 &269047593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269047587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
---- !u!114 &269047594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269047587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 1
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 269047593}
-  viewIdField: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &291500290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,8 +2367,6 @@ GameObject:
   - component: {fileID: 1723975648}
   - component: {fileID: 1723975647}
   - component: {fileID: 1723975646}
-  - component: {fileID: 1723975650}
-  - component: {fileID: 1723975649}
   m_Layer: 0
   m_Name: AR Session
   m_TagString: Untagged
@@ -2458,45 +2415,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1723975649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723975645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
---- !u!114 &1723975650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723975645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 1
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 1723975649}
-  viewIdField: 4
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1742704988
 GameObject:
   m_ObjectHideFlags: 0
