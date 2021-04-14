@@ -63,8 +63,8 @@ namespace com.cactusteam.Sayyar
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-
             Debug.Log("disconnected from server"); //popup pleeeease
+            Connect();
         }
         void Awake()
         {

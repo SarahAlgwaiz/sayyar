@@ -80,7 +80,17 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 
     public static string status;
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-    private void Awake()
+    
+        void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+            {
+                if(stream.IsWriting){
+                    stream.SendNext(AR_Plane_Manager.planePrefab.transform.position);
+                }
+                else{
+                    AR_Plane_Manager.planePrefab.transform.position = (Vector3) stream.ReceiveNext();
+                }
+        }
+        private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         status = "Ongoing";
