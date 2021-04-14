@@ -631,12 +631,21 @@ public class AuthManager : MonoBehaviourPunCallbacks
             DBreference.Child("tmpDT").Child("DT").SetValueAsync("NONE");
             var UID = await Task.Run(() => DBreference.Child("FingerpintInfo").Child(DT).Child("UID").GetValueAsync().Result.Value);
             string userID = await Task.Run(() => UID.ToString());
-            string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
+            string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("password").GetValueAsync().Result.Value) as string;
             string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
 
-            string DecryptedPwd = Security.Decrypt("AHSLSSNN", _password);
+            while (_password == null || _email == null)
+            {
+            _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("password").GetValueAsync().Result.Value) as string;
+             _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
+            }
+            
+
             Debug.Log("Email is       #@#@#nn  " + _email);
-            Debug.Log("Password is       #@#@#nn  " + _password);
+            Debug.Log("_password is       #@#@#nn  " + _password);
+
+            string DecryptedPwd = Security.Decrypt("AHSLSSNN", _password);
+            Debug.Log("DecryptedPwd is       #@#@#nn  " + DecryptedPwd);
             auth.SignInWithEmailAndPasswordAsync(_email, DecryptedPwd);
             SceneManager.LoadScene("LoadingScreen");
         }
