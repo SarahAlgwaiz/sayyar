@@ -26,16 +26,22 @@ public class HideScript : MonoBehaviour, IPunObservable
            Debug.Log("Inside Not Mine");
             if(!isAvailable){
         Debug.Log("Inside Not Available");
-               this.gameObject.GetComponent<Renderer>().material.color = new Color (0.4f,0.4f,0.4f); //dark
+               //this.gameObject.GetComponent<Renderer>().material.color = new Color (0.4f,0.4f,0.4f); //dark
+               this.gameObject.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineAll;
+               this.gameObject.GetComponent<Outline>().OutlineColor = new Color(1f,0.9373403f,0f,1f);
+               this.gameObject.GetComponent<Outline>().OutlineWidth = 10f;
             }
            else {
           Debug.Log("Inside  Available");
-               this.gameObject.GetComponent<Renderer>().material.color = new Color (1f,1f,1f); //normal
+               //this.gameObject.GetComponent<Renderer>().material.color = new Color (1f,1f,1f); //normal
+               this.gameObject.GetComponent<Outline>().OutlineColor = new Color(1f,0.9373403f,0f,0f);
+
            }
         }
         else {
          Debug.Log("Inside Mine");
-        this.gameObject.GetComponent<Renderer>().material.color = new Color (1f,1f,1f);
+        //this.gameObject.GetComponent<Renderer>().material.color = new Color (1f,1f,1f);
+        this.gameObject.GetComponent<Outline>().OutlineColor = new Color(1f,0.9373403f,0f,0f);
         if(this.gameObject.GetComponent<PlacementObject>().Moving){
           Debug.Log("Inside Moving");
 

@@ -87,11 +87,13 @@ public class CollisionManager : MonoBehaviour
      }
         [PunRPC]
         public void updatePlanetInsertion(int planetNumber){
+        this.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineAll;
+        this.GetComponent<Outline>().OutlineColor = new Color(0.1162419f,1f,0f,1f);
+        this.GetComponent<Outline>().OutlineWidth = 10f;       
         Debug.Log("inside RPC");
         switch(planetNumber){
           case 0:
                   this.GetComponent<Renderer>().material = materials[0];
-
           PlanetsOnPlane.isPlanetInserted[0] = true;
           break;
           case 1:
