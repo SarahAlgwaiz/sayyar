@@ -18,26 +18,26 @@ using System.Threading.Tasks;
 public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 {
 
-    int calls = 0 ;
-    int calls2 = 0 ;
+    int calls = 0;
+    int calls2 = 0;
 
     [Header("planets")]
-    public  Sprite SUN;
-    public  Sprite MERCURY;
-    public  Sprite VENUS;
-    public  Sprite EARTH;
-    public  Sprite MARS;
-    public  Sprite JUPITER;
-    public  Sprite SATURN;
-    public  Sprite URANUS;
-    public  Sprite NEPTUNE;
-    public  GameObject WinnerBoard;
+    public Sprite SUN;
+    public Sprite MERCURY;
+    public Sprite VENUS;
+    public Sprite EARTH;
+    public Sprite MARS;
+    public Sprite JUPITER;
+    public Sprite SATURN;
+    public Sprite URANUS;
+    public Sprite NEPTUNE;
+    public GameObject WinnerBoard;
 
 
-     Image renderer;
+    Image renderer;
 
-    public  GameObject planet;
-   
+    public GameObject planet;
+
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -46,7 +46,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     private ARRaycastManager raycastManager;
     private GameObject spawnedObject;
 
-[Header("PopUps")]
+    [Header("PopUps")]
     public GameObject noOnepopUp;
     public GameObject ExitButtonpopUp;
 
@@ -64,7 +64,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     private Camera ARCamera;
 
     private PlacementObject selectedObject;
-    
+
     [SerializeField]
     private PhotonView photonView;
 
@@ -106,34 +106,38 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         ExitButtonpopUp.SetActive(true);
     }
 
-    public void BackButton(){
+    public void BackButton()
+    {
         ExitButtonpopUp.SetActive(false);
     }
 
-    public void EndGameButtons(){
+    public void EndGameButtons()
+    {
 
         PhotonNetwork.Disconnect();
-    } 
-    
+    }
+
     public override void OnDisconnected(DisconnectCause cause)
-        {
-            SceneManager.LoadScene("HomeScene");
-        }
-     private void Update()
+    {
+        SceneManager.LoadScene("HomeScene");
+    }
+    private void Update()
     {
         Debug.Log(PhotonNetwork.InRoom);
-     if (PhotonNetwork.CurrentRoom == null)
+        if (PhotonNetwork.CurrentRoom == null)
         {
-          PhotonNetwork.Disconnect();
+            PhotonNetwork.Disconnect();
+        }
+        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1 && status == "Ongoing")
+        {
+            //PhotonNetwork.Disconnect();
+            calls++;
+            if (calls == 1)
+            {
+                noOnepopUp.SetActive(true);
+                AudioManager.playSound("noOne");
             }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount == 1 && status == "Ongoing" )
-        {
-         //PhotonNetwork.Disconnect();
-         calls++;
-         if(calls == 1)
-         {noOnepopUp.SetActive(true);
-         AudioManager.playSound("noOne");}
-            
+
         }
         Vector2 touchPosition = new Vector2(0, 0);
         if (AR_Plane_Manager.enabled)
@@ -209,8 +213,8 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 // }
             }
         }
-        if(!won)
-        checkPlanets();
+        if (!won)
+            checkPlanets();
     }
     private void checkPlanets()
     {
@@ -224,14 +228,15 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Okofwinnerboard(){
-    SceneManager.LoadScene("HomeScene");
+    public void Okofwinnerboard()
+    {
+        PhotonNetwork.LeaveRoom();
     }
 
     public void finishGame()
     {
         storeDataAfterGame();
-        
+
     }
 
     public async void storeDataBeforeGame()
@@ -247,18 +252,19 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             await FirebaseStorageAfterGame.storeBadgeData();
-                    Debug.Log("storeBadgeData");
+            Debug.Log("storeBadgeData");
 
             await FirebaseStorageAfterGame.storeTimeAndStatus();
-                                Debug.Log("storeTimeAndStatus");
+            Debug.Log("storeTimeAndStatus");
 
         }
         Debug.Log("Before");
-            calls2++;
+        calls2++;
         if (calls2 == 1)
         {
-        photonView.RPC("showBoard",RpcTarget.All,1);
-        Debug.Log("After");
+            if (PhotonNetwork.IsMasterClient)
+                photonView.RPC("showBoard", RpcTarget.All);
+            Debug.Log("After");
         }
 
     }
@@ -278,70 +284,75 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         }
     }
 
- public void InitializeFirebase()
+    public void InitializeFirebase()
     {
         reference = FirebaseDatabase.GetInstance("https://sayyar-2021-default-rtdb.firebaseio.com/").RootReference;
     }
     [PunRPC]
-    public async void showBoard(int a){
+    public async void showBoard()
+    {
         Debug.Log("Inside showBoard");
         InitializeFirebase();
         reference = reference.Root;
 
         var result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
-        while(result == null){
-         result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
+        while (result == null)
+        {
+            result = await Task.Run(() => reference.Child("VirtualPlayrooms").OrderByChild("RoomCode").EqualTo(PhotonNetwork.CurrentRoom.Name).GetValueAsync().Result);
         }
         var result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
-        while(result2 == null){
-        result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
+        while (result2 == null)
+        {
+            result2 = await Task.Run(() => result.Children.ElementAt(0).Child("VirtualPlayroomID").Value);
         }
         string VID = result2.ToString();
         Debug.Log("VID     " + VID);
         var result3 = await Task.Run(() => reference.Child("VirtualPlayrooms").Child(VID).Child("GameID").GetValueAsync().Result.Value);
-        while(result3 == null){
-        result3 = await Task.Run(() => reference.Child("VirtualPlayrooms").Child(VID).Child("GameID").GetValueAsync().Result.Value);
+        while (result3 == null)
+        {
+            result3 = await Task.Run(() => reference.Child("VirtualPlayrooms").Child(VID).Child("GameID").GetValueAsync().Result.Value);
         }
         string GID = result3.ToString();
         Debug.Log("GID       " + GID);
         var result4 = await Task.Run(() => reference.Child("Game").Child(GID).Child("Badge").GetValueAsync().Result.Value);
-        while(result4 == null){
-        result4 = await Task.Run(() => reference.Child("Game").Child(GID).Child("Badge").GetValueAsync().Result.Value);
+        while (result4 == null)
+        {
+            result4 = await Task.Run(() => reference.Child("Game").Child(GID).Child("Badge").GetValueAsync().Result.Value);
         }
         string badgeID = result4.ToString();
 
-            renderer = planet.GetComponent<Image>();
-            switch (badgeID)
-            {
-                case "SUN_BAD":
+        renderer = planet.GetComponent<Image>();
+        switch (badgeID)
+        {
+            case "SUN_BAD":
                 renderer.sprite = SUN;
                 break;
-                case "MERCURY_BAD":
+            case "MERCURY_BAD":
                 renderer.sprite = MERCURY;
                 break;
-                case "VENUS_BAD":
+            case "VENUS_BAD":
                 renderer.sprite = VENUS;
                 break;
-                case "EARTH_BAD":
+            case "EARTH_BAD":
                 renderer.sprite = EARTH;
                 break;
-                case "MARS_BAD":
+            case "MARS_BAD":
                 renderer.sprite = MARS;
                 break;
-                case "JUPITER_BAD":
+            case "JUPITER_BAD":
                 renderer.sprite = JUPITER;
                 break;
-                case "SATURN_BAD":
+            case "SATURN_BAD":
                 renderer.sprite = SATURN;
                 break;
-                case "URANUS_BAD":
+            case "URANUS_BAD":
                 renderer.sprite = URANUS;
                 break;
-                case "NEPTUNE_BAD":
+            case "NEPTUNE_BAD":
                 renderer.sprite = NEPTUNE;
                 break;
-                
-            }
+
+        }
         WinnerBoard.SetActive(true);
         AudioManager.playSound("winner");
     }

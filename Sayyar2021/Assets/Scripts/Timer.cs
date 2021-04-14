@@ -54,11 +54,13 @@ public class Timer : MonoBehaviourPunCallbacks
         PlanetsOnPlane.status = "Lost";
         storeData();
         Debug.Log("Time has run out!");//popup =============================
-        photonView.RPC("showPopup",RpcTarget.All,1);
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC("showPopup", RpcTarget.All);
     }
 
     [PunRPC]
-    public void showPopup(int a){
+    public void showPopup()
+    {
         popUp.SetActive(true);
         AudioManager.playSound("endTime");
     }
@@ -75,9 +77,9 @@ public class Timer : MonoBehaviourPunCallbacks
         gameExactDuration++;
     }
 
-    public void OkButton(){
-
-        SceneManager.LoadScene("HomeScene");
+    public void OkButton()
+    {
+        PhotonNetwork.LeaveRoom();
 
     }
 
