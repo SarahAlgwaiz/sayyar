@@ -84,10 +84,10 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
         void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
             {
                 if(stream.IsWriting){
-                    stream.SendNext(AR_Plane_Manager.planePrefab.transform.position);
+                    stream.SendNext(session.transform.position);
                 }
                 else{
-                    AR_Plane_Manager.planePrefab.transform.position = (Vector3) stream.ReceiveNext();
+                    session.transform.SetPositionAndRotation((Vector3) stream.ReceiveNext(),session.transform.rotation);
                 }
         }
         private void Awake()
