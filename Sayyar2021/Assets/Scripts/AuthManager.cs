@@ -379,7 +379,9 @@ public class AuthManager : MonoBehaviourPunCallbacks
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Email").SetValueAsync(_email); // newUser.UserId is samiller to auth.CurrentUser.UserId
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Username").SetValueAsync(_username);
                     DBreference.Child("playerInfo").Child(newUser.UserId).Child("Avatar").SetValueAsync("AvatarA");
-                    DBreference.Child("playerInfo").Child(newUser.UserId).Child("password").SetValueAsync(_password);
+                    //DBreference.Child("playerInfo").Child(newUser.UserId).Child("password").SetValueAsync(_password);
+                    string EncryptedPwd = Security.Encrypt("AHSLSSNN", _password);
+                    DBreference.Child("playerInfo").Child(newUser.UserId).Child("password").SetValueAsync(EncryptedPwd);
 
                     if (signUpToggle.isOn)
                     {
@@ -601,6 +603,8 @@ public class AuthManager : MonoBehaviourPunCallbacks
 
     public async void fingerprintButton()
     {
+
+
         await Task.Run(() => ReadDeviceToken());
         await Task.Run(() => InitializeFirebase());
         string DT = "NONE";
@@ -629,9 +633,11 @@ public class AuthManager : MonoBehaviourPunCallbacks
             string userID = await Task.Run(() => UID.ToString());
             string _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Password").GetValueAsync().Result.Value) as string;
             string _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
+
+            string DecryptedPwd = Security.Decrypt("AHSLSSNN", _password);
             Debug.Log("Email is       #@#@#nn  " + _email);
             Debug.Log("Password is       #@#@#nn  " + _password);
-            auth.SignInWithEmailAndPasswordAsync(_email, _password);
+            auth.SignInWithEmailAndPasswordAsync(_email, DecryptedPwd);
             SceneManager.LoadScene("LoadingScreen");
         }
         else
