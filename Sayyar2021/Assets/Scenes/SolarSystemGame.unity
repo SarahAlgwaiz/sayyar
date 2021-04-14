@@ -718,7 +718,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &269047594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,7 +1253,6 @@ GameObject:
   - component: {fileID: 523229036}
   - component: {fileID: 523229035}
   - component: {fileID: 523229034}
-  - component: {fileID: 523229038}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: Untagged
@@ -1274,7 +1273,7 @@ Camera:
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -1286,7 +1285,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 20
-  field of view: 60
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1361,21 +1360,6 @@ Transform:
   m_Father: {fileID: 269047590}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 84.329, y: 21.767, z: 24.865}
---- !u!114 &523229038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523229032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc5477ced31641a8830d2b1ccaeeaf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bar: {fileID: 0}
-  popUp: {fileID: 0}
-  photonView: {fileID: 0}
 --- !u!1 &554125283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,6 +2408,8 @@ GameObject:
   - component: {fileID: 1723975648}
   - component: {fileID: 1723975647}
   - component: {fileID: 1723975646}
+  - component: {fileID: 1723975650}
+  - component: {fileID: 1723975649}
   m_Layer: 0
   m_Name: AR Session
   m_TagString: Untagged
@@ -2472,6 +2458,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723975649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723975645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 0
+--- !u!114 &1723975650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723975645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 1
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 1723975649}
+  viewIdField: 4
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1742704988
 GameObject:
   m_ObjectHideFlags: 0
