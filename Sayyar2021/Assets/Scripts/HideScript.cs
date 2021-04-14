@@ -28,8 +28,8 @@ public class HideScript : MonoBehaviour, IPunObservable
         Debug.Log("Inside Not Available");
                //this.gameObject.GetComponent<Renderer>().material.color = new Color (0.4f,0.4f,0.4f); //dark
                this.gameObject.GetComponent<Outline>().OutlineMode = Outline.Mode.OutlineAll;
-               this.gameObject.GetComponent<Outline>().OutlineColor = new Color(1f,0.9373403f,0f,1f);
-               this.gameObject.GetComponent<Outline>().OutlineWidth = 10f;
+               this.gameObject.GetComponent<Outline>().OutlineColor = new Color(0.8301887f,0.731962f,0.1527234f,0.8f);
+               this.gameObject.GetComponent<Outline>().OutlineWidth = 5f;
             }
            else {
           Debug.Log("Inside  Available");
