@@ -34,8 +34,8 @@ public class Home_UIManager : MonoBehaviour
     public DatabaseReference DBreference;
     public TextMeshProUGUI userName;
 
-  //Variable to prepare Badges After login
-   // public GameObject holdedScript;
+    //Variable to prepare Badges After login
+    // public GameObject holdedScript;
 
     private void InitializeFirebase()
     {
@@ -49,23 +49,25 @@ public class Home_UIManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void _storeDeviceToken(string userID);
 
-    async void CheckFP(){
+    async void CheckFP()
+    {
 
-      var isON = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").GetValueAsync().Result.Value);
-      string isOn = await Task.Run(() => isON.ToString()); 
+        var isON = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").GetValueAsync().Result.Value);
+        string isOn = await Task.Run(() => isON.ToString());
 
-      if(isOn == "1" ){
+        if (isOn == "1")
+        {
 
             _storeDeviceToken(auth.CurrentUser.UserId);
             DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("isFPallowed").SetValueAsync("1");
 
-      }
+        }
     }
 
 
     private void Awake()
     {
-        
+
         if (instance == null)
         {
             instance = this;
@@ -77,29 +79,30 @@ public class Home_UIManager : MonoBehaviour
         }
     }
 
-    void start(){
+    void start()
+    {
         CheckFP();
         //holdedScript.SetActive(true);
     }
-//  public void HomeScreen() //Back button  
-//     {
+    //  public void HomeScreen() //Back button  
+    //     {
 
-//         homeScreen.SetActive(true);
-        
-//         //SceneManager.LoadScene("HomeScene");
+    //         homeScreen.SetActive(true);
 
-//     }
+    //         //SceneManager.LoadScene("HomeScene");
+
+    //     }
 
     public void MenuScreen() //Back button  
     {
 
         getUserName();
-        menuScreen.SetActive(true);  
+        menuScreen.SetActive(true);
         //homeScreen.SetActive(false);
         Panel_ShowProfile.SetActive(false);
         Panel_EditProfile.SetActive(false);
     }
-public void openPanel_ShowProfile()
+    public void openPanel_ShowProfile()
     {
         if (Panel_ShowProfile != null)
             Panel_ShowProfile.SetActive(true);
@@ -111,7 +114,7 @@ public void openPanel_ShowProfile()
             Panel_EditProfile.SetActive(true);
     }
 
-     public void ClosePanel_ShowProfile()
+    public void ClosePanel_ShowProfile()
     {
         Panel_ShowProfile.SetActive(false);
     }
@@ -120,7 +123,7 @@ public void openPanel_ShowProfile()
     {
         Panel_EditProfile.SetActive(false);
     }
-     public void ClosePanel_menuScreen()
+    public void ClosePanel_menuScreen()
     {
         menuScreen.SetActive(false);
         //HomeScreen();
@@ -156,9 +159,10 @@ public void openPanel_ShowProfile()
         CreateRoomPanel.SetActive(false);
     }
 
-    public async void getUserName(){ 
+    public async void getUserName()
+    {
         InitializeFirebase();
         var Name = await Task.Run(() => DBreference.Child("playerInfo").Child(auth.CurrentUser.UserId).Child("Username").GetValueAsync().Result.Value) as string;
-        userName.text = ArabicFixer.Fix("رائد الفضاء: ") + ArabicFixer.Fix(Name);
+        userName.text = Name + ArabicFixer.Fix("رائد الفضاء: ");
     }
 }
