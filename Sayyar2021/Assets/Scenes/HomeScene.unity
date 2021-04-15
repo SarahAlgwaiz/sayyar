@@ -6803,7 +6803,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4287730076
-  m_fontColor: {r: 0.6117647, g: 0.5686275, b: 0.5686275, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13535,6 +13535,7 @@ MonoBehaviour:
   E_password: {fileID: 1498632683}
   E_ConfirmPass: {fileID: 1094170918}
   UpdatedMsg: {fileID: 1959299472}
+  placeholder: {fileID: 904367858}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
   signUpToggle: {fileID: 0}
@@ -13900,7 +13901,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u200B"
-  m_isRightToLeft: 1
+  m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 446a120dd32bc4a308b3b6de69955c43, type: 2}
   m_sharedMaterial: {fileID: -7711748062770209483, guid: 446a120dd32bc4a308b3b6de69955c43, type: 2}
   m_fontSharedMaterials: []

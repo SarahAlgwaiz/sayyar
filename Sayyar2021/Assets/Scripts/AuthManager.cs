@@ -61,6 +61,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     public InputField E_password;
     public InputField E_ConfirmPass;
     public TextMeshProUGUI UpdatedMsg;
+    public TextMeshProUGUI placeholder;
 
     [Header("Reset Password Info")]
     public InputField E_ResetPass;
@@ -259,7 +260,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         {
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
-            E_username.text = snapshot.Child("Username").Value.ToString();
+            placeholder.text = snapshot.Child("Username").Value.ToString();
             E_email.text = snapshot.Child("Email").Value.ToString();
         }
     }
