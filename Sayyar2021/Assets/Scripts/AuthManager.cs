@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using ArabicSupport;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 
 
 
@@ -60,6 +61,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     public InputField E_password;
     public InputField E_ConfirmPass;
     public TextMeshProUGUI UpdatedMsg;
+    public TextMeshProUGUI placeholder;
 
     [Header("Reset Password Info")]
     public InputField E_ResetPass;
@@ -201,6 +203,19 @@ public class AuthManager : MonoBehaviourPunCallbacks
         StartCoroutine(ResetPass());
     }
 
+    //___________________________________________________________________________________
+    public static bool HasSpecialCharacter(string s)
+    {
+        foreach (var c in s)
+        {
+            if (!char.IsLetterOrDigit(c))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //___________________________________________________________________________________MyProfile Function
     public IEnumerator MyProfile()
     {
@@ -245,7 +260,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         {
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
-            E_username.text = snapshot.Child("Username").Value.ToString();
+            placeholder.text = snapshot.Child("Username").Value.ToString();
             E_email.text = snapshot.Child("Email").Value.ToString();
         }
     }
@@ -343,7 +358,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         {
 
             string arabicCheck = "([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd])"; //check whether string contains arabic characters
-                                                                                                                                                                      // Regex arabicRegex = new Regex(arabicCheck);
+
             bool result = Regex.IsMatch(_password, arabicCheck);
 
             if (Regex.IsMatch(_email, arabicCheck))
@@ -352,17 +367,22 @@ public class AuthManager : MonoBehaviourPunCallbacks
                 ErrorMsgR.text = ArabicFixer.Fix("البريد الالكتروني خاطئ");
             }
 
-            else if (result)
+            else if (result || HasSpecialCharacter(_password))
             {
 
                 Debug.Log("* Password should contain only English characters");
-                ErrorMsgR.text = ArabicFixer.Fix("كلمة المرور يجب ان تحتوي على الاحرف الانجليزية فقط");
+                ErrorMsgR.text = ArabicFixer.Fix("كلمة المرور تتضمن الاحرف الانجليزية فقط");
             }
 
             else if (_password.Length != 6)
             {
                 ErrorMsgR.text = ArabicFixer.Fix("كلمة المرور يجب ان تكون ٦ رموز");
                 Debug.Log("Password should have length of six characters");
+            }
+            else if (Char.IsDigit(char.Parse(_email.Substring(0, 1))))
+            {
+                ErrorMsgR.text = ArabicFixer.Fix("البريد الالكتروني ينبغي ألا يبدأ برقم");
+                Debug.Log("email start with non-alpha");
             }
             else
             {
@@ -636,10 +656,10 @@ public class AuthManager : MonoBehaviourPunCallbacks
 
             while (_password == null || _email == null)
             {
-            _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("password").GetValueAsync().Result.Value) as string;
-             _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
+                _password = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("password").GetValueAsync().Result.Value) as string;
+                _email = await Task.Run(() => DBreference.Child("playerInfo").Child(userID).Child("Email").GetValueAsync().Result.Value) as string;
             }
-            
+
 
             Debug.Log("Email is       #@#@#nn  " + _email);
             Debug.Log("_password is       #@#@#nn  " + _password);
