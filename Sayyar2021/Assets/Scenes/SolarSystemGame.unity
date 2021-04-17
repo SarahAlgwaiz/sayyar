@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 269047592}
   - component: {fileID: 269047591}
   - component: {fileID: 269047588}
+  - component: {fileID: 269047593}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -685,7 +686,7 @@ MonoBehaviour:
   - {fileID: 6428949619592926398, guid: 32d52a2b496884a1399a40d1a56ca156, type: 3}
   - {fileID: 1487389192617538027, guid: e9bc39d91c6c44d13a367e5468bc13cb, type: 3}
   ARCamera: {fileID: 523229033}
-  photonView: {fileID: 0}
+  photonView: {fileID: 269047593}
   plane: {fileID: 1562845046716497409, guid: c656ed551d0964d2a93d4f31310a5838, type: 3}
   won: 0
 --- !u!114 &269047592
@@ -701,6 +702,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 542570577421383826, guid: b1088a7bdbbe34ca793a3b9f624dfa4f, type: 3}
+--- !u!114 &269047593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269047587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &291500290
 GameObject:
   m_ObjectHideFlags: 0
