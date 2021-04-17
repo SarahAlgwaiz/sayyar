@@ -34,7 +34,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7765523008238663313}
   m_LocalRotation: {x: 0.20364176, y: 0, z: 0, w: 0.97904545}
-  m_LocalPosition: {x: -0, y: 0, z: 1.25}
+  m_LocalPosition: {x: -0, y: 0, z: 0.8}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solarObject:
     type: 4
-    xAxis: 1
-    zAxis: 1.25
+    xAxis: 0.8
+    zAxis: 0.8
     yAxis: 0
     orbitPeriodSeconds: 1
     rotationPeriodSeconds: 1
