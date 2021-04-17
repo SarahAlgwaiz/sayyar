@@ -11241,6 +11241,7 @@ MonoBehaviour:
   E_password: {fileID: 0}
   E_ConfirmPass: {fileID: 0}
   UpdatedMsg: {fileID: 0}
+  placeholder: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
   signUpToggle: {fileID: 0}
@@ -14546,8 +14547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1348.9805, y: -1655.6328}
-  m_SizeDelta: {x: 811, y: 257}
+  m_AnchoredPosition: {x: -1365.7, y: -1620}
+  m_SizeDelta: {x: 1031.9047, y: 327.0031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273096359
 MonoBehaviour:
@@ -21202,6 +21203,7 @@ MonoBehaviour:
   E_password: {fileID: 0}
   E_ConfirmPass: {fileID: 0}
   UpdatedMsg: {fileID: 0}
+  placeholder: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
   signUpToggle: {fileID: 0}
@@ -21987,6 +21989,7 @@ MonoBehaviour:
   E_password: {fileID: 0}
   E_ConfirmPass: {fileID: 0}
   UpdatedMsg: {fileID: 0}
+  placeholder: {fileID: 0}
   E_ResetPass: {fileID: 0}
   ResetErrorMsg: {fileID: 0}
   signUpToggle: {fileID: 0}
@@ -22888,6 +22891,7 @@ MonoBehaviour:
   E_password: {fileID: 496572483}
   E_ConfirmPass: {fileID: 391448567}
   UpdatedMsg: {fileID: 9173695}
+  placeholder: {fileID: 0}
   E_ResetPass: {fileID: 1186663478}
   ResetErrorMsg: {fileID: 1200654219}
   signUpToggle: {fileID: 388412115}
