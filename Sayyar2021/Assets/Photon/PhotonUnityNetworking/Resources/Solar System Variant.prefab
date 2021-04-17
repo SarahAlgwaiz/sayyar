@@ -278,8 +278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solarObject:
     type: 2
-    xAxis: 0.4
-    zAxis: 0.4
+    xAxis: 0.5
+    zAxis: 0.75
     yAxis: 0
     orbitPeriodSeconds: 0.24
     rotationPeriodSeconds: 176
@@ -291,7 +291,7 @@ MonoBehaviour:
     drawOrbit: 0
     isMoving: 1
     isRotating: 1
-  orbitProgress: 0.583
+  orbitProgress: 0
   isActive: 1
   rotationProgress: 0
   movementSpeed: 0
@@ -667,7 +667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619606024515, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.761
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619606024515, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
@@ -6779,7 +6779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619606024525, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5985675
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619606024525, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6787,7 +6787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619606024525, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0414361
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915140, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_Enabled
@@ -6819,7 +6819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915141, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.53981763
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915141, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6827,7 +6827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915141, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2917418
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915161, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_IsTrigger
@@ -6839,7 +6839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915163, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.063
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074619765915163, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
@@ -6863,7 +6863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620522693052, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.268
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620522693052, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
@@ -6915,7 +6915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620522693055, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.79488903
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620522693055, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6923,7 +6923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620522693055, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.09028522
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931333, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: isActive
@@ -6935,7 +6935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931333, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.105
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931333, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
@@ -6975,7 +6975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931335, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.61290705
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931335, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6983,7 +6983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931335, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.79015505
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620646931355, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_IsTrigger
@@ -7003,7 +7003,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620759400212, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.583
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620759400212, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
@@ -7447,7 +7447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620759400214, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.59782225
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620759400214, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7455,7 +7455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620759400214, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0404849
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620970651362, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalScale.x
@@ -7468,6 +7468,10 @@ PrefabInstance:
     - target: {fileID: 7896074620970651362, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896074620970651362, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620970651362, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7503,7 +7507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620982723369, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.409
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620982723369, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
@@ -7543,7 +7547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620982723371, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7575695
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620982723371, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7551,7 +7555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620982723371, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.1773226
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 7896074620982723375, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_IsTrigger
@@ -7615,7 +7619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621321729503, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.19927408
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621321729503, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7623,7 +7627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621321729503, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.34682828
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621524408165, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_RootOrder
@@ -7699,7 +7703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621575864776, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.47423303
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621575864776, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7707,7 +7711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621575864776, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3172331
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621575864780, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: m_IsTrigger
@@ -7719,7 +7723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621575864782, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: orbitProgress
-      value: 0.945
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896074621575864782, guid: fe7a94622372a46fa81d9d8cfaaddf46, type: 3}
       propertyPath: rotationProgress
