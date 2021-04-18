@@ -21,6 +21,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     int calls = 0;
     int calls2 = 0;
 
+    [Header("GameLoading")]
+    public GameObject BeforeWinnerBoard;
+
     [Header("planets")]
     public Sprite SUN;
     public Sprite MERCURY;
@@ -224,6 +227,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 
             status = "Won";
             won = true;
+            BeforeWinnerBoard.SetActive(true);
             finishGame();
         }
     }
@@ -353,6 +357,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 break;
 
         }
+        BeforeWinnerBoard.SetActive(false);
         WinnerBoard.SetActive(true);
         AudioManager.playSound("winner");
     }
