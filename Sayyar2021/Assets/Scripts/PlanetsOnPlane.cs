@@ -152,7 +152,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 {
                     if (PhotonNetwork.IsMasterClient)
                     {
-                        spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name, new Vector3(0,0,1), Quaternion.identity, 0, null);
+                        spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name, hitPose.position, Quaternion.identity, 0, null);
                     }
                 }
 
