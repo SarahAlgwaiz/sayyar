@@ -152,7 +152,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 {
                     if (PhotonNetwork.IsMasterClient)
                     {
-                        spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name, new Vector3(0,0,1), Quaternion.identity, 0, null);
+                        spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name, hitPose.position, Quaternion.identity, 0, null);
                     }
                 }
 
@@ -281,7 +281,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 float randomX = Random.Range(-1.5f, 1.5f);
                 float randomY = Random.Range(-1.5f, 1.5f);
                 float randomZ = Random.Range(-1.5f, 1.5f);
-                Vector3 randomPosition = new Vector3(randomX, -0.25f, randomZ);
+                Vector3 randomPosition = new Vector3(randomX, 0f, randomZ);
                 PhotonNetwork.Instantiate(planets[i].name, randomPosition, Quaternion.identity, 0, null);
 
             }

@@ -26,20 +26,18 @@ public class RequestOwnershipScript : MonoBehaviourPun, IPunOwnershipCallbacks
         if (targetView.gameObject != this.gameObject) {
             return;
         }
-        if ((targetView.Owner != requestingPlayer))
-        // && !targetView.gameObject.GetComponent<HideScript>().isAvailable)
+        if(!targetView.IsMine){
+        if ((targetView.Owner != requestingPlayer) && targetView.gameObject.GetComponent<HideScript>().isAvailable)
         {
             Debug.Log("Requesting granted");
             targetView.TransferOwnership(requestingPlayer);
         }  
-        // if(!targetView.IsMine){
-            
-        //  Toast.Instance.Show(ArabicFixer.Fix("الكوكب مع زميلك حاليًا"),2f,Toast.ToastType.Warning);
-        //   AudioManager.playSound("holdedPlanet");
+        else if(!targetView.gameObject.GetComponent<HideScript>().isAvailable){
+             Toast.Instance.Show(ArabicFixer.Fix("الكوكب مع زميلك حاليًا"),2f,Toast.ToastType.Warning);
+        AudioManager.playSound("holdedPlanet");
 
-
-
-        // }
+        }
+        }
 
     }
 
