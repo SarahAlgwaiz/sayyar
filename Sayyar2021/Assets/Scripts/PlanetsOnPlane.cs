@@ -203,7 +203,9 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 
                 if (selectedObject.Selected)
                 {
+                    if(selectedObject.transform.gameObject.GetComponent<PhotonView>().IsMine){
                     selectedObject.transform.position = hitPose.position;
+                    }
                     Debug.Log("selected position" + selectedObject.transform.position);
                     selectedObject.Moving = true;
                 }
