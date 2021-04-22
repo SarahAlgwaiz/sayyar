@@ -9,7 +9,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase;
 using TMPro;
-
+using UnityEngine.Video;
 
 public class Synchronization : MonoBehaviourPunCallbacks
 {
@@ -48,7 +48,7 @@ public class Synchronization : MonoBehaviourPunCallbacks
     // public TMP_Text PlayerONEName;
     // public TMP_Text PlayerTWOName;
     // public TMP_Text PlayerTHREEName;
-
+ public VideoPlayer videoPlayer;
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -75,6 +75,10 @@ public class Synchronization : MonoBehaviourPunCallbacks
         getRoomPlayers();
     }
 
+public void Stop(){
+       videoPlayer.Pause();
+
+}
     private async void storeData()
     {
 
