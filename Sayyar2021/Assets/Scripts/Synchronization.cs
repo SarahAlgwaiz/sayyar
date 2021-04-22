@@ -11,6 +11,7 @@ using Firebase;
 using TMPro;
 using UnityEngine.Video;
 
+
 public class Synchronization : MonoBehaviourPunCallbacks
 {
     // [SerializeField]
@@ -23,8 +24,16 @@ public class Synchronization : MonoBehaviourPunCallbacks
     [SerializeField]
     private MyPlayer myPlayer;
 
+    private List<bool> arePlayersReady;
+
+    private bool isPlayerReady;
+
+    private int count;
+
     [SerializeField]
     private Button start;
+
+    private PhotonView photonView;
     [SerializeField]
     private GameObject playerBG;
     private Transform tr;
@@ -59,10 +68,7 @@ public GameObject playIcon;
     {
         addNewPlayer(newPlayer);
         updatePosition();
-        if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount && PhotonNetwork.IsMasterClient)
-        {
-            start.interactable = true;
-        }
+      
     }
     public void OnClickStartButton()
     {
@@ -70,18 +76,53 @@ public GameObject playIcon;
     }
     private void Awake()
     {
-               videoPlayer.Pause();
+                       videoPlayer.Pause();
+
+                count = 0;
         PhotonNetwork.AutomaticallySyncScene = true;
         roomCodeText.text = PhotonNetwork.CurrentRoom.Name;
         //storeData();
+    
+        isPlayerReady = false;
         getRoomPlayers();
     }
 
 public void IamReady(){
+        Debug.Log("inside stop");
        videoPlayer.Pause();
+       if(!PhotonNetwork.IsMasterClient && !isPlayerReady){
+               Debug.Log("not master client");
+         photonView.RPC("updateReady",RpcTarget.MasterClient,0);
+         isPlayerReady = true;
+       }
+       else if(!isPlayerReady){
+        Debug.Log("is master client");
+        updateReady(0);
+        isPlayerReady = true;
+       }
 }
 
-
+[PunRPC]
+private void updateReady(int a){
+    Debug.Log("inside update ready");
+    if(arePlayersReady==null){
+                arePlayersReady = new List<bool>(PhotonNetwork.CurrentRoom.PlayerCount);
+ 
+    }
+            arePlayersReady.Add(true); 
+            bool flag = true;    
+        for(int i = 0; i<arePlayersReady.Count;i++){
+            if(!arePlayersReady[i]){
+                flag = false;
+            }
+        }
+        if(flag){
+     if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount && (arePlayersReady.Count == arePlayersReady.Capacity))
+        {
+            start.interactable = true;
+        }
+    }
+}
 public void PlayButton(){
             playIcon.SetActive(false);
        videoPlayer.Play();
@@ -95,6 +136,7 @@ public void PlayButton(){
     private void Start()
     {
         Debug.Log("room code in 85 " + roomCodeText.text);
+        photonView = this.gameObject.GetComponent<PhotonView>();
     }
 
     public void addNewPlayer(Player newPlayer)
@@ -131,6 +173,9 @@ public void PlayButton(){
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {Debug.Log("on player left");
+    if(PhotonNetwork.IsMasterClient){
+        arePlayersReady.RemoveAt(arePlayersReady.Count-1);
+    }
         int index = -1;
         foreach (MyPlayer playerInfo in playerList)
         {
