@@ -75,9 +75,8 @@ public class Synchronization : MonoBehaviourPunCallbacks
         getRoomPlayers();
     }
 
-public void Stop(){
+public void IamReady(){
        videoPlayer.Pause();
-
 }
     private async void storeData()
     {
