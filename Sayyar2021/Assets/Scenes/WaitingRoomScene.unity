@@ -232,6 +232,7 @@ MonoBehaviour:
   start: {fileID: 1489984356}
   playerBG: {fileID: 13579668}
   videoPlayer: {fileID: 1121899756}
+  playIcon: {fileID: 1954191502}
   dependencyStatus: 0
 --- !u!4 &80539847
 Transform:
@@ -814,7 +815,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1050234590}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -833,8 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babb526a0c99bbc49a57597e4f7d179e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 1121899756}
-  progress: {fileID: 0}
 --- !u!114 &633345460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,7 +1244,6 @@ RectTransform:
   - {fileID: 1489984355}
   - {fileID: 1714699395}
   - {fileID: 1217946471}
-  - {fileID: 1954191503}
   - {fileID: 2027557049}
   - {fileID: 633345458}
   m_Father: {fileID: 0}
@@ -1273,6 +1271,7 @@ MonoBehaviour:
   start: {fileID: 1489984356}
   playerBG: {fileID: 13579668}
   videoPlayer: {fileID: 1121899756}
+  playIcon: {fileID: 1954191502}
   dependencyStatus: 0
 --- !u!1 &1075023657
 GameObject:
@@ -1525,7 +1524,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121899754}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: deb7cef486b89436796447405b898263, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 5656fc231c3414b7fb54b8977dafeb97, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -2080,8 +2079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babb526a0c99bbc49a57597e4f7d179e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 1121899756}
-  progress: {fileID: 0}
 --- !u!4 &1592212736
 Transform:
   m_ObjectHideFlags: 0
@@ -2663,6 +2660,7 @@ RectTransform:
   - {fileID: 538416697}
   - {fileID: 637913751}
   - {fileID: 1121899755}
+  - {fileID: 1954191503}
   - {fileID: 2026165206}
   m_Father: {fileID: 1050234590}
   m_RootOrder: 1
@@ -2899,7 +2897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1954191503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2907,18 +2905,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954191502}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2074569584}
-  m_Father: {fileID: 1050234590}
-  m_RootOrder: 13
+  m_Father: {fileID: 1862252913}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -374, y: -415}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -276, y: 8}
+  m_SizeDelta: {x: 195.8913, y: 195.8912}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954191504
 MonoBehaviour:
@@ -2964,9 +2962,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1121899756}
-        m_TargetAssemblyTypeName: UnityEngine.Video.VideoPlayer, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 80539846}
+        m_TargetAssemblyTypeName: Synchronization, Assembly-CSharp
+        m_MethodName: PlayButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2989,14 +2987,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8862745}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 88feca1a2da1c44b680b1202f9d777c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e26fe12be8c6a4b2ba255caa34ac6878, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3407,7 +3405,7 @@ RectTransform:
   m_Children:
   - {fileID: 1394437355}
   m_Father: {fileID: 1862252913}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3460,7 +3458,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 80539846}
         m_TargetAssemblyTypeName: Synchronization, Assembly-CSharp
-        m_MethodName: Stop
+        m_MethodName: IamReady
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3538,7 +3536,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1050234590}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -3565,7 +3563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4d987b41ad5964246acab18f4df017b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83009c4fc3cc642a280078314cf16e65, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

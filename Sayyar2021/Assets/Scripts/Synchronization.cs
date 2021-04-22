@@ -48,7 +48,8 @@ public class Synchronization : MonoBehaviourPunCallbacks
     // public TMP_Text PlayerONEName;
     // public TMP_Text PlayerTWOName;
     // public TMP_Text PlayerTHREEName;
- public VideoPlayer videoPlayer;
+public VideoPlayer videoPlayer;
+public GameObject playIcon;
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -69,6 +70,7 @@ public class Synchronization : MonoBehaviourPunCallbacks
     }
     private void Awake()
     {
+               videoPlayer.Pause();
         PhotonNetwork.AutomaticallySyncScene = true;
         roomCodeText.text = PhotonNetwork.CurrentRoom.Name;
         //storeData();
@@ -77,6 +79,12 @@ public class Synchronization : MonoBehaviourPunCallbacks
 
 public void IamReady(){
        videoPlayer.Pause();
+}
+
+
+public void PlayButton(){
+            playIcon.SetActive(false);
+       videoPlayer.Play();
 }
     private async void storeData()
     {
