@@ -126,6 +126,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
+        plane.transform.SetPositionAndRotation(new Vector3(plane.transform.position.x,0,plane.transform.position.z),Quaternion.identity);
         Debug.Log(PhotonNetwork.InRoom);
         if (PhotonNetwork.CurrentRoom == null)
         {
@@ -152,7 +153,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
                 {
                     if (PhotonNetwork.IsMasterClient)
                     {
-                        spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name, hitPose.position, Quaternion.identity, 0, null);
+                        spawnedObject = PhotonNetwork.Instantiate(placablePrefab.name, new Vector3(hitPose.position.x,0,hitPose.position.z), Quaternion.identity, 0, null);
                     }
                 }
 
@@ -203,7 +204,7 @@ public class PlanetsOnPlane : MonoBehaviourPunCallbacks
 
                 if (selectedObject.Selected)
                 {
-                    selectedObject.transform.position = hitPose.position;
+                    selectedObject.transform.position = new Vector3(hitPose.position.x,0,hitPose.position.z);
                     Debug.Log("selected position" + selectedObject.transform.position);
                     selectedObject.Moving = true;
                 }
