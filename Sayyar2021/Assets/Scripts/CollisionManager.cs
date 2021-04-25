@@ -21,10 +21,6 @@ public class CollisionManager : MonoBehaviour
           photonView.TransferOwnership(PhotonNetwork.LocalPlayer);        //take control of hidden object (this)
             Debug.Log("collided inside");
             Debug.Log("after destroy");
-            if(otherView.IsMine){
-           Toast.Instance.Show(ArabicFixer.Fix("أحسنت"),2f,Toast.ToastType.Check);//Toast
-           AudioManager.playSound("ahsant");
-            }
              otherView.TransferOwnership(PhotonNetwork.LocalPlayer);  //take control of original object (this)
             switch(name){
                  case "Mercury":
@@ -75,14 +71,17 @@ public class CollisionManager : MonoBehaviour
                     break;
                     default: break;
             }
-    }else{
-         if(otherView.IsMine){
+             if(otherView.IsMine){
+           Toast.Instance.Show(ArabicFixer.Fix("أحسنت"),2f,Toast.ToastType.Check);//Toast
+           AudioManager.playSound("ahsant");
+            }
+    }else if(otherView != null){
+            if(otherView.IsMine){
             //popup  "غير صحيح، حاول مرة أخرى" Mismatching planets (INCORRECT)  
            Toast.Instance.Show(ArabicFixer.Fix("حاول مرة أخرى"),2f,Toast.ToastType.Warning);
            AudioManager.playSound("tryAgain");
                         }
-            other.gameObject.transform.SetPositionAndRotation(new Vector3(other.gameObject.transform.position.x+ 0.5f,other.gameObject.transform.position.y,other.gameObject.transform.position.z + 0.5f), Quaternion.identity);
-        }
+    }
 
      }
         [PunRPC]
