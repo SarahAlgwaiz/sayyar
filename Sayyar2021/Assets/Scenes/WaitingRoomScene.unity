@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomCodeText: {fileID: 1714699396}
   myPlayer: {fileID: 7492993675932870584, guid: 98ca6ccf377764586b0beab984e6a19b, type: 3}
-  start: {fileID: 1489984356}
+  start: {fileID: 1489984354}
   readyButton: {fileID: 2026165205}
   playerBG: {fileID: 13579668}
   videoPlayer: {fileID: 1121899756}
