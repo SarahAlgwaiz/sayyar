@@ -31,8 +31,9 @@ public class Synchronization : MonoBehaviourPunCallbacks
     private int count;
 
     [SerializeField]
-    private Button start;
-
+    private GameObject start;
+    [SerializeField]
+    private GameObject readyButton;
     private PhotonView photonView;
     [SerializeField]
     private GameObject playerBG;
@@ -57,8 +58,8 @@ public class Synchronization : MonoBehaviourPunCallbacks
     // public TMP_Text PlayerONEName;
     // public TMP_Text PlayerTWOName;
     // public TMP_Text PlayerTHREEName;
-public VideoPlayer videoPlayer;
-public GameObject playIcon;
+    public VideoPlayer videoPlayer;
+    public GameObject playIcon;
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -68,7 +69,7 @@ public GameObject playIcon;
     {
         addNewPlayer(newPlayer);
         updatePosition();
-      
+
     }
     public void OnClickStartButton()
     {
@@ -76,57 +77,67 @@ public GameObject playIcon;
     }
     private void Awake()
     {
-                       videoPlayer.Pause();
+        videoPlayer.Pause();
 
-                count = 0;
+        count = 0;
         PhotonNetwork.AutomaticallySyncScene = true;
         roomCodeText.text = PhotonNetwork.CurrentRoom.Name;
         //storeData();
-    
+
         isPlayerReady = false;
         getRoomPlayers();
     }
 
-public void IamReady(){
+    public void IamReady()
+    {
         Debug.Log("inside stop");
-       videoPlayer.Pause();
-       if(!PhotonNetwork.IsMasterClient && !isPlayerReady){
-               Debug.Log("not master client");
-         photonView.RPC("updateReady",RpcTarget.MasterClient,0);
-         isPlayerReady = true;
-       }
-       else if(!isPlayerReady){
-        Debug.Log("is master client");
-        updateReady(0);
-        isPlayerReady = true;
-       }
-}
-
-[PunRPC]
-private void updateReady(int a){
-    Debug.Log("inside update ready");
-    if(arePlayersReady==null){
-                arePlayersReady = new List<bool>(PhotonNetwork.CurrentRoom.PlayerCount);
- 
+        videoPlayer.Pause();
+        readyButton.GetComponent<Button>().interactable = false;
+        if (!PhotonNetwork.IsMasterClient && !isPlayerReady)
+        {
+            Debug.Log("not master client");
+            photonView.RPC("updateReady", RpcTarget.MasterClient, 0);
+            isPlayerReady = true;
+        }
+        else if (!isPlayerReady)
+        {
+            Debug.Log("is master client");
+            updateReady(0);
+            isPlayerReady = true;
+        }
     }
-            arePlayersReady.Add(true); 
-            bool flag = true;    
-        for(int i = 0; i<arePlayersReady.Count;i++){
-            if(!arePlayersReady[i]){
+
+    [PunRPC]
+    private void updateReady(int a)
+    {
+        Debug.Log("inside update ready");
+        if (arePlayersReady == null)
+        {
+            arePlayersReady = new List<bool>(PhotonNetwork.CurrentRoom.PlayerCount);
+
+        }
+        arePlayersReady.Add(true);
+        bool flag = true;
+        for (int i = 0; i < arePlayersReady.Count; i++)
+        {
+            if (!arePlayersReady[i])
+            {
                 flag = false;
             }
         }
-        if(flag){
-     if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount && (arePlayersReady.Count == arePlayersReady.Capacity))
+        if (flag)
         {
-            start.interactable = true;
+            if (PhotonNetwork.CurrentRoom.MaxPlayers == PhotonNetwork.CurrentRoom.PlayerCount && (arePlayersReady.Count == arePlayersReady.Capacity))
+            {
+                start.GetComponent<Button>().interactable = true;
+            }
         }
     }
-}
-public void PlayButton(){
-            playIcon.SetActive(false);
-       videoPlayer.Play();
-}
+    public void PlayButton()
+    {
+        playIcon.SetActive(false);
+        videoPlayer.Play();
+    }
     private async void storeData()
     {
 
@@ -137,6 +148,13 @@ public void PlayButton(){
     {
         Debug.Log("room code in 85 " + roomCodeText.text);
         photonView = this.gameObject.GetComponent<PhotonView>();
+        if (PhotonNetwork.IsMasterClient){
+            readyButton.SetActive(false);
+            updateReady(0);
+            isPlayerReady = true;
+            }else{
+               start.SetActive(false);  
+            }
     }
 
     public void addNewPlayer(Player newPlayer)
@@ -148,7 +166,6 @@ public void PlayButton(){
             player.setPlayerName(newPlayer);
             playerList.Add(player);
         }
-        // numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
     }
     public void getRoomPlayers()
     {
@@ -168,24 +185,26 @@ public void PlayButton(){
             player.transform.parent = playerBG.transform;
             Debug.Log("update");
             player.transform.gameObject.GetComponent<RectTransform>().localPosition = new Vector3(0, i, 0);
-            i -= 180;//---------
+            i -= 180;
         }
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
-    {Debug.Log("on player left");
-    if(PhotonNetwork.IsMasterClient){
-        arePlayersReady.RemoveAt(arePlayersReady.Count-1);
-    }
+    {
+        Debug.Log("on player left");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            arePlayersReady.RemoveAt(arePlayersReady.Count - 1);
+            start.SetActive(true);
+        }
         int index = -1;
         foreach (MyPlayer playerInfo in playerList)
         {
-            if(playerInfo.Player.Equals(otherPlayer))
+            if (playerInfo.Player.Equals(otherPlayer))
             {
                 index = playerList.IndexOf(playerInfo);
-                Debug.Log("Index is "+index);
+                Debug.Log("Index is " + index);
             }
         }
-        //int index = playerList.FindIndex(x => x.Player.Equals(otherPlayer));
         if (index != -1)
         {
             Debug.Log("Before ddestroy !");
@@ -193,16 +212,14 @@ public void PlayButton(){
             Debug.Log("After destroy ");
             playerList.RemoveAt(index);
         }
-
-        //  numOfJoinedPlayersText.text = ""+ PhotonNetwork.CurrentRoom.PlayerCount;
         updatePosition();
-            start.interactable = false;
-
+        start.GetComponent<Button>().interactable = false;
     }
-     public void onClickExitGameButton(){
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene("HomeScene");//change it later to HomeScene 
-        }
+    public void onClickExitGameButton()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("HomeScene");//change it later to HomeScene 
+    }
 
 }
 
