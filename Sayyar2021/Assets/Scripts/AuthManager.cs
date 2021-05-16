@@ -174,6 +174,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
     {
         if (E_username.text.Equals("") && E_email.text.Equals("") && E_password.text.Equals("") && E_ConfirmPass.text.Equals(""))
         {
+            UpdatedMsg.color = Color.red;
             UpdatedMsg.text = ArabicFixer.Fix("لا توجد بيانات مدخلة");
         }
         else
@@ -274,6 +275,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         //Call the Firebase auth signin function passing the email and password
         if (_email.Equals("") || _password.Equals(""))
         {
+            ErrorMsgL.color = Color.red;
             ErrorMsgL.text = ArabicFixer.Fix("لطفاً قم بإدخال بياناتك", useTashkeel, useArabicNumbers);
         }
         else
@@ -309,6 +311,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
                         message = "البريد الالكتروني غير مسجل مسبقاً";
                         break;
                 }
+                ErrorMsgL.color = Color.red;
                 ErrorMsgL.text = ArabicFixer.Fix(message);
             }
             else
@@ -351,7 +354,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
 
         if (_username.Equals("") || _email.Equals("") || _password.Equals(""))
         {
-
+            ErrorMsgR.color = Color.red;
             ErrorMsgR.text = ArabicFixer.Fix("لطفاً قم بتعبئة بياناتك");
         }
         else
@@ -364,6 +367,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
             if (Regex.IsMatch(_email, arabicCheck))
             {
                 Debug.Log("* Invalid Email");
+                ErrorMsgR.color = Color.red;
                 ErrorMsgR.text = ArabicFixer.Fix("البريد الالكتروني خاطئ");
             }
 
@@ -371,16 +375,19 @@ public class AuthManager : MonoBehaviourPunCallbacks
             {
 
                 Debug.Log("* Password should contain only English characters");
+                ErrorMsgR.color = Color.red;
                 ErrorMsgR.text = ArabicFixer.Fix("كلمة المرور تتضمن الاحرف الانجليزية فقط");
             }
 
             else if (_password.Length != 6)
             {
+                ErrorMsgR.color = Color.red;
                 ErrorMsgR.text = ArabicFixer.Fix("كلمة المرور يجب ان تكون ٦ رموز");
                 Debug.Log("Password should have length of six characters");
             }
             else if (Char.IsDigit(char.Parse(_email.Substring(0, 1))))
             {
+                ErrorMsgR.color = Color.red;
                 ErrorMsgR.text = ArabicFixer.Fix("البريد الالكتروني ينبغي ألا يبدأ برقم");
                 Debug.Log("email start with non-alpha");
             }
@@ -449,6 +456,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
                             break;
                     }
                     Debug.Log(message);
+                    ErrorMsgR.color = Color.red;
                     ErrorMsgR.text = ArabicFixer.Fix(message);
                 }
                 else
@@ -463,6 +471,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
             }
             if (ErrorMsgR.text.Equals(""))
             {
+                ErrorMsgR.color = Color.green;
                 ErrorMsgR.text = ArabicFixer.Fix("تم انشاء حساب بنجاح ");
                 UIManager.instance.LoginScreen();
             }
@@ -517,10 +526,16 @@ public class AuthManager : MonoBehaviourPunCallbacks
                 FirebaseException firebaseEx = DBTask1.Exception.GetBaseException() as FirebaseException;
                 AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
                 if (AuthError.EmailAlreadyInUse.Equals(errorCode))
+                {
+                    UpdatedMsg.color = Color.red;
                     UpdatedMsg.text = ArabicFixer.Fix("البريد الالكتروني مستخدم مسبقاً");
+                }
 
                 else if (AuthError.InvalidEmail.Equals(errorCode) || Regex.IsMatch(UpdatedEmail, arabicCheck))
+                {
+                    UpdatedMsg.color = Color.red;
                     UpdatedMsg.text = ArabicFixer.Fix("البريد الالكتروني غير صحيح");
+                }
             }
             else
             {
@@ -555,15 +570,23 @@ public class AuthManager : MonoBehaviourPunCallbacks
                 if (DBTask.Exception != null)
                 {
                     if (Regex.IsMatch(UpdatedPass, arabicCheck) || Regex.IsMatch(UpdatedPassConfirm, arabicCheck))
+                    {
+                        UpdatedMsg.color = Color.red;
                         UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور يجب ان تحتوي على الاحرف الانجليزية فقط");
-
+                    }
                     else if (!UpdatedPass.Equals(UpdatedPassConfirm))
                     {
                         Debug.Log("the passwords are not the same");
+                        UpdatedMsg.color = Color.red;
+
                         UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور غير متطابقة");
                     }
                     else if (UpdatedPass.Length != 6 || UpdatedPassConfirm.Length != 6)
+                    {
+                        UpdatedMsg.color = Color.red;
+
                         UpdatedMsg.text = ArabicFixer.Fix("كلمة المرور يجب ان تكون ٦ رموز");
+                    }
                 }
 
                 else
@@ -614,6 +637,8 @@ public class AuthManager : MonoBehaviourPunCallbacks
         }
         else
         {
+            ResetErrorMsg.color = Color.red;
+
             ResetErrorMsg.text = ArabicFixer.Fix("يرجى إدخال البريد الإلكتروني");
         }
     }
@@ -671,6 +696,7 @@ public class AuthManager : MonoBehaviourPunCallbacks
         }
         else
         {
+            FPMsg.color = Color.red;
             FPMsg.text = ArabicFixer.Fix("لم تقم مسبقًا بالسماح لتطبيق سيّار باستخدام بصمتك");
             fingerprintMsg.SetActive(true);
         }
